@@ -6,14 +6,6 @@ const { items = [] }: { items: (keyof typeof menu)[] } = Astro.props as {
 };
 
 const menu = {
-  about: { name: "About Me", path: "/about-me" },
-  blog: { 
-    name: "Blog", 
-    path: "/blog/",
-    dropdown: [
-      { name: "All Posts", path: "/blog/all-posts" },
-    ]
-  },
   home: { name: "Home", path: "/#home" },
   experience: { name: "Experience", path: "/#experience" },
   projects: { name: "Projects", path: "/#projects" },
@@ -102,52 +94,23 @@ const baseClasses = {
   role="navigation"
   aria-label="Main Navigation"
 >
-  {
-    items.map((key: string) => {
-      const item = menu[key as keyof typeof menu];
-      if (!item) return null;
+{items.map((key: string) => {
+  const item = menu[key as keyof typeof menu];
+  if (!item) return null;
 
-      if ('dropdown' in item) {
-        return (
-          <div class={baseClasses.dropdown}>
-            <a
-              href={item.path}
-              class={baseClasses.link}
-              data-path={item.path}
-              aria-label={item.name}
-              aria-current={item.path === Astro.url.pathname ? 'page' : undefined}
-            >
-              {item.name}
-            </a>
-            <div class={baseClasses.dropdownMenu}>
-              {item.dropdown.map((dropdownItem) => (
-                <a
-                  href={dropdownItem.path}
-                  class={baseClasses.dropdownItem}
-                  data-path={dropdownItem.path}
-                  aria-label={dropdownItem.name}
-                >
-                  {dropdownItem.name}
-                </a>
-              ))}
-            </div>
-          </div>
-        );
-      }
-
-      return (
-        <a
-          href={item.path}
-          class={baseClasses.link}
-          data-path={item.path}
-          aria-label={item.name}
-          aria-current={item.path === Astro.url.pathname ? 'page' : undefined}
-        >
-          {item.name}
-        </a>
-      );
-    })
-  }
+  return (
+    <a
+      href={item.path}
+      class={baseClasses.link}
+      data-path={item.path}
+      aria-label={item.name}
+      aria-current={item.path === Astro.url.pathname ? 'page' : undefined}
+    >
+      {item.name}
+    </a>
+  );
+})}
+  
   
   <div 
     class={baseClasses.socialContainer}
