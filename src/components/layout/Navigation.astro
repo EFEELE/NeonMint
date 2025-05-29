@@ -1,5 +1,13 @@
 ---
 import Social from "../ui/Social.astro";
+import { AstroError } from "astro/errors";
+import { getCollection} from "astro:content";
+
+const [staticData] = await getCollection('staticData');
+
+if (!staticData) {
+  throw new AstroError("JSON data not found");
+}
 
 const { items = [] }: { items: (keyof typeof menu)[] } = Astro.props as {
   items: (keyof typeof menu)[];
@@ -154,7 +162,7 @@ const baseClasses = {
     role="group"
     aria-label="Social Media Links"
   >
-    <Social link="https://github.com/EFEELE" iconName="github" />
-    <Social link="https://www.linkedin.com/in/efeele/" iconName="linkedin" />
+    <Social link={staticData.data.github} iconName={staticData.data.githubIconName} />
+    <Social link={staticData.data.linkedin} iconName={staticData.data.linkedinIconName} />
   </div>
 </nav>

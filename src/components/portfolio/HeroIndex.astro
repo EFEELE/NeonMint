@@ -4,18 +4,14 @@ import Heading from "../ui/Heading.astro";
 import Tools from "../portfolio/Tools.astro";
 import { Icon } from "astro-icon/components";
 import Hobbies from "../portfolio/Hobbies.astro";
+import { AstroError } from "astro/errors";
+import { getCollection} from "astro:content";
 
-const  {
-  profileImage = "/images/efeeleprofile.webp",
-  profileAlt = "Photo of Fernando Aldair López Ponce (EFEELE) for the blog",
-  profileLink = "/about-me",
-  profileTitle = "FrontEnd Developer",
-  profileName = "Fernando López",
-  githubLink = "https://github.com/EFEELE/NeonMint",
-  githubText = "Do you like this blog's design?",
-  portfolioImage = "/images/portfolio.webp",
-  email = "hello@efeele.dev",
-} = Astro.props;;
+const [staticData] = await getCollection('staticData');
+
+if (!staticData) {
+  throw new AstroError("JSON data not found");
+}
 ---
 
 <section
@@ -40,11 +36,11 @@ const  {
           <div class="relative z-20 flex w-full rounded-full bg-mint-900">
             <div
               class="w-full aspect-square rounded-full bg-center bg-cover"
-              style={`background-image: url(${profileImage})`}
-              aria-label="Photo of Fernando Aldair López Ponce (EFEELE) for the blog"
+              style={`background-image: url(${staticData.data.profileImage})`}
+              aria-label={staticData.data.profileAlt}
             >
               <a
-                href={profileLink}
+                href={staticData.data.profileLink}
                 class="flex h-full w-full"
                 aria-label="View about me page"></a>
             </div>
@@ -67,14 +63,14 @@ const  {
         <h1
           class="text-4xl font-black leading-none text-blacktext  dark:text-white max-xl:text-3xl max-lg:text-2xl  max-sm:text-center"
         >
-          {profileName} 👋
+          {staticData.data.profileName} 👋
         </h1>
         <p
           class="mb-0 text-lg font-semibold leading-8 text-blacktext dark:text-gray-200 max-xl:text-base"
         >
           <span
             class="bg-gradient-to-r from-riptide-500 to-mint-500 bg-clip-text font-black text-transparent   dark:from-riptide-300 dark:to-mint-200"
-            >{profileTitle}</span
+            >{staticData.data.profileTitle}</span
           > with <span
             class="bg-gradient-to-r from-riptide-500 to-mint-500 bg-clip-text font-black text-transparent  dark:from-riptide-300 dark:to-mint-200"
             >8 years of experience</span
@@ -83,12 +79,12 @@ const  {
 
         <div class="flex gap-4 max-sm:flex-col max-sm:items-center">
           <Button
-            link={"mailto:" + email}
-            text="Contact Me"
-            iconName="envelope"
+            link={"mailto:" + staticData.data.email}
+            text={staticData.data.contactSectionButtonText}
+            iconName={staticData.data.emailIconName}
           />
           <Button
-            link={profileLink}
+            link={staticData.data.profileLink}
             text="About Me"
             iconName="person"
             variant="dark"
@@ -121,7 +117,7 @@ const  {
         >
           <a
             target="_blank"
-            href={githubLink}
+            href={staticData.data.github}
             aria-label="View this site's code repository on GitHub"
           >
             <div
@@ -198,7 +194,7 @@ const  {
         </p>
         <img
           class="relative left-0 z-0 mt-40 w-full object-cover transition-all ease-in-out duration-500 group-hover:rotate-2 group-hover:scale-185 max-xl:mt-28 max-lg:mt-10 max-sm:mt-0 max-md:scale-100 max-sm:scale-125 scale-180 max-md:group-hover:scale-105 before:[background-image:radial-gradient(circle,_rgba(13,188,130)_0,_rgba(1,45,34)_100%)] before:absolute before:left-30 before:-bottom-0 before:h-[80%] before:aspect-square before:rounded-full before:blur-3xl before:opacity-80 before:-z-10 before:transition"
-          src={portfolioImage}
+          src={staticData.data.portfolioImage}
           alt="View of two website interfaces with modern and dark design. The first screen shows the title 'Behind the Code' with a rocket and dark background, explaining the origin of a community software project. The second screen presents a platform for finding speakers, with an attractive design, expert photos, and a prominent search button."
           loading="lazy"
           width="480"

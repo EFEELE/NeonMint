@@ -4,17 +4,14 @@ import LastPost from "../blog/LastPost.astro";
 import Languages from "../blog/Languages.astro";
 import { Icon } from "astro-icon/components";
 import Heading from "../ui/Heading.astro";
+import { AstroError } from "astro/errors";
+import { getCollection} from "astro:content";
 
-const { 
-  profileImage = "/images/efeeleprofile.webp",
-  profileAlt = "Photo of Fernando Aldair López Ponce (EFEELE) for the blog",
-  profileLink = "/about-me",
-  profileTitle = "FrontEnd Developer",
-  profileName = "Fernando Aldair López Ponce",
-  githubLink = "https://github.com/EFEELE/NeonMint",
-  githubText = "Do you like this blog's design?",
-  techsTitle = "TECHS"
-} = Astro.props;
+const [staticData] = await getCollection('staticData');
+
+if (!staticData) {
+  throw new AstroError("JSON data not found");
+}
 ---
 
 <section class="py-8 px-8  max-sm:px-4 max-sm:py-2">
@@ -24,7 +21,7 @@ const {
     <div
       class="p-8 max-md:gap-0  max-xl:p-5 h-full max-md:p-4 max-lg:gap-1 gap-3 flex flex-col border border-emerald-50 rounded-2xl dark:bg-zinc-800 bg-gradient-to-r from-riptide-200 to-mint-200 dark:from-riptide-500 dark:to-mint-500 dark:border-zinc-800 dark:border-2 dark:bg-gradient-radial md:col-start-4 col-start-2 row-start-2"
     >
-      <Heading text={techsTitle} textGradient="" level={3}/>
+      <Heading text={staticData.data.techsTitle} textGradient="" level={3}/>
 
       <div class="overflow-y-auto">
         <Languages />
@@ -39,13 +36,13 @@ const {
         <div
           class="w-full h-full relative overflow-hidden rounded-2xl bg-gradient-to-tr from-riptide-100 to-white dark:from-transparent dark:bg-gradient-to-bl dark:to-transparent "
         >
-          <a target="_blank" href={githubLink}>
+          <a target="_blank" href={staticData.data.github}>
             <div
               class="p-8 h-full relative max-xl:p-5 max-md:p-4 flex flex-col gap-8 dark:before:[background-image:radial-gradient(circle,_rgba(13,188,130)_0,_rgba(1,45,34)_100%)] before:[background-image:radial-gradient(circle,_rgba(95,255,202)_0,_rgba(144,253,210)_100%)]  before:h-[30%] before:absolute before:aspect-square xl:before:bottom-10 before:left-30 before:bottom-30 before:rounded-full before:blur-3xl before:opacity-90 before:transition before:z-0"
             >
               <div class="z-2">
                 <Heading
-                  text={githubText}
+                  text={staticData.data.githubText}
                   textGradient=""
                   level={3}
                 />
@@ -71,11 +68,11 @@ const {
           class="group-hover:scale-103 ease-in-out duration-500 w-5/12 max-sm:w-auto flex justify-center items-center"
         >
           <div
-            aria-label={profileAlt}
+            aria-label={staticData.data.profileAlt}
             class="h-full w-full max-sm:rounded-full rounded-2xl max-sm:size-20 bg-center bg-cover"
-            style={`background-image: url(${profileImage})`}
+            style={`background-image: url(${staticData.data.profileImage})`}
           >
-            <a href={profileLink} class="h-full w-full flex"></a>
+            <a href={staticData.data.profileLink} class="h-full w-full flex"></a>
           </div>
         </div>
         <div class="p-4 w-7/12 flex flex-col justify-center gap-4 max-sm:w-fit max-md:gap-2">
@@ -83,15 +80,15 @@ const {
             class="font-extrabold text-lg max-xl:text-base max-lg:text-sm max-lg:flex max-lg:flex-col-reverse max-md:flex-row leading-normal max-sm:leading-none"
             ><b
               class="bg-gradient-to-r  from-riptide-400 to-mint-400 dark:from-riptide-200 dark:to-mint-400 text-transparent bg-clip-text"
-              >{profileTitle}</b
+              >{staticData.data.profileTitle}</b
             > 🚀</span
           >
           <Heading
-          text={profileName}
+          text={staticData.data.profileName}
           level={3}
         />
           <Button
-            link={profileLink}
+            link={staticData.data.profileLink}
             text="About Me"
             iconName="person"
             class="drop-shadow-xl"
