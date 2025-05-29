@@ -37,7 +37,7 @@ if (!staticData) {
             <div
               class="w-full aspect-square rounded-full bg-center bg-cover"
               style={`background-image: url(${staticData.data.profileImage})`}
-              aria-label="Photo of Fernando Aldair López Ponce (EFEELE) for the blog"
+              aria-label={staticData.data.profileAlt}
             >
               <a
                 href={staticData.data.profileLink}
@@ -80,8 +80,8 @@ if (!staticData) {
         <div class="flex gap-4 max-sm:flex-col max-sm:items-center">
           <Button
             link={"mailto:" + staticData.data.email}
-            text="Contact Me"
-            iconName="envelope"
+            text={staticData.data.contactSectionButtonText}
+            iconName={staticData.data.emailIconName}
           />
           <Button
             link={staticData.data.profileLink}
