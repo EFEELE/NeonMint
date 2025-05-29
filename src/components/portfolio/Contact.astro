@@ -1,12 +1,14 @@
 ---
 import Heading from "../ui/Heading.astro";
 import Button from "../ui/Button.astro";
+import { AstroError } from "astro/errors";
+import { getCollection} from "astro:content";
 
-const mail = "hello@efeele.dev";
-const title = "Ready to take your idea to the next level?";
-const subtitle = "Let's work together.";
-const buttonText = "Contact Me";
-const buttonIcon = "paperplane";
+const [staticData] = await getCollection('staticData');
+
+if (!staticData) {
+  throw new AstroError("JSON data not found");
+}
 ---
 
 <section>
@@ -17,8 +19,8 @@ const buttonIcon = "paperplane";
       <div class="flex items-center justify-between max-sm:flex-col max-sm:gap-8 max-sm:text-center">
         <div class="max-w-lg">
           <Heading
-            text={title}
-            textGradient={subtitle}
+            text={staticData.data.contactSectionSubtitle}
+            textGradient={staticData.data.contactSectionSubtitle}
             level={2}
           />
         </div>
@@ -27,9 +29,9 @@ const buttonIcon = "paperplane";
         >   
           <Button
             variant="big"
-            link={`mailto:${mail}`}
-            text={buttonText}
-            iconName={buttonIcon}
+            link={`mailto:${staticData.data.email}`}
+            text={staticData.data.contactSectionButtonText}
+            iconName={staticData.data.contactSectionButtonIcon}
           />
         </div>
       </div>

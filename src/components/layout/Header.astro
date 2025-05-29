@@ -3,12 +3,17 @@ import Navigation from "./Navigation.astro";
 import ThemeIcon from "../ui/ThemeIcon.astro";
 import Social from "../ui/Social.astro";
 import { Icon } from "astro-icon/components";
+import { AstroError } from "astro/errors";
+import { getCollection} from "astro:content";
+
+const [staticData] = await getCollection('staticData');
+
+if (!staticData) {
+  throw new AstroError("JSON data not found");
+}
 
 const currentPath = Astro.url.pathname;
 const routes = ["/", "/portfolio", "/about-me", ]; 
-
-const github = "https://github.com/EFEELE";
-const linkedin = "https://www.linkedin.com/in/efeele/";
 
 // Check if the current route is in the list of routes
 const isActiveRoute = routes.includes(currentPath);
@@ -38,11 +43,8 @@ const navItems = isActiveRoute
 
     <div class="flex items-center justify-between gap-5 text-xl">
       <div class="max-md:hidden flex items-center justify-center gap-5" role="list">
-        <Social link={github} iconName="github" />
-        <Social
-          link={linkedin}
-          iconName="linkedin"
-        />
+        <Social link={staticData.data.github} iconName={staticData.data.githubIconName} />
+        <Social link={staticData.data.linkedin} iconName={staticData.data.linkedinIconName} />
       </div>
     </div>
     <div class="flex items-center gap-5 text-xl md:pl-5">
