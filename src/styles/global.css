@@ -63,6 +63,7 @@
  *{
 	scrollbar-color: #6ce9b7 #d0fbe5;
 	scrollbar-width: thin;
+	box-sizing: border-box;
 }
 
 
@@ -132,15 +133,11 @@ a.inline-block.leading-5.pl-12{
 }
 
 .markdown blockquote {
-	@apply py-4 border-l-4 border-mint-500 pl-4 italic text-blacktext dark:text-mint-200 bg-mint-50 dark:bg-mint-900/20 backdrop-blur-lg;
+	@apply py-4 border-l-4 border-mint-500 pl-4 italic text-blacktext dark:text-mint-200 bg-mint-50 dark:bg-mint-900/20 backdrop-blur-lg mb-8;
 }
 
 .markdown blockquote p {
 	@apply mb-0;
-}
-
-.markdown blockquote {
-	@apply mb-8;
 }
 
 .markdown :not(pre)>code {
@@ -206,10 +203,6 @@ a.inline-block.leading-5.pl-12{
 	display: block;  /* Show 'xmark' icon when .active is present */
   }
   
-* {
-	box-sizing: border-box;
-}
-
 
 /* Navigation bar styles */
 .hamburger {
