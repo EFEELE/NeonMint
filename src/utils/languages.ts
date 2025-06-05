@@ -35,7 +35,7 @@ export const languages: Record<string, Language> = {
   },
   mysql: {
     name: "MySQL",
-    className: "!bg-[#f6ece1]",
+    className: "bg-[#f6ece1]!",
     iconName: "mysql",
   },
   wordpress: {

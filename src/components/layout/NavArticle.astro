@@ -75,12 +75,12 @@ const { title } = Astro.props;
           if (entry.isIntersecting) {
             // Remove class from all and add only to the active one
             document.querySelectorAll("#toc-list a").forEach((el) => {
-              el.classList.remove("font-semibold", "dark:!text-mint-300", "!text-blacktext", "dark:!border-white", "!border-blacktext"  );
+              el.classList.remove("font-semibold", "dark:text-mint-300!", "text-blacktext!", "dark:border-white!", "border-blacktext!"  );
               el.classList.add("dark:text-neutral-300","text-neutral-500" );
               console.log("classes removed 4");
             });
 
-            link?.classList.add("font-semibold", "dark:!text-mint-300", "!text-blacktext",   "border-l", "dark:!border-white", "!border-blacktext");
+            link?.classList.add("font-semibold", "dark:text-mint-300!", "text-blacktext!",   "border-l", "dark:border-white!", "border-blacktext!");
           }
         });
       },

@@ -1,46 +1,46 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-	--font-montserrat: "Montserrat", sans-serif;
-	--font-roboto: "Roboto", sans-serif;
-	--font-opensans: "Open Sans", sans-serif;
-	--color-blacktext: #171717;
-	--color-mint-50: #ecfdf5;
-	--color-mint-100: #d0fbe5;
-	--color-mint-200: #a4f4cf;
-	--color-mint-300: #6ce9b7;
-	--color-mint-400: #31d69a;
-	--color-mint-500: #0dbc82;
-	--color-mint-600: #03986a;
-	--color-mint-700: #027a58;
-	--color-mint-800: #056047;
-	--color-mint-900: #054f3c;
-	--color-mint-950: #012d22;
+  --font-montserrat: 'Montserrat', sans-serif;
+  --font-roboto: 'Roboto', sans-serif;
+  --font-opensans: 'Open Sans', sans-serif;
+  --color-blacktext: #171717;
+  --color-mint-50: #ecfdf5;
+  --color-mint-100: #d0fbe5;
+  --color-mint-200: #a4f4cf;
+  --color-mint-300: #6ce9b7;
+  --color-mint-400: #31d69a;
+  --color-mint-500: #0dbc82;
+  --color-mint-600: #03986a;
+  --color-mint-700: #027a58;
+  --color-mint-800: #056047;
+  --color-mint-900: #054f3c;
+  --color-mint-950: #012d22;
 
-	--color-riptide-50: #f0fdfa;
-	--color-riptide-100: #cbfcf1;
-	--color-riptide-200: #96f7e4;
-	--color-riptide-300: #5cecd5;
-	--color-riptide-400: #2bd6c1;
-	--color-riptide-500: #12baa8;
-	--color-riptide-600: #0b9689;
-	--color-riptide-700: #0e776f;
-	--color-riptide-800: #105f5a;
-	--color-riptide-900: #124f4b;
-	--color-riptide-950: #03302f;
+  --color-riptide-50: #f0fdfa;
+  --color-riptide-100: #cbfcf1;
+  --color-riptide-200: #96f7e4;
+  --color-riptide-300: #5cecd5;
+  --color-riptide-400: #2bd6c1;
+  --color-riptide-500: #12baa8;
+  --color-riptide-600: #0b9689;
+  --color-riptide-700: #0e776f;
+  --color-riptide-800: #105f5a;
+  --color-riptide-900: #124f4b;
+  --color-riptide-950: #03302f;
 
-	--animate-rotate: rotate 10s linear infinite;
+  --animate-rotate: rotate 10s linear infinite;
 
-	--animate-rotate-border: border-rotate 3s linear infinite;
-	@keyframes border-rotate {
-		to {
-			 --border-angle: 360deg;
-		}
-	}
-	
+  --animate-rotate-border: border-rotate 3s linear infinite;
+  @keyframes border-rotate {
+    to {
+      --border-angle: 360deg;
+    }
+  }
 }
 
 @property --border-angle{
@@ -110,7 +110,7 @@ a.inline-block.leading-5.pl-12{
 }
 
 .markdown a {
-	@apply text-xl max-md:text-lg font-semibold dark:!text-riptide-300 !text-mint-500 underline hover:!text-riptide-400 transition-all;
+	@apply text-xl max-md:text-lg font-semibold dark:text-riptide-300! text-mint-500! underline hover:text-riptide-400! transition-all;
 }
 
 .markdown ol{
@@ -158,7 +158,7 @@ a.inline-block.leading-5.pl-12{
 	@apply size-5;
 }
 .copy-code{
-	@apply absolute  text-slate-400 text-xs cursor-pointer bg-slate-600/50 border hover:bg-transparent border-slate-500 p-2.5 rounded-md top-4 right-4 flex transition-all duration-300 max-md:opacity-100 min-md:opacity-0 group-hover:opacity-100 items-center justify-center;
+	@apply absolute  text-slate-400 text-xs cursor-pointer bg-slate-600/50 border hover:bg-transparent border-slate-500 p-2.5 rounded-md top-4 right-4 flex transition-all duration-300 max-md:opacity-100 md:opacity-0 group-hover:opacity-100 items-center justify-center;
 }
   
 .contains-task-list {
@@ -182,7 +182,7 @@ a.inline-block.leading-5.pl-12{
   }
 
 .expanded {
-	@apply transition-all duration-700 w-full !flex !flex-col left-0 top-full mt-4 absolute shadow-xl  dark:text-zinc-300 bg-gradient-to-t from-white to-white/90 dark:from-zinc-950 dark:to-zinc-950/80 bg-clip-padding backdrop-filter backdrop-blur backdrop-saturate-100 backdrop-contrast-100;
+	@apply transition-all duration-700 w-full flex! flex-col! left-0 top-full mt-4 absolute shadow-xl  dark:text-zinc-300 bg-linear-to-t from-white to-white/90 dark:from-zinc-950 dark:to-zinc-950/80 bg-clip-padding backdrop-filter backdrop-blur backdrop-saturate-100 backdrop-contrast-100;
 }
 
 
@@ -257,21 +257,6 @@ a.inline-block.leading-5.pl-12{
 	filter: blur(150px);
 	overflow: hidden;
 	z-index: -1;
-}
-
-.dark .blur-circle::after {
-	content: "";
-	display: block;
-	width: 500px;
-	height: 500px;
-	background: #31d69945 !important;
-	bottom: 00px;
-	right: 0px;
-	position: absolute;
-	z-index: -1;
-	border-radius: 50%;
-	filter: blur(50px);
-
 }
 
 .dark .blur-circle::after {

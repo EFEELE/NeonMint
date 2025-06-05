@@ -24,14 +24,14 @@ const imageAlt =
   latestPost && (
     <div
       style={{ backgroundImage: `url(${image})` }}
-      class="h-full hover:shadow-[0_20px_50px_rgba(13,_188,_130,_0.2)] flex flex-col overflow-hidden rounded-2xl bg-gradient-to-br bg-center bg-cover transition-all ease-in-out duration-200"
+      class="h-full hover:shadow-[0_20px_50px_rgba(13,188,130,0.2)] flex flex-col overflow-hidden rounded-2xl bg-linear-to-br bg-center bg-cover transition-all ease-in-out duration-200"
       role="article"
       aria-labelledby="post-title"
     >
-      <article class="h-full flex flex-col justify-between max-sm:bg-zinc-900 max-sm:relative min-sm:bg-gradient-to-t from-black/95 from-25% to-transparent max-sm:from-60% p-8 max-md:p-6 max-sm:mp-0 max-sm:p-0">
+      <article class="h-full flex flex-col justify-between max-sm:bg-zinc-900 max-sm:relative sm:bg-linear-to-t from-black/95 from-25% to-transparent max-sm:from-60% p-8 max-md:p-6 max-sm:mp-0 max-sm:p-0">
         <a
           href=""
-          class="min-sm:hidden relative top-0 left-0 w-full h-auto -z-0"
+          class="sm:hidden relative top-0 left-0 w-full h-auto -z-0"
           aria-hidden="true"
         >
           <img
@@ -56,7 +56,7 @@ const imageAlt =
           class="text-mint-50 gap-3 h-full flex items-end max-sm:px-6  rounded-lg transition-all"
           aria-label={`Read article: ${latestPost.frontmatter.title}`}
         >
-          <div class="gap-3 flex flex-col justify-end drop-shadow-[1px_6px_1px_rgba(0,_0,_0,_0.3)]">
+          <div class="gap-3 flex flex-col justify-end drop-shadow-[1px_6px_1px_rgba(0,0,0,0.3)]">
             <DatePub date={latestPost.frontmatter.pubDate} class="text-mint-50" />
             <h2
               id="post-title"
