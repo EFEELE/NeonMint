@@ -16,51 +16,7 @@ import Heading from "../components/ui/Heading.astro";
 
 <Layout pageTitle={pageTitle} description={description} ogimage={ogimage}>
   <HeroIndex />
-
-  <section
-    class="py-8 px-8 max-md:py-4 mb-4 scroll-m-16"
-    id="experience"
-  >
-    <div class="flex flex-col  pt-8 max-w-4xl mx-auto">
-      <div class="flex gap-4 items-center justify-center">
-        <Icon class="text-3xl dark:text-white text-blacktext" name="briefcase" />
-        <Heading text="Experience" textGradient="Work" level={2}/>
-      </div>
-
-      <Experience />
-    </div>
-  </section>
-
-  <section
-    class="bg-linear-to-t dark:from-[#0e0e10] from-white from-50% to-transparent to-100% scroll-m-16"
-    id="projects"
-  >
-    <div class="flex flex-col gap-8 max-w-7xl mx-auto">
-      <ListProjects>
-        <div class="flex gap-4 items-center justify-center text-center">
-          <Icon class="text-3xl dark:text-white text-blacktext" name="code" />
-          <Heading text="Projects" textGradient="Completed" level={2}/>
-        </div>
-        <p
-          class="z-2 text-center mx-auto text-lg max-xl:text-base max-w-2xl dark:text-gray-200 text-blacktext my-6 leading-6 font-medium"
-        >
-          I love <b
-            class=" bg-linear-to-r  from-riptide-500 to-mint-500 dark:from-riptide-300 dark:to-mint-200 text-transparent bg-clip-text"
-            >turning ideas into real projects.</b
-          >
-          <br /> Here I show you some of the <b
-            class="d bg-linear-to-r  from-riptide-500 to-mint-500 dark:from-riptide-300 dark:to-mint-200 text-transparent bg-clip-text"
-            >developments</b
-          > I've worked on, applying technology, design, and lots of creativity.
-          <b
-            class=" bg-linear-to-r  from-riptide-500 to-mint-500 dark:from-riptide-300 dark:to-mint-200 text-transparent bg-clip-text"
-            >Check them out!</b
-          >
-        </p>
-      </ListProjects>
-    </div>
-  </section>
-
-
+  <Experience />
+  <ListProjects />
   <Contact />
 </Layout>
