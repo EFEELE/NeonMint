@@ -20,9 +20,9 @@ allPosts.sort(
   <div class="mx-auto max-w-7xl py-8">
     <div class="flex gap-4 items-center justify-center text-center">
       <Icon class="text-3xl dark:text-white text-blacktext" name="code" />
-      <Heading text="Projects" textGradient="Completed" level={2}/>
+      <Heading text="Projects" textGradient="Completed" level={2} />
     </div>
-    
+
     <p
       class="z-2 text-center mx-auto text-lg max-xl:text-base max-w-2xl dark:text-gray-200 text-blacktext my-6 leading-6 font-medium"
     >
@@ -74,16 +74,18 @@ allPosts.sort(
 
 <script>
   document.querySelector("#moreProjects")?.addEventListener("click", () => {
-    const container = document.querySelector("#containerProjects") as HTMLElement;
+    const container = document.querySelector("#containerProjects");
     const moreProjectsBtn = document.querySelector("#moreProjects");
 
     if (container && moreProjectsBtn) {
       // Expand container to show all projects
-      container.style.maxHeight = "15000px";
+      container.classList.remove("h-[150vh]");
+      container.classList.remove("h-auto");
       // Hide the "View More" button after animation completes
+      moreProjectsBtn.classList.add("hidden");
       setTimeout(() => {
         moreProjectsBtn.classList.add("hidden");
-      }, 5000);
+      }, 500);
     }
   });
 </script>
