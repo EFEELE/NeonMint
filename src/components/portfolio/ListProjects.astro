@@ -1,6 +1,10 @@
 ---
 import Project from "./Project.astro";
+import Heading from "../ui/Heading.astro";
+import { Icon } from "astro-icon/components";
+
 const allPosts = await Astro.glob("../../pages/portfolio/projects/*.md");
+
 // Sort by descending date (most recent first)
 allPosts.sort(
   (a, b) =>
@@ -9,8 +13,32 @@ allPosts.sort(
 );
 ---
 
-<section class="relative pt-8 pb-32 max-2xl:px-8 max-md:pt-4">
+<section
+  class="bg-linear-to-t dark:from-[#0e0e10] from-white from-50% to-transparent to-100% scroll-m-16 relative pt-8 pb-32 max-2xl:px-8 max-md:pt-4"
+  id="projects"
+>
   <div class="mx-auto max-w-7xl py-8">
+    <div class="flex gap-4 items-center justify-center text-center">
+      <Icon class="text-3xl dark:text-white text-blacktext" name="code" />
+      <Heading text="Projects" textGradient="Completed" level={2} />
+    </div>
+
+    <p
+      class="z-2 text-center mx-auto text-lg max-xl:text-base max-w-2xl dark:text-gray-200 text-blacktext my-6 leading-6 font-medium"
+    >
+      I love <b
+        class="bg-linear-to-r from-riptide-500 to-mint-500 dark:from-riptide-300 dark:to-mint-200 text-transparent bg-clip-text"
+        >turning ideas into real projects.</b
+      >
+      <br /> Here I show you some of the <b
+        class="bg-linear-to-r from-riptide-500 to-mint-500 dark:from-riptide-300 dark:to-mint-200 text-transparent bg-clip-text"
+        >developments</b
+      > I've worked on, applying technology, design, and lots of creativity.
+      <b
+        class="bg-linear-to-r from-riptide-500 to-mint-500 dark:from-riptide-300 dark:to-mint-200 text-transparent bg-clip-text"
+        >Check them out!</b
+      >
+    </p>
     <slot />
   </div>
 
@@ -46,16 +74,18 @@ allPosts.sort(
 
 <script>
   document.querySelector("#moreProjects")?.addEventListener("click", () => {
-    const contenedor = document.querySelector("#containerProjects") as HTMLElement;
-    const moreprojects = document.querySelector("#moreProjects");
+    const container = document.querySelector("#containerProjects");
+    const moreProjectsBtn = document.querySelector("#moreProjects");
 
-    if (contenedor && moreprojects) {
-      // Use a very large max height to show all content
-      contenedor.style.maxHeight = "15000px";
-      // Hide the view more button
+    if (container && moreProjectsBtn) {
+      // Expand container to show all projects
+      container.classList.remove("h-[150vh]");
+      container.classList.remove("h-auto");
+      // Hide the "View More" button after animation completes
+      moreProjectsBtn.classList.add("hidden");
       setTimeout(() => {
-        moreprojects.classList.add("hidden");
-      }, 5000);
+        moreProjectsBtn.classList.add("hidden");
+      }, 500);
     }
   });
 </script>
