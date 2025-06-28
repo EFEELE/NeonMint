@@ -3,14 +3,9 @@ import Navigation from "./Navigation.astro";
 import ThemeIcon from "../ui/ThemeIcon.astro";
 import Social from "../ui/Social.astro";
 import { Icon } from "astro-icon/components";
-import { AstroError } from "astro/errors";
 import { getCollection} from "astro:content";
 
 const [staticData] = await getCollection('staticData');
-
-if (!staticData) {
-  throw new AstroError("JSON data not found");
-}
 
 const currentPath = Astro.url.pathname;
 const routes = ["/", "/portfolio", "/about-me", ]; 

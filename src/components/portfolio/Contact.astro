@@ -1,14 +1,9 @@
 ---
 import Heading from "../ui/Heading.astro";
 import Button from "../ui/Button.astro";
-import { AstroError } from "astro/errors";
 import { getCollection} from "astro:content";
 
 const [staticData] = await getCollection('staticData');
-
-if (!staticData) {
-  throw new AstroError("JSON data not found");
-}
 ---
 
 <section>

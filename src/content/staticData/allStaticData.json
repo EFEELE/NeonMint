@@ -21,5 +21,13 @@
   "youtubeIconName": "youtube",
   "githubIconName": "github",
   "linkedinIconName": "linkedin",
-  "emailIconName": "envelope"
+  "emailIconName": "envelope",
+  "hobbies": [
+    "Writing",
+    "Camping",
+    "Coffee",
+    "Music",
+    "Movies",
+    "Board Games"
+  ]
 }

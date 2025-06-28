@@ -27,7 +27,8 @@ const jsonDataCollection = defineCollection({
     youtubeIconName: z.string(),
     githubIconName: z.string(),
     linkedinIconName: z.string(),
-    emailIconName: z.string()
+    emailIconName: z.string(),
+    hobbies: z.array(z.string()),
   }),
 });
 
