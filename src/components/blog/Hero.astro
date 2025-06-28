@@ -4,14 +4,9 @@ import LastPost from "../blog/LastPost.astro";
 import Languages from "../blog/Languages.astro";
 import { Icon } from "astro-icon/components";
 import Heading from "../ui/Heading.astro";
-import { AstroError } from "astro/errors";
 import { getCollection} from "astro:content";
 
 const [staticData] = await getCollection('staticData');
-
-if (!staticData) {
-  throw new AstroError("JSON data not found");
-}
 ---
 
 <section class="py-8 px-8  max-sm:px-4 max-sm:py-2">

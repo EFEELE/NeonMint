@@ -1,24 +1,18 @@
 ---
+import { getCollection } from "astro:content";
+import Hobbie from "./Hobbie.astro";
+
+const [staticData] = await getCollection("staticData");
+
 interface Props {
     variant?: 'default' | 'vertical';
 }
-
-const hobbies = [
-    "Writing",
-    "Camping",
-    "Coffee",
-    "Music",
-    "Movies",
-    "Board Games"
-];
-
-import Hobbie from "./Hobbie.astro";
 
 const baseClasses = "max-w-7xl gap-3 py-4 max-md:py-3";
 
 const variants = {
     default: `${baseClasses} flex-wrap mx-auto max-md:gap-2 max-sm:gap-1 justify-start items-center flex flex-row`,
-    vertical: `${baseClasses} max-sm:gap-2 justify-start items-start flex flex-col`
+    vertical: `${baseClasses} max-sm:gap-2 justify-start items-start flex flex-col`,
 } as const;
 
 const { variant = "default" } = Astro.props as Props;
@@ -26,12 +20,5 @@ const classes = variants[variant];
 ---
 
 <div id="tags" class={classes}>
-    {hobbies.map((hobby) => <Hobbie tag={hobby} />)}
+    {staticData.data.hobbies.map((hobby) => <Hobbie tag={hobby} />)}
 </div>
-
-
-
-
-
-
-
