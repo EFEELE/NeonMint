@@ -1,9 +1,16 @@
 ---
 import Heading from "../ui/Heading.astro";
 import Button from "../ui/Button.astro";
-import { getCollection} from "astro:content";
+import { getCollection } from "astro:content";
 
-const [staticData] = await getCollection('staticData');
+const [staticData] = await getCollection("staticData");
+const {
+  contactSectionTitle,
+  contactSectionSubtitle,
+  contactSectionButtonText,
+  email,
+  contactSectionButtonIcon,
+} = staticData.data;
 ---
 
 <section>
@@ -11,22 +18,24 @@ const [staticData] = await getCollection('staticData');
     class="w-full border-b bg-linear-to-b from-mint-100 to-transparent dark:from-mint-800 dark:border-mint-950 border-mint-100"
   >
     <div class="mx-auto max-w-5xl px-8 py-24 max-sm:py-12">
-      <div class="flex items-center justify-between max-sm:flex-col max-sm:gap-8 max-sm:text-center">
+      <div
+        class="flex items-center justify-between max-sm:flex-col max-sm:gap-8 max-sm:text-center"
+      >
         <div class="max-w-lg">
           <Heading
-            text={staticData.data.contactSectionSubtitle}
-            textGradient={staticData.data.contactSectionSubtitle}
+            text={contactSectionTitle}
+            textGradient={contactSectionSubtitle}
             level={2}
           />
         </div>
         <div
           class="transition-all duration-500 group-hover:animate-jump group-hover:animate-duration-[300ms] group-hover:animate-ease-in-out group-hover:scale-105 hover:scale-125"
-        >   
+        >
           <Button
             variant="big"
-            link={`mailto:${staticData.data.email}`}
-            text={staticData.data.contactSectionButtonText}
-            iconName={staticData.data.contactSectionButtonIcon}
+            link={`mailto:${email}`}
+            text={contactSectionButtonText}
+            iconName={contactSectionButtonIcon}
           />
         </div>
       </div>

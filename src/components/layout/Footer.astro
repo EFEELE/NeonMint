@@ -1,9 +1,22 @@
 ---
 import Social from "../ui/Social.astro";
 import { Icon } from "astro-icon/components";
-import { getCollection} from "astro:content";
+import { getCollection } from "astro:content";
 
-const [staticData] = await getCollection('staticData');
+const [staticData] = await getCollection("staticData");
+const {
+  github,
+  alias,
+  instagram,
+  email,
+  youtube,
+  linkedin,
+  emailIconName,
+  youtubeIconName,
+  linkedinIconName,
+  instagramIconName,
+  githubIconName,
+} = staticData.data;
 ---
 
 <footer
@@ -25,18 +38,44 @@ const [staticData] = await getCollection('staticData');
     </div>
     <div class="text-center">
       <a
-        href={staticData.data.github}
+        href={github}
         class="flex items-center justify-center gap-3 text-base font-normal italic max-sm:text-sm"
         aria-label="About the website development"
-        ><Icon name="code" aria-hidden="true" /> Developed by <strong>{staticData.data.alias}</strong>, with Astro</a
+        ><Icon name="code" aria-hidden="true" /> Developed by <strong
+          >{alias}</strong
+        >, with Astro</a
       >
     </div>
-    <div class="flex items-center justify-center gap-5" role="list" aria-label="Social media links">
-      <Social link={`mailto:${staticData.data.email}`} iconName={staticData.data.emailIconName} label={`Send email to ${staticData.data.email}`} />
-      <Social link={staticData.data.instagram} iconName={staticData.data.instagramIconName} label={`Visit ${staticData.data.alias} on Instagram`} />
-      <Social link={staticData.data.youtube} iconName={staticData.data.youtubeIconName} label={`Visit ${staticData.data.alias} on YouTube`} />
-      <Social link={staticData.data.github} iconName={staticData.data.githubIconName} label={`Visit ${staticData.data.alias} on GitHub`} />
-      <Social link={staticData.data.linkedin} iconName={staticData.data.linkedinIconName} label={`Visit ${staticData.data.alias} on LinkedIn`} />
+    <div
+      class="flex items-center justify-center gap-5"
+      role="group"
+      aria-label="Social media links"
+    >
+      <Social
+        link={`mailto:${email}`}
+        iconName={emailIconName}
+        label={`Send email to ${email}`}
+      />
+      <Social
+        link={instagram}
+        iconName={instagramIconName}
+        label={`Visit ${alias} on Instagram`}
+      />
+      <Social
+        link={youtube}
+        iconName={youtubeIconName}
+        label={`Visit ${alias} on YouTube`}
+      />
+      <Social
+        link={github}
+        iconName={githubIconName}
+        label={`Visit ${alias} on GitHub`}
+      />
+      <Social
+        link={linkedin}
+        iconName={linkedinIconName}
+        label={`Visit ${alias} on LinkedIn`}
+      />
     </div>
   </nav>
 </footer>

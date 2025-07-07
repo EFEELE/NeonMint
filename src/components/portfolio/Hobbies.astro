@@ -3,11 +3,12 @@ import { getCollection } from "astro:content";
 import Hobbie from "./Hobbie.astro";
 
 const [staticData] = await getCollection("staticData");
+const { hobbies } = staticData.data;
 
 interface Props {
-    variant?: 'default' | 'vertical';
+    variant?: "default" | "vertical";
 }
-
+    
 const baseClasses = "max-w-7xl gap-3 py-4 max-md:py-3";
 
 const variants = {
