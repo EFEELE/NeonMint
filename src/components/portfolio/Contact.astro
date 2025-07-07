@@ -5,6 +5,7 @@ import { getCollection } from "astro:content";
 
 const [staticData] = await getCollection("staticData");
 const {
+  contactSectionTitle,
   contactSectionSubtitle,
   contactSectionButtonText,
   email,
@@ -22,7 +23,7 @@ const {
       >
         <div class="max-w-lg">
           <Heading
-            text={contactSectionSubtitle}
+            text={contactSectionTitle}
             textGradient={contactSectionSubtitle}
             level={2}
           />
