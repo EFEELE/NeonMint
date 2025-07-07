@@ -1,17 +1,17 @@
 {
-  "profileImage": "/images/efeeleprofile.webp",
-  "profileAlt": "Photo of Fernando Aldair López Ponce (EFEELE) for the blog",
+  "profileImage": "/images/perfil.png",
+  "profileAlt": "Photo of David Josue Solorza Viera Ponce (Solorza) for the blog",
   "profileLink": "/about-me",
   "profileTitle": "FrontEnd Developer",
-  "profileName": "Fernando López",
-  "github": "https://github.com/EFEELE/NeonMint",
+  "profileName": "David Solorza",
+  "github": "https://github.com/DavidSolorza",
   "githubText": "Do you like this blog's design?",
   "portfolioImage": "/images/portfolio.webp",
-  "email": "hello@efeele.dev",
-  "linkedin": "https://www.linkedin.com/in/efeele/",
-  "instagram": "https://www.instagram.com/efeele.dev/",
+  "email": "david.josue.solorza@gmail.com",
+  "linkedin": "https://www.linkedin.com/in/david-josue-solorza-viera",
+  "instagram": "https://www.instagram.com/josuedavidsv?igsh=MXB2cXZ0MTQ5Y2F4cQ==",
   "youtube": "https://www.youtube.com/@efeeledev",
-  "alias": "EFEELE",
+  "alias": "Solorza",
   "contactSectionTitle": "Ready to take your idea to the next level?",
   "contactSectionSubtitle": "Let's work together.",
   "contactSectionButtonText": "Contact Me",
@@ -23,11 +23,12 @@
   "linkedinIconName": "linkedin",
   "emailIconName": "envelope",
   "hobbies": [
-    "Writing",
-    "Camping",
-    "Coffee",
+    "Sleeping",
+    "Eating",
+    "Reading",
+    "Walking",
     "Music",
     "Movies",
-    "Board Games"
+    "Gaming"
   ]
 }

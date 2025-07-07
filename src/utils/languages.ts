@@ -110,6 +110,7 @@ export const languages: Record<string, Language> = {
     name: "Python",
     iconName: "python",
   },
+  
 };
 
 export const getLanguage = (lang: string): Language => {

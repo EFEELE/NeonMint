@@ -9,17 +9,17 @@
   --font-roboto: 'Roboto', sans-serif;
   --font-opensans: 'Open Sans', sans-serif;
   --color-blacktext: #171717;
-  --color-mint-50: #ecfdf5;
-  --color-mint-100: #d0fbe5;
-  --color-mint-200: #a4f4cf;
-  --color-mint-300: #6ce9b7;
-  --color-mint-400: #31d69a;
-  --color-mint-500: #0dbc82;
-  --color-mint-600: #03986a;
-  --color-mint-700: #027a58;
-  --color-mint-800: #056047;
-  --color-mint-900: #054f3c;
-  --color-mint-950: #012d22;
+  --color-mint-50: #f7e6fb;
+  --color-mint-100: #ecd1f7;
+  --color-mint-200: #d9aaf0;
+  --color-mint-300: #c47be7;
+  --color-mint-400: #b34edb;
+  --color-mint-500: #A411CC;      /* azul menta principal */
+  --color-mint-600: #8e0fae;
+  --color-mint-700: #740d8e;
+  --color-mint-800: #5c0a6e;
+  --color-mint-900: #470857;
+  --color-mint-950: #2d0336;
 
   --color-riptide-50: #f0fdfa;
   --color-riptide-100: #cbfcf1;
@@ -57,8 +57,8 @@
 	border-radius: 20px;
 }
 .dark *{
-	scrollbar-color: #6ce9b7 #012d22;
-	scrollbar-width: thin;
+	   scrollbar-color: #A411CC #2d0336;
+    scrollbar-width: thin;
 }
  *{
 	scrollbar-color: #6ce9b7 #d0fbe5;
@@ -110,7 +110,11 @@ a.inline-block.leading-5.pl-12{
 }
 
 .markdown a {
-	@apply text-xl max-md:text-lg font-semibold dark:text-riptide-300! text-mint-500! underline hover:text-riptide-400! transition-all;
+	@apply text-xl max-md:text-lg font-semibold dark:text-mint-400! text-mint-500! underline hover:text-mint-600! transition-all;
+}
+
+.markdown a:hover {
+    color: #8e0fae !important; /* Derivado de #A411CC */
 }
 
 .markdown ol{
@@ -235,7 +239,7 @@ a.inline-block.leading-5.pl-12{
 	display: block;
 	width: 400px;
 	height: 400px;
-	background: #31d69a40;
+	background: #A411CC40;
 	bottom: -400px;
 	right: -300px;
 	position: fixed;
@@ -247,7 +251,7 @@ a.inline-block.leading-5.pl-12{
 
 
 .blur-circle {
-	background-color: rgba(87, 253, 228, 0.29);
+	background-color: rgba(164, 17, 204, 0.29);
 	position: absolute;
 	width: 200px;
 	height: 200px;
@@ -264,7 +268,7 @@ a.inline-block.leading-5.pl-12{
 	display: block;
 	width: 500px;
 	height: 500px;
-	background: #50fd8f25 !important;
+	background: #A411CC25 !important;
 	bottom: -150px;
 	right: -150px;
 	position: absolute;

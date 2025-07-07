@@ -34,7 +34,6 @@ const [staticData] = await getCollection('staticData');
     <div class="flex items-center justify-center gap-5" role="list" aria-label="Social media links">
       <Social link={`mailto:${staticData.data.email}`} iconName={staticData.data.emailIconName} label={`Send email to ${staticData.data.email}`} />
       <Social link={staticData.data.instagram} iconName={staticData.data.instagramIconName} label={`Visit ${staticData.data.alias} on Instagram`} />
-      <Social link={staticData.data.youtube} iconName={staticData.data.youtubeIconName} label={`Visit ${staticData.data.alias} on YouTube`} />
       <Social link={staticData.data.github} iconName={staticData.data.githubIconName} label={`Visit ${staticData.data.alias} on GitHub`} />
       <Social link={staticData.data.linkedin} iconName={staticData.data.linkedinIconName} label={`Visit ${staticData.data.alias} on LinkedIn`} />
     </div>
