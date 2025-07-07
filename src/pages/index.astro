@@ -4,15 +4,17 @@ import Experience from "../components/portfolio/Experience.astro";
 import HeroIndex from "../components/portfolio/HeroIndex.astro";
 import Contact from "../components/portfolio/Contact.astro";
 import ListProjects from "../components/portfolio/ListProjects.astro";
-const pageTitle = "NeonMint by | Fernando Lopez | EFEELE ";
-const description = "Is a modern, minimalist template crafted for developers and digital creatives.";
-const ogimage = {
-  url: "/images/imagedefault.webp",
-  alt: "Screenshot of a web portfolio with a modern and dark design. Featuring Fernando López, a Frontend Developer with 8 years of experience, highlighting his passion for development and technology. Includes contact sections, projects, and a technology stack with technologies like HTML5, JavaScript, TypeScript, Angular, Node.js, CSS, Tailwind, and more.",
-};
+import { getCollection } from "astro:content";
+
+const [staticData] = await getCollection("staticData");
+const { pageTitle, pageDescription, OGImage } = staticData.data;
 ---
 
-<Layout pageTitle={pageTitle} description={description} ogimage={ogimage}>
+<Layout
+  pageTitle={pageTitle}
+  description={pageDescription}
+  ogimage={{ alt: OGImage.alt, url: OGImage.url }}
+>
   <HeroIndex />
   <Experience />
   <ListProjects />

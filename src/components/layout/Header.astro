@@ -3,18 +3,19 @@ import Navigation from "./Navigation.astro";
 import ThemeIcon from "../ui/ThemeIcon.astro";
 import Social from "../ui/Social.astro";
 import { Icon } from "astro-icon/components";
-import { getCollection} from "astro:content";
+import { getCollection } from "astro:content";
 
-const [staticData] = await getCollection('staticData');
+const [staticData] = await getCollection("staticData");
+const { github, githubIconName, linkedin, linkedinIconName } = staticData.data;
 
 const currentPath = Astro.url.pathname;
-const routes = ["/", "/portfolio", "/about-me", ]; 
+const routes = ["/", "/portfolio", "/about-me"];
 
 // Check if the current route is in the list of routes
 const isActiveRoute = routes.includes(currentPath);
 
-const navItems = isActiveRoute 
-  ? ["home", "experience", "projects", "about", "blog",]
+const navItems = isActiveRoute
+  ? ["home", "experience", "projects", "about", "blog"]
   : ["home", "blog", "about"]; // Change the items
 ---
 
@@ -37,21 +38,28 @@ const navItems = isActiveRoute
     <Navigation items={navItems} />
 
     <div class="flex items-center justify-between gap-5 text-xl">
-      <div class="max-md:hidden flex items-center justify-center gap-5" role="list">
-        <Social link={staticData.data.github} iconName={staticData.data.githubIconName} />
-        <Social link={staticData.data.linkedin} iconName={staticData.data.linkedinIconName} />
+      <div
+        class="max-md:hidden flex items-center justify-center gap-5"
+        role="group"
+      >
+        <Social link={github} iconName={githubIconName} />
+        <Social link={linkedin} iconName={linkedinIconName} />
       </div>
     </div>
     <div class="flex items-center gap-5 text-xl md:pl-5">
       <ThemeIcon />
-      <button 
+      <button
         class="hamburger"
         aria-label="Open menu"
         aria-expanded="false"
         aria-controls="mobile-menu"
       >
         <Icon name="bars" class="hamburger-icon bars-icon" aria-hidden="true" />
-        <Icon name="xmark" class="hamburger-icon xmark-icon" aria-hidden="true" />
+        <Icon
+          name="xmark"
+          class="hamburger-icon xmark-icon"
+          aria-hidden="true"
+        />
       </button>
     </div>
   </div>
