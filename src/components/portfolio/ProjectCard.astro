@@ -1,0 +1,128 @@
+---
+import { Icon } from "astro-icon/components";
+import Capsule from "../ui/Capsule.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  imageAlt?: string;
+  technologies: string[];
+  liveUrl?: string;
+  githubUrl?: string;
+  featured?: boolean;
+}
+
+const { 
+  title, 
+  description, 
+  image, 
+  imageAlt = `${title} project screenshot`,
+  technologies, 
+  liveUrl, 
+  githubUrl,
+  featured = false 
+} = Astro.props;
+---
+
+<article 
+  class={`group relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-2xl ${
+    featured 
+      ? 'bg-linear-to-r from-mint-300 dark:from-mint-600 to-mint-50 dark:to-mint-200/5 p-[2px] hover:shadow-mint-500/30' 
+      : 'bg-white dark:bg-zinc-900 border border-mint-100 dark:border-zinc-800 hover:border-mint-300 dark:hover:border-mint-500'
+  }`}
+>
+  <div class={`h-full ${featured ? 'bg-white dark:bg-zinc-900 rounded-2xl' : ''}`}>
+    <!-- Imagen del proyecto -->
+    <div class="relative overflow-hidden">
+      <img 
+        src={image} 
+        alt={imageAlt}
+        class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      
+      <!-- Enlaces superpuestos -->
+      {(liveUrl || githubUrl) && (
+        <div class="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          {liveUrl && (
+            <a 
+              href={liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="p-2 bg-white/90 dark:bg-zinc-800/90 rounded-full hover:bg-mint-400 hover:text-white transition-colors"
+              aria-label={`Ver ${title} en vivo`}
+            >
+              <Icon name="rocket" class="size-4" />
+            </a>
+          )}
+          {githubUrl && (
+            <a 
+              href={githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="p-2 bg-white/90 dark:bg-zinc-800/90 rounded-full hover:bg-mint-400 hover:text-white transition-colors"
+              aria-label={`Ver código de ${title} en GitHub`}
+            >
+              <Icon name="github" class="size-4" />
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+
+    <!-- Contenido -->
+    <div class="p-6">
+      <div class="flex items-start justify-between mb-3">
+        <h3 class="text-xl font-bold text-blacktext dark:text-white group-hover:text-mint-500 dark:group-hover:text-mint-400 transition-colors">
+          {title}
+        </h3>
+        {featured && (
+          <span class="px-2 py-1 text-xs font-semibold bg-mint-100 dark:bg-mint-900 text-mint-700 dark:text-mint-300 rounded-full">
+            Destacado
+          </span>
+        )}
+      </div>
+
+      <p class="text-blacktext/80 dark:text-zinc-300 text-sm leading-relaxed mb-4">
+        {description}
+      </p>
+
+      <!-- Tecnologías -->
+      <div class="flex flex-wrap gap-2 mb-4">
+        {technologies.map((tech) => (
+          <Capsule lang={tech} linkEnabled={false} size="xs" />
+        ))}
+      </div>
+
+      <!-- Enlaces en el footer -->
+      {(liveUrl || githubUrl) && (
+        <div class="flex gap-3 pt-4 border-t border-mint-100 dark:border-zinc-700">
+          {liveUrl && (
+            <a 
+              href={liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 text-sm font-medium text-mint-600 dark:text-mint-400 hover:text-mint-700 dark:hover:text-mint-300 transition-colors"
+            >
+              <Icon name="rocket" class="size-4" />
+              Ver proyecto
+            </a>
+          )}
+          {githubUrl && (
+            <a 
+              href={githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 text-sm font-medium text-blacktext/70 dark:text-zinc-400 hover:text-blacktext dark:hover:text-white transition-colors"
+            >
+              <Icon name="github" class="size-4" />
+              Código
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+  </div>
+</article>

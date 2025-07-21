@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import HeroIndex from "../components/portfolio/HeroIndex.astro";
 import Contact from "../components/portfolio/Contact.astro";
+import ProjectsGrid from "../components/portfolio/ProjectsGrid.astro";
 
 const pageTitle = "NeonMint by David Solorza | Frontend Developer";
 const description = "Modern, minimalist portfolio template crafted for developers and digital creatives.";
@@ -13,5 +14,6 @@ const ogimage = {
 
 <Layout pageTitle={pageTitle} description={description} ogimage={ogimage}>
   <HeroIndex />
+  <ProjectsGrid />
   <Contact />
 </Layout>
