@@ -88,6 +88,7 @@ const [staticData] = await getCollection('staticData');
       </div>
     </div>
   </div>
+  
   <div
     class="mx-auto grid max-w-7xl grid-cols-2 grid-rows-4 max-sm:gap-3 gap-4 max-md:h-[80vh] max-sm:h-[900px] max-xl:h-[550px] xl:h-[700px] md:grid-cols-4 md:grid-rows-2"
   >
@@ -95,7 +96,7 @@ const [staticData] = await getCollection('staticData');
       class="col-start-2 row-start-2 flex flex-col gap-3 rounded-2xl border border-emerald-50 bg-linear-to-r from-riptide-200 to-mint-200 p-8 dark:border-zinc-800 dark:border-2 dark:bg-zinc-800 dark:bg-gradient-radial dark:from-riptide-500 dark:to-mint-500 max-md:gap-0 max-xl:p-5 max-md:p-4 max-lg:gap-1 md:col-start-4"
     >
       <div class="flex flex-col-reverse items-start gap-4 max-md:gap-2">
-        <Heading text="Beyond the Code" level={3} />
+        <Heading text="Beyond the Code" level={3}/>
       </div>
 
       <div class="overflow-y-auto">
@@ -113,17 +114,17 @@ const [staticData] = await getCollection('staticData');
           <a
             target="_blank"
             href={staticData.data.github}
-            aria-label="View this site's code repository on GitHub"
+            aria-label="View GitHub profile"
           >
             <div
               class="relative flex h-full flex-col gap-8 p-8 dark:before:bg-[radial-gradient(circle,rgba(13,188,130)_0,rgba(1,45,34)_100%)] before:bg-[radial-gradient(circle,rgba(95,255,202)_0,rgba(144,253,210)_100%)] before:absolute before:left-30 before:bottom-30 before:h-[30%] before:aspect-square before:rounded-full before:blur-3xl before:opacity-90 before:transition before:z-0 max-xl:p-5 max-md:p-4 xl:before:bottom-10"
             >
               <div class="z-2">
-                <Heading text="Do you like this site's design?" level={3}/>
+                <Heading text={staticData.data.githubText} level={3}/>
               </div>
 
               <Icon
-                class="absolute -bottom-10 left-30 size-50 text-mint-500/30 group-hover:animate-pulse ease-in-out max-sm:left-10 max-md:left-30 xl:size-56 xl:-bottom-5 xl:-right-24"
+                class="group-hover:animate-pulse ease-in-out size-50 absolute -bottom-10 left-30 max-sm:left-10 max-md:left-30 xl:size-56 xl:-bottom-5 xl:-right-24 text-mint-500/30"
                 name="github"
                 aria-hidden="true"
               />
@@ -155,14 +156,11 @@ const [staticData] = await getCollection('staticData');
 
     <div
       class="col-span-2 row-span-2 rounded-2xl bg-linear-to-r from-mint-300 dark:from-mint-600 to-mint-50 dark:to-mint-200/5 p-[.2rem] hover:to-mint-300/30 dark:hover:to-mint-600/30 md:col-start-1 md:row-start-1"
+      id="projects"
     >
       <article
         class="group relative flex h-full flex-col justify-start overflow-hidden rounded-2xl bg-linear-to-br from-riptide-100 to-white dark:from-mint-950 dark:to-zinc-950 p-8 transition-all hover:shadow-[0_20px_50px_rgba(13,188,130,0.4)] max-md:p-6 dark:before:bg-[radial-gradient(circle,rgba(13,188,130)_0,rgba(1,45,34)_100%)] before:bg-[radial-gradient(circle,rgba(95,255,202)_0,rgba(144,253,210)_100%)] before:absolute before:left-1/2 before:bottom-30 before:h-[30%] before:aspect-square before:rounded-full before:blur-3xl before:opacity-70 before:transition before:-z-0 hover:before:animate-pulse xl:before:bottom-2/5"
       >
-        <a
-          href="#projects"
-          class="absolute left-0 top-0 z-40 h-full w-full bg-transparent"
-          aria-label="View projects section"></a>
         <div class="flex items-center gap-4 max-md:gap-2">
           <Icon
             class="text-3xl dark:text-white text-mint-500 max-md:text-2xl max-sm:text-xl"
@@ -190,12 +188,48 @@ const [staticData] = await getCollection('staticData');
         <img
           class="relative left-0 z-0 mt-40 w-full object-cover transition-all ease-in-out duration-500 group-hover:rotate-2 group-hover:scale-185 max-xl:mt-28 max-lg:mt-10 max-sm:mt-0 max-md:scale-100 max-sm:scale-125 scale-180 max-md:group-hover:scale-105 before:bg-[radial-gradient(circle,rgba(13,188,130)_0,rgba(1,45,34)_100%)] before:absolute before:left-30 before:-bottom-0 before:h-[80%] before:aspect-square before:rounded-full before:blur-3xl before:opacity-80 before:-z-10 before:transition"
           src={staticData.data.portfolioImage}
-          alt="View of two website interfaces with modern and dark design. The first screen shows the title 'Behind the Code' with a rocket and dark background, explaining the origin of a community software project. The second screen presents a platform for finding speakers, with an attractive design, expert photos, and a prominent search button."
+          alt="Portfolio showcase image"
           loading="lazy"
           width="480"
           height="320"
         />
       </article>
+    </div>
+  </div>
+</section>
+
+<section
+  class="scroll-m-16 py-16 px-8 max-md:py-8"
+  id="experience"
+  aria-label="Work experience"
+>
+  <div class="mx-auto max-w-4xl">
+    <div class="flex gap-4 items-center justify-center mb-12">
+      <Icon class="text-3xl dark:text-white text-blacktext" name="briefcase" />
+      <Heading text="Work" textGradient="Experience" level={2} />
+    </div>
+
+    <div class="relative">
+      <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-mint-400/30"></div>
+      
+      <div class="space-y-12">
+        <div class="relative flex items-start gap-6">
+          <div class="flex-shrink-0 w-8 h-8 bg-mint-400 rounded-full flex items-center justify-center relative z-10">
+            <div class="w-3 h-3 bg-white rounded-full"></div>
+          </div>
+          
+          <div class="flex-grow">
+            <div class="bg-white dark:bg-zinc-900/50 rounded-xl p-6 shadow-lg border border-mint-100 dark:border-zinc-800">
+              <h3 class="text-xl font-bold text-mint-500 mb-2">Web Developer</h3>
+              <h4 class="text-lg font-semibold text-blacktext dark:text-white mb-2">Fundación FreeAgents</h4>
+              <time class="text-sm text-zinc-600 dark:text-zinc-400 mb-4 block">2024 – Present</time>
+              <p class="text-blacktext dark:text-zinc-300 leading-relaxed">
+                Built custom web systems tailored to organizational needs. Developed and consumed REST APIs and microservices for modular web applications. Supported integration of systems across platforms, especially in e-commerce environments.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

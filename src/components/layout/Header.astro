@@ -7,15 +7,7 @@ import { getCollection} from "astro:content";
 
 const [staticData] = await getCollection('staticData');
 
-const currentPath = Astro.url.pathname;
-const routes = ["/", "/portfolio", "/about-me", ]; 
-
-// Check if the current route is in the list of routes
-const isActiveRoute = routes.includes(currentPath);
-
-const navItems = isActiveRoute 
-  ? ["home", "experience", "projects", "about"]
-  : ["home", "experience", "projects", "about"]; // Change the items
+const navItems = ["home", "experience", "projects", "about"];
 ---
 
 <header
@@ -26,8 +18,6 @@ const navItems = isActiveRoute
   <div
     class="relative mx-auto flex max-w-7xl flex-row items-center justify-between max-xl:px-6"
   >
-    
-
     <Navigation items={navItems} />
 
     <div class="flex items-center justify-between gap-5 text-xl">

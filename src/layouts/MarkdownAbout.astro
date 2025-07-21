@@ -2,20 +2,10 @@
 import Layout from "./Layout.astro";
 import { Icon } from "astro-icon/components";
 import Heading from "../components/ui/Heading.astro";
-import Experience from "../components/portfolio/Experience.astro";
-import NavArticle from "../components/layout/NavArticle.astro";
 import Contact from "../components/portfolio/Contact.astro";
 import Tools from "../components/portfolio/Tools.astro";
 const { frontmatter } = Astro.props;
 ---
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach((header) => {
-      header.classList.add("scroll-m-28");
-    });
-  });
-</script>
 
 <Layout
   pageTitle={frontmatter.title}
@@ -25,10 +15,8 @@ const { frontmatter } = Astro.props;
   <section
     class="w-full px-8 mt-5 max-sm:px-4 py-4 flex flex-row justify-center gap-6"
   >
-    <div class="w-64 max-xl:hidden"></div>
-
     <article
-      class="flex flex-col gap-8 max-w-3xl max-md:w-full pb-10 pt-8 mt-8 max-sm:mt-0 px-14 max-md:px-10 max-sm:px-6 dark:bg-transparent bg-white dark:border-0 border border-neutral-100 rounded-2xl"
+      class="flex flex-col gap-8 max-w-3xl max-md:w-full pb-10 pt-8 mt-8 max-sm:mt-0 px-14 max-md:px-10 max-sm:px-6 dark:bg-transparent bg-white dark:border-0 border border-neutral-100 rounded-2xl mx-auto"
     >
       <div class="w-full h-auto mb-4 mx-auto" id="#">
         <div
@@ -58,11 +46,11 @@ const { frontmatter } = Astro.props;
 
           <div class="w-full flex flex-col justify-center gap-4 max-md:gap-2">
             <div class="text-center">
-              <Heading textGradient="David Solorza | FREEAGENTS" />
+              <Heading textGradient="David Solorza | Frontend Developer" />
             </div>
 
             <p
-              class="text-lg max-xl:text-base text-blacktext dark:text-gray-200 mb-0 leading-8 font-semibold"
+              class="text-lg max-xl:text-base text-blacktext dark:text-gray-200 mb-0 leading-8 font-semibold text-center"
             >
               <b
                 class="bg-linear-to-r from-riptide-400 to-mint-500 dark:to-mint-200 dark:from-riptide-300 text-transparent bg-clip-text"
@@ -75,6 +63,7 @@ const { frontmatter } = Astro.props;
           </div>
         </div>
       </div>
+      
       <div class="flex gap-4 items-center">
         <Heading text="About" textGradient="me" />
       </div>
@@ -83,26 +72,17 @@ const { frontmatter } = Astro.props;
         <slot />
       </div>
     </article>
-    <NavArticle title={frontmatter.title} />
   </section>
-  <section class="py-8 px-8 max-md:py-4 mb-4 scroll-m-16" id="experience">
-    <div class="flex flex-col gap-8 pt-8 max-w-4xl mx-auto">
-      <div class="flex gap-4 items-center justify-center">
-        <Icon class="text-3xl text-white" name="briefcase" />
-        <Heading text="Experience" textGradient="Work" level={2} />
-      </div>
-
-      <Experience />
-    </div>
-  </section>
-  <section class="py-8 px-8 max-md:py-4 mt-10 mb-20 scroll-m-16" id="sttack">
+  
+  <section class="py-8 px-8 max-md:py-4 mt-10 mb-20 scroll-m-16" id="stack">
     <div class="flex flex-col gap-8 max-w-3xl justify-center mx-auto">
       <div class="flex gap-4 items-center justify-center">
         <Icon class="text-3xl text-white" name="dashboard" />
-        <Heading text="Stack" textGradient="Technological" level={2} />
+        <Heading text="Tech" textGradient="Stack" level={2} />
       </div>
       <Tools variant="center" />
     </div>
   </section>
+  
   <Contact />
 </Layout>

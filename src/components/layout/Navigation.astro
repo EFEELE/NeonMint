@@ -10,13 +10,6 @@ const { items = [] }: { items: (keyof typeof menu)[] } = Astro.props as {
 
 const menu = {
   about: { name: "About Me", path: "/about-me" },
-  blog: { 
-    name: "Blog", 
-    path: "/blog/",
-    dropdown: [
-      { name: "All Posts", path: "/blog/posts/" },
-    ]
-  },
   home: { name: "Home", path: "/#home" },
   experience: { name: "Experience", path: "/#experience" },
   projects: { name: "Projects", path: "/#projects" },
@@ -27,9 +20,6 @@ const baseClasses = {
   nav: "nav-links flex w-full justify-center gap-6 max-md:gap-3 max-md:py-6",
   link: "px-2 py-2 transition-all hover:text-mint-300 max-md:mx-auto max-md:w-full max-md:px-6 max-md:py-2 ",
   socialContainer: "flex items-center justify-center gap-5 md:hidden",
-  dropdown: "relative group flex items-center",
-  dropdownMenu: "absolute left-0 top-full hidden group-hover:block bg-white dark:bg-zinc-800 shadow-lg rounded-md py-2 min-w-[200px] z-50",
-  dropdownItem: "block px-4 py-2 text-sm hover:bg-mint-100 dark:hover:bg-zinc-700 transition-colors"
 } as const;
 ---
 
@@ -109,34 +99,6 @@ const baseClasses = {
     items.map((key: string) => {
       const item = menu[key as keyof typeof menu];
       if (!item) return null;
-
-      if ('dropdown' in item) {
-        return (
-          <div class={baseClasses.dropdown}>
-            <a
-              href={item.path}
-              class={baseClasses.link}
-              data-path={item.path}
-              aria-label={item.name}
-              aria-current={item.path === Astro.url.pathname ? 'page' : undefined}
-            >
-              {item.name}
-            </a>
-            <div class={baseClasses.dropdownMenu}>
-              {item.dropdown.map((dropdownItem) => (
-                <a
-                  href={dropdownItem.path}
-                  class={baseClasses.dropdownItem}
-                  data-path={dropdownItem.path}
-                  aria-label={dropdownItem.name}
-                >
-                  {dropdownItem.name}
-                </a>
-              ))}
-            </div>
-          </div>
-        );
-      }
 
       return (
         <a

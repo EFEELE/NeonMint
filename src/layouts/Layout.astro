@@ -2,25 +2,24 @@
 import "../styles/global.css";
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
-import  SpeedInsights  from "@vercel/speed-insights/astro"
+
 const {
-  pageTitle = "NeonMint by EFEELE 🚀",
-  description = "Welcome to NeonMint by EFEELE, where I develop software and share knowledge.",
+  pageTitle = "NeonMint by David Solorza 🚀",
+  description = "Modern, minimalist portfolio template crafted for developers and digital creatives.",
   ogimage = {
     url: "/images/imagedefault.webp",
-    alt: "Default image of EFEELE",
+    alt: "Default image of David Solorza portfolio",
   },
 } = Astro.props;
 
 const siteUrl = new URL(Astro.url).origin;
 const SEO = {
-  sitename: "FREE AGENTS",
+  sitename: "David Solorza Portfolio",
   url: siteUrl,
   locale: "en_US",
-  author: "David Solorza | FREE AGENTS",
-  twitter: "@efeeledev",
+  author: "David Solorza",
+  twitter: "@davidsolorza",
 };
-
 
 const twitterimage = `${siteUrl}${ogimage.url}`;
 ---
@@ -33,6 +32,7 @@ const twitterimage = `${siteUrl}${ogimage.url}`;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <title>{pageTitle}</title>
+    
     <!-- Favicon for different platforms -->
     <link rel="icon" href="/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" href="/favicon-16x16.png" sizes="16x16" />
@@ -47,6 +47,7 @@ const twitterimage = `${siteUrl}${ogimage.url}`;
     <meta name="author" content={SEO.author} />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={`${Astro.site}${Astro.url.pathname}`}>
+    
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
@@ -56,7 +57,6 @@ const twitterimage = `${siteUrl}${ogimage.url}`;
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SEO.sitename} />
     <meta property="og:locale" content={SEO.locale} />
-    
 
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -70,23 +70,24 @@ const twitterimage = `${siteUrl}${ogimage.url}`;
 
     <!-- Sitemap -->
     <link rel="sitemap" href="/sitemap-index.xml" />
-    
   </head>
+  
   <body class="overflow-x-hidden">
-    <SpeedInsights/>
     <div class="blur-circle"></div>
     <div
-      style="  background:linear-gradient(45deg, rgba(96, 250, 155, 0) 10.79%, rgba(96, 250, 170, 0.03) 40.92%, rgba(96, 250, 155, 0) 90.35%)"
+      style="background:linear-gradient(45deg, rgba(96, 250, 155, 0) 10.79%, rgba(96, 250, 170, 0.03) 40.92%, rgba(96, 250, 155, 0) 90.35%)"
       class="fixed top-0 left-0 w-full h-full pointer-events-none -z-1"
     >
     </div>
+    
     <Header />
 
-    <div class="min-h-[85vh] ">
+    <div class="min-h-[85vh]">
       <slot />
     </div>
 
     <Footer />
+    
     <script>
       import "../scripts/menu.js";
     </script>
