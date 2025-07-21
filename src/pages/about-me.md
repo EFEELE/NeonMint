@@ -7,64 +7,56 @@ image:
   url: "/images/profile.png"
   alt: "Profile photo of David Josue Solorza Viera for the portfolio"
 ---
-Hi, I'm **David Josue Solorza Viera**, a **Systems and Computing Engineering student** at Universidad de Caldas, currently specializing in **Frontend Web Development**. I have hands-on experience with modern frameworks like **Angular**, **React**, and **Vite**, and I’m passionate about creating elegant, scalable, and responsive web interfaces.
+Hola, soy **David Josue Solorza Viera**, estudiante de **Ingeniería en Sistemas y Computación** en la Universidad de Caldas, actualmente especializándome en **Desarrollo Web Frontend**. Tengo experiencia práctica con frameworks modernos como **Angular**, **React**, y **Vite**, y me apasiona crear interfaces web elegantes, escalables y responsivas.
 
-I also work with **Python**, **Java**, and **C++**, which allows me to contribute to **back-end development**, APIs, and system integration. I believe in building complete solutions—from backend logic to polished frontends—while staying up-to-date with the latest technologies.
+También trabajo con **Python**, **Java**, y **C++**, lo que me permite contribuir al **desarrollo back-end**, APIs, e integración de sistemas. Creo en construir soluciones completas—desde la lógica del backend hasta frontends pulidos—manteniéndome actualizado con las últimas tecnologías.
 
-I currently collaborate with **Fundación FreeAgents**, developing web systems, APIs, and integrations that support e-commerce and digital outreach initiatives.
+Actualmente colaboro con **Fundación FreeAgents**, desarrollando sistemas web, APIs, e integraciones que apoyan iniciativas de e-commerce y divulgación digital.
 
-## Skills & Technologies 💻
+## Habilidades y Tecnologías 💻
 
 - **Frontend**: HTML, CSS, JavaScript, React, Angular, Vite
 - **Backend**: Python, Java, C++
-- **Tools & Dev**: Git, GitHub, Microservices, APIs
-- **Other**: Systems Integration, E-commerce Platforms
-- **Languages**: Spanish (native), English (advanced - conversational & functional)
+- **Herramientas y Desarrollo**: Git, GitHub, Microservicios, APIs
+- **Otros**: Integración de Sistemas, Plataformas E-commerce
+- **Idiomas**: Español (nativo), Inglés (avanzado - conversacional y funcional)
 
-## Experience 👨‍💻
+## Experiencia 👨‍💻
 
-### Web Developer  
+### Desarrollador Web  
 **Fundación FreeAgents**  
-*2024 – Present*
+*2024 – Actualidad*
 
-- Built custom web systems tailored to organizational needs.
-- Developed and consumed **REST APIs** and microservices for modular web applications.
-- Supported integration of systems across platforms, especially in **e-commerce environments**.
-- Collaborated in outreach and tech promotion for digital tools.
+- Creación de sistemas Web personalizados adaptados a las necesidades organizacionales.
+- Desarrollo y consumo de **APIs REST** y microservicios para aplicaciones web modulares.
+- Apoyo en la integración de sistemas a través de plataformas, especialmente en **entornos de e-commerce**.
+- Colaboración en divulgación y promoción tecnológica para herramientas digitales.
 
-## Education 🎓
+## Educación 🎓
 
-- **B.Sc. Systems and Computing Engineering**  
-  *Universidad de Caldas* — *2024 – Present*
+- **Ingeniería en Sistemas y Computación**  
+  *Universidad de Caldas* — *2024 – Actualidad*
 
-- **Intro to Programming with Python I**  
+- **Introducción a la Programación en Python I**  
   *Pontificia Universidad Católica de Chile* — *2022*
 
-- **Software Development Process & IT Solutions**  
+- **Proceso de Desarrollo de Software y Soluciones TIC**  
   *SENA* — *2020*
 
-- **C++ Programming Structure (Level I)**  
-  *SENA* — *2020*
+## Certificaciones 📜
 
-- **Electronics Circuit Design**  
-  *SENA* — *2019*
+- Programación en Python (PUC Chile)
+- Metodologías de Desarrollo de Software (SENA)
+- Aplicación de etapas del desarrollo de software en TIC (SENA)
+## Contacto 📫
 
-## Certifications 📜
-
-- Python Programming (PUC Chile)
-- Software Development Methodologies (SENA)
-- C++ Fundamentals (SENA)
-- Electronics Circuits & ICT Integration (SENA)
-
-## Contact 📫
-
-- **Phone**: +57 313 737 4108  
+- **Teléfono**: +57 313 737 4108  
 - **Email**: david.josue.solorza@gmail.com  
 - **GitHub**: [github.com/davidsolorza](https://github.com/DavidSolorza)  
 - **LinkedIn**: [linkedin.com/in/david-josue-solorza-viera](https://www.linkedin.com/in/david-josue-solorza-viera)
 
-## Let's Build Something Great 🚀
+## Construyamos Algo Genial 🚀
 
-I'm always open to collaboration, freelance opportunities, or simply discussing exciting ideas. Whether it's coding, design, or system thinking—I'm ready to contribute and grow.
+Siempre estoy abierto a colaboraciones, oportunidades freelance, o simplemente discutir ideas emocionantes. Ya sea programación, diseño, o pensamiento de sistemas—estoy listo para contribuir y crecer.
 
 ---
