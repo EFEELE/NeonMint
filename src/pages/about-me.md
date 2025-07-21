@@ -43,11 +43,14 @@ Actualmente colaboro con **Fundación FreeAgents**, desarrollando sistemas web, 
 - **Proceso de Desarrollo de Software y Soluciones TIC**  
   *SENA* — *2020*
 
+- **Múltiples Certificaciones Técnicas**  
+  *SENA* — *2020*
+  - Aplicación de las etapas del desarrollo de software en la implementación de soluciones de TIC
+  - Estructura de lenguaje de programación C++ (NIVEL I)
+  - Elaboración de circuitos electrónicos
+
 ## Certificaciones 📜
 
-- Programación en Python (PUC Chile)
-- Metodologías de Desarrollo de Software (SENA)
-- Aplicación de etapas del desarrollo de software en TIC (SENA)
 ## Contacto 📫
 
 - **Teléfono**: +57 313 737 4108  
