@@ -90,26 +90,59 @@ const [staticData] = await getCollection('staticData');
   </div>
   
   <div
-    class="mx-auto grid max-w-7xl grid-cols-2 grid-rows-4 max-sm:gap-3 gap-4 max-md:h-[80vh] max-sm:h-[900px] max-xl:h-[550px] xl:h-[700px] md:grid-cols-4 md:grid-rows-2"
+    class="mx-auto grid max-w-7xl grid-cols-1 md:grid-cols-3 gap-4 max-sm:gap-3"
   >
+    <!-- Tech Stack Card - Ocupa 2 columnas en desktop -->
     <div
-      class="col-start-2 row-start-2 flex flex-col gap-3 rounded-2xl border border-emerald-50 bg-linear-to-r from-riptide-200 to-mint-200 p-8 dark:border-zinc-800 dark:border-2 dark:bg-zinc-800 dark:bg-gradient-radial dark:from-riptide-500 dark:to-mint-500 max-md:gap-0 max-xl:p-5 max-md:p-4 max-lg:gap-1 md:col-start-4"
+      class="md:col-span-2 flex flex-col gap-4 rounded-2xl bg-linear-to-r from-mint-300 dark:from-mint-600 to-mint-50 dark:to-mint-200/5 hover:to-mint-300/30 dark:hover:to-mint-600/30 p-[.2rem] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_20px_50px_rgba(13,188,130,0.3)]"
     >
-      <div class="flex flex-col-reverse items-start gap-4 max-md:gap-2">
-        <Heading text="Beyond the Code" level={3}/>
+      <article
+        class="group relative z-0 flex h-full w-full flex-col overflow-hidden rounded-2xl bg-linear-to-tr from-riptide-100 to-mint-100 p-8 max-md:p-6 gap-6 max-md:gap-4 dark:bg-linear-to-r dark:from-mint-900 dark:to-mint-950 dark:before:bg-[radial-gradient(circle,rgba(13,188,130)_0,rgba(1,45,34)_100%)] before:bg-[radial-gradient(circle,rgba(95,255,202)_0,rgba(144,253,210)_100%)] before:absolute before:right-0 before:top-0 before:h-[60%] before:aspect-square before:rounded-full before:blur-3xl dark:before:opacity-60 before:opacity-20 before:-z-10 before:transition"
+      >
+        <div class="flex items-center gap-4 max-md:gap-3">
+          <Icon
+            class="text-4xl dark:text-white text-mint-500 max-md:text-3xl"
+            name="dashboard"
+            aria-hidden="true"
+          />
+          <Heading text="Tech" textGradient="Stack" level={2} />
+        </div>
+        
+        <div class="flex-1 overflow-y-auto">
+          <Tools variant="default" />
+        </div>
+      </article>
+    </div>
+
+    <!-- Hobbies Card -->
+    <div
+      class="flex flex-col gap-4 rounded-2xl border border-emerald-50 bg-linear-to-r from-riptide-200 to-mint-200 p-8 max-md:p-6 dark:border-zinc-800 dark:border-2 dark:bg-zinc-800 dark:bg-gradient-radial dark:from-riptide-500 dark:to-mint-500 transition-all duration-300 hover:scale-[1.02]"
+    >
+      <div class="flex items-center gap-3">
+        <Icon
+          class="text-2xl dark:text-white text-blacktext"
+          name="person"
+          aria-hidden="true"
+        />
+        <Heading text="Beyond the" textGradient="Code" level={3}/>
       </div>
 
-      <div class="overflow-y-auto">
-        <Hobbies />
+      <div class="flex-1 overflow-y-auto">
+        <Hobbies variant="vertical" />
       </div>
     </div>
 
+    <!-- GitHub Card - Ahora en una fila separada ocupando todo el ancho -->
+  </div>
+  
+  <!-- GitHub Card - Separada en su propia fila -->
+  <div class="mx-auto max-w-7xl mt-4">
     <div
-      class="col-start-1 row-start-2 rounded-2xl bg-linear-to-r from-mint-300 dark:from-mint-600 to-mint-50 dark:to-mint-200/5 hover:to-mint-300/30 dark:hover:to-mint-600/30 p-[.2rem] transition-all ease-in duration-150 hover:scale-105 hover:shadow-[0_20px_50px_rgba(13,188,130,0.4)] z-40 md:col-start-3"
+      class="rounded-2xl bg-linear-to-r from-mint-300 dark:from-mint-600 to-mint-50 dark:to-mint-200/5 hover:to-mint-300/30 dark:hover:to-mint-600/30 p-[.2rem] transition-all ease-in duration-300 hover:scale-[1.01] hover:shadow-[0_20px_50px_rgba(13,188,130,0.4)]"
     >
       <div class="h-full w-full overflow-hidden rounded-2xl dark:bg-zinc-900">
         <div
-          class="relative h-full w-full overflow-hidden rounded-2xl  bg-linear-to-tr from-riptide-100 to-white dark:from-transparent dark:bg-linear-to-bl dark:to-transparent "
+          class="relative h-full w-full overflow-hidden rounded-2xl bg-linear-to-tr from-riptide-100 to-white dark:from-transparent dark:bg-linear-to-bl dark:to-transparent"
         >
           <a
             target="_blank"
@@ -117,14 +150,24 @@ const [staticData] = await getCollection('staticData');
             aria-label="View GitHub profile"
           >
             <div
-              class="relative flex h-full flex-col gap-8 p-8 dark:before:bg-[radial-gradient(circle,rgba(13,188,130)_0,rgba(1,45,34)_100%)] before:bg-[radial-gradient(circle,rgba(95,255,202)_0,rgba(144,253,210)_100%)] before:absolute before:left-30 before:bottom-30 before:h-[30%] before:aspect-square before:rounded-full before:blur-3xl before:opacity-90 before:transition before:z-0 max-xl:p-5 max-md:p-4 xl:before:bottom-10"
+              class="relative flex h-full flex-row items-center justify-between gap-8 p-8 max-md:p-6 dark:before:bg-[radial-gradient(circle,rgba(13,188,130)_0,rgba(1,45,34)_100%)] before:bg-[radial-gradient(circle,rgba(95,255,202)_0,rgba(144,253,210)_100%)] before:absolute before:right-10 before:top-1/2 before:-translate-y-1/2 before:h-[60%] before:aspect-square before:rounded-full before:blur-3xl before:opacity-90 before:transition before:z-0"
             >
-              <div class="z-2">
-                <Heading text={staticData.data.githubText} level={3}/>
+              <div class="z-10 flex-1">
+                <div class="flex items-center gap-4 mb-4">
+                  <Icon
+                    class="text-3xl text-mint-500"
+                    name="github"
+                    aria-hidden="true"
+                  />
+                  <Heading text={staticData.data.githubText} level={3}/>
+                </div>
+                <p class="text-blacktext/80 dark:text-zinc-300 text-lg max-md:text-base">
+                  Explora mi código, contribuciones y proyectos open source en GitHub.
+                </p>
               </div>
 
               <Icon
-                class="group-hover:animate-pulse ease-in-out size-50 absolute -bottom-10 left-30 max-sm:left-10 max-md:left-30 xl:size-56 xl:-bottom-5 xl:-right-24 text-mint-500/30"
+                class="group-hover:animate-pulse ease-in-out size-32 max-md:size-24 text-mint-500/30 z-10"
                 name="github"
                 aria-hidden="true"
               />
@@ -132,26 +175,6 @@ const [staticData] = await getCollection('staticData');
           </a>
         </div>
       </div>
-    </div>
-
-    <div
-      class="col-span-2 col-start-1 row-start-1 rounded-2xl bg-linear-to-r from-mint-300 dark:from-mint-600 to-mint-50 dark:to-mint-200/5  hover:to-mint-300/30 dark:hover:to-mint-600/30 p-[.2rem] md:col-start-3"
-    >
-      <article
-        class="group relative z-0 flex h-full w-full flex-col overflow-hidden rounded-2xl bg-linear-to-tr from-riptide-100 to-mint-100 p-6 transition hover:shadow-[0_10px_50px_rgba(13,188,130,0.2)] dark:bg-linear-to-r dark:from-mint-900 dark:to-mint-950 dark:overflow-hidden max-md:p-4 gap-6 max-md:gap-3 max-lg:gap-4 dark:before:bg-[radial-gradient(circle,rgba(13,188,130)_0,rgba(1,45,34)_100%)] before:bg-[radial-gradient(circle,rgba(95,255,202)_0,rgba(144,253,210)_100%)] before:absolute before:left-30 before:-bottom-0 before:h-[80%] before:aspect-square before:rounded-full before:blur-3xl dark:before:opacity-80 before:opacity-30 before:-z-10 before:transition"
-      >
-        <div class="flex items-center gap-4 max-md:gap-2">
-          <Icon
-            class="text-3xl dark:text-white text-mint-500 max-md:text-2xl max-sm:text-sm"
-            name="dashboard"
-            aria-hidden="true"
-          />
-          <Heading text="Tech" textGradient="Stack" level={3} />
-        </div>
-        <div class="overflow-y-auto">
-          <Tools />
-        </div>
-      </article>
     </div>
 
   </div>

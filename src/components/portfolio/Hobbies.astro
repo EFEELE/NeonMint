@@ -12,7 +12,7 @@ const baseClasses = "max-w-7xl gap-3 py-4 max-md:py-3";
 
 const variants = {
     default: `${baseClasses} flex-wrap mx-auto max-md:gap-2 max-sm:gap-1 justify-start items-center flex flex-row`,
-    vertical: `${baseClasses} max-sm:gap-2 justify-start items-start flex flex-col`,
+    vertical: `${baseClasses} max-sm:gap-2 justify-start items-start flex flex-wrap max-h-48 overflow-y-auto`,
 } as const;
 
 const { variant = "default" } = Astro.props as Props;

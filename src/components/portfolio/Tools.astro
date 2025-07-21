@@ -22,11 +22,11 @@ import Capsule from "../ui/Capsule.astro";
 type ToolVariant = "default" | "center";
 
 // Base classes that are common to all variants
-const baseClasses = "flex flex-wrap gap-4 max-lg:gap-1 grid-auto-efe";
+const baseClasses = "flex flex-wrap gap-4 max-lg:gap-3 max-md:gap-2";
 
 // Variant-specific classes
 const variantClasses: Record<ToolVariant, string> = {
-  default: "cursor-default",
+  default: "cursor-default justify-start",
   center: "justify-center cursor-default",
 };
 
