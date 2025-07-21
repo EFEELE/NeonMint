@@ -6,41 +6,42 @@ import { Icon } from "astro-icon/components";
 // Aquí defines tus proyectos
 const projects = [
   {
-    title: "E-commerce Platform",
-    description: "Plataforma de comercio electrónico completa con carrito de compras, pagos integrados y panel de administración.",
-    image: "/images/projects/ecommerce-demo.webp",
-    technologies: ["angular", "node", "mongo", "tailwind"],
-    liveUrl: "https://demo-ecommerce.com",
-    githubUrl: "https://github.com/davidsolorza/ecommerce",
-    featured: true
+    title: "Sabores del Monte",
+    description:
+      "Tienda online de mermeladas artesanales desarrollada con tecnologías modernas. Implementé un diseño responsivo y atractivo usando React y Tailwind CSS, con enfoque en experiencia de usuario, catálogo de productos dinámico y flujo de compra simple. Ideal para pequeños emprendimientos que buscan presencia digital efectiva.",
+    image: "/images/projects/Captura de pantalla 2025-07-21 152702.png",
+    technologies: [ "node", "mongo", "tailwind", "javascript","html"],
+    liveUrl: "https://saboresdelmonte.shop/",
+    githubUrl: "https://github.com/DavidSolorza/Sabores-Del-Monte.git",
+    featured: true,
   },
   {
-    title: "Task Management App",
-    description: "Aplicación de gestión de tareas con funcionalidades de colaboración en tiempo real y notificaciones.",
-    image: "/images/projects/task-app-demo.webp",
-    technologies: ["javascript", "firebase", "css"],
-    liveUrl: "https://task-manager-demo.com",
-    githubUrl: "https://github.com/davidsolorza/task-manager"
+    title: "STREAMING PLUS",
+    description:
+      "Plataforma de venta de películas y series en línea, construida con tecnologías actuales. Desarrollé una interfaz atractiva y completamente responsiva utilizando React y Tailwind CSS, priorizando una experiencia de usuario fluida. Incluye un catálogo interactivo y un proceso de compra intuitivo, pensada para emprendimientos que desean digitalizar sus ventas de forma eficiente.",
+    image: "/images/projects/task-app-demo.jpg",
+    technologies: ["node", "mongo", "tailwind", "javascript",],
+    liveUrl: "https://streamingpluss.shop/",
+    githubUrl: "https://github.com/DavidSolorza/STREAMINGPLUS.git",
   },
-  {
-    title: "Weather Dashboard",
-    description: "Dashboard del clima con pronósticos detallados, mapas interactivos y alertas meteorológicas.",
-    image: "/images/projects/weather-demo.webp",
-    technologies: ["ts", "astro", "tailwind"],
-    githubUrl: "https://github.com/davidsolorza/weather-dashboard"
-  },
+
   {
     title: "Portfolio Website",
-    description: "Sitio web de portfolio personal con diseño moderno, animaciones suaves y optimización SEO.",
-    image: "/images/projects/portfolio-demo.webp",
+    description:
+      "Sitio web de portfolio personal con diseño moderno, animaciones suaves y optimización SEO.",
+    image: "/images/projects/Captura de pantalla 2025-07-21 154554.png",
     technologies: ["astro", "tailwind", "javascript"],
     liveUrl: "https://davidsolorza.dev",
-    githubUrl: "https://github.com/davidsolorza/portfolio"
-  }
+    githubUrl: "https://github.com/DavidSolorza/Solorza.git",
+  },
 ];
 ---
 
-<section class="py-16 px-8 max-md:py-8" id="projects" aria-label="Proyectos destacados">
+<section
+  class="py-16 px-8 max-md:py-8"
+  id="projects"
+  aria-label="Proyectos destacados"
+>
   <div class="mx-auto max-w-7xl">
     <!-- Header de la sección -->
     <div class="flex gap-4 items-center justify-center mb-12">
@@ -48,16 +49,18 @@ const projects = [
       <Heading text="Mis" textGradient="Proyectos" level={2} />
     </div>
 
-    <p class="text-center text-lg text-blacktext/80 dark:text-zinc-300 mb-12 max-w-2xl mx-auto">
-      Aquí puedes ver algunos de los proyectos en los que he trabajado, aplicando las últimas tecnologías 
-      y mejores prácticas de desarrollo.
+    <p
+      class="text-center text-lg text-blacktext/80 dark:text-zinc-300 mb-12 max-w-2xl mx-auto"
+    >
+      Aquí puedes ver algunos de los proyectos en los que he trabajado,
+      aplicando las últimas tecnologías y mejores prácticas de desarrollo.
     </p>
 
     <!-- Grid de proyectos -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-md:gap-6">
-      {projects.map((project) => (
-        <ProjectCard {...project} />
-      ))}
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-md:gap-6"
+    >
+      {projects.map((project) => <ProjectCard {...project} />)}
     </div>
 
     <!-- Call to action -->
@@ -65,7 +68,7 @@ const projects = [
       <p class="text-blacktext/70 dark:text-zinc-400 mb-4">
         ¿Tienes un proyecto en mente?
       </p>
-      <a 
+      <a
         href="mailto:david.josue.solorza@gmail.com"
         class="inline-flex items-center gap-2 px-6 py-3 bg-mint-500 hover:bg-mint-600 text-white font-medium rounded-full transition-colors"
       >
