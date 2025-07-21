@@ -3,7 +3,8 @@ import { Icon } from "astro-icon/components";
 import Heading from "../ui/Heading.astro";
 import { getCollection } from "astro:content";
 
-const [staticData] = await getCollection('staticData');
+
+const [staticData] = await getCollection("staticData");
 ---
 
 <section class="py-16 px-8 max-md:py-8" id="contact">
@@ -21,9 +22,11 @@ const [staticData] = await getCollection('staticData');
           <h3 class="text-2xl font-bold text-blacktext dark:text-white mb-4">
             ¡Trabajemos juntos!
           </h3>
-          <p class="text-lg text-blacktext/80 dark:text-zinc-300 leading-relaxed">
-            ¿Tienes un proyecto en mente? Me encantaría escuchar sobre tu idea y 
-            ayudarte a convertirla en realidad. Estoy disponible para proyectos 
+          <p
+            class="text-lg text-blacktext/80 dark:text-zinc-300 leading-relaxed"
+          >
+            ¿Tienes un proyecto en mente? Me encantaría escuchar sobre tu idea y
+            ayudarte a convertirla en realidad. Estoy disponible para proyectos
             freelance y colaboraciones.
           </p>
         </div>
@@ -32,11 +35,16 @@ const [staticData] = await getCollection('staticData');
         <div class="space-y-6">
           <div class="flex items-center gap-4">
             <div class="p-3 bg-mint-100 dark:bg-mint-900 rounded-full">
-              <Icon name="envelope" class="size-6 text-mint-600 dark:text-mint-400" />
+              <Icon
+                name="envelope"
+                class="size-6 text-mint-600 dark:text-mint-400"
+              />
             </div>
             <div>
-              <h4 class="font-semibold text-blacktext dark:text-white">Email</h4>
-              <a 
+              <h4 class="font-semibold text-blacktext dark:text-white">
+                Email
+              </h4>
+              <a
                 href={`mailto:${staticData.data.email}`}
                 class="text-mint-600 dark:text-mint-400 hover:text-mint-700 dark:hover:text-mint-300 transition-colors"
               >
@@ -47,11 +55,16 @@ const [staticData] = await getCollection('staticData');
 
           <div class="flex items-center gap-4">
             <div class="p-3 bg-mint-100 dark:bg-mint-900 rounded-full">
-              <Icon name="linkedin" class="size-6 text-mint-600 dark:text-mint-400" />
+              <Icon
+                name="linkedin"
+                class="size-6 text-mint-600 dark:text-mint-400"
+              />
             </div>
             <div>
-              <h4 class="font-semibold text-blacktext dark:text-white">LinkedIn</h4>
-              <a 
+              <h4 class="font-semibold text-blacktext dark:text-white">
+                LinkedIn
+              </h4>
+              <a
                 href={staticData.data.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -64,11 +77,16 @@ const [staticData] = await getCollection('staticData');
 
           <div class="flex items-center gap-4">
             <div class="p-3 bg-mint-100 dark:bg-mint-900 rounded-full">
-              <Icon name="github" class="size-6 text-mint-600 dark:text-mint-400" />
+              <Icon
+                name="github"
+                class="size-6 text-mint-600 dark:text-mint-400"
+              />
             </div>
             <div>
-              <h4 class="font-semibold text-blacktext dark:text-white">GitHub</h4>
-              <a 
+              <h4 class="font-semibold text-blacktext dark:text-white">
+                GitHub
+              </h4>
+              <a
                 href={staticData.data.github}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -81,7 +99,9 @@ const [staticData] = await getCollection('staticData');
         </div>
 
         <!-- Disponibilidad -->
-        <div class="p-6 bg-mint-50 dark:bg-mint-950/30 rounded-xl border border-mint-200 dark:border-mint-800">
+        <div
+          class="p-6 bg-mint-50 dark:bg-mint-950/30 rounded-xl border border-mint-200 dark:border-mint-800"
+        >
           <div class="flex items-center gap-3 mb-3">
             <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
             <span class="font-semibold text-blacktext dark:text-white">
@@ -89,17 +109,22 @@ const [staticData] = await getCollection('staticData');
             </span>
           </div>
           <p class="text-sm text-blacktext/70 dark:text-zinc-400">
-            Actualmente acepto proyectos freelance y colaboraciones. 
-            Tiempo de respuesta: 24-48 horas.
+            Actualmente acepto proyectos freelance y colaboraciones. Tiempo de
+            respuesta: 24-48 horas.
           </p>
         </div>
       </div>
 
       <!-- Formulario de contacto -->
-      <div class="bg-white dark:bg-zinc-900/50 rounded-2xl p-8 border border-mint-100 dark:border-zinc-800">
+      <div
+        class="bg-white dark:bg-zinc-900/50 rounded-2xl p-8 border border-mint-100 dark:border-zinc-800"
+      >
         <form id="contact-form" class="space-y-6">
           <div>
-            <label for="name" class="block text-sm font-medium text-blacktext dark:text-white mb-2">
+            <label
+              for="name"
+              class="block text-sm font-medium text-blacktext dark:text-white mb-2"
+            >
               Nombre *
             </label>
             <input
@@ -113,7 +138,10 @@ const [staticData] = await getCollection('staticData');
           </div>
 
           <div>
-            <label for="email" class="block text-sm font-medium text-blacktext dark:text-white mb-2">
+            <label
+              for="email"
+              class="block text-sm font-medium text-blacktext dark:text-white mb-2"
+            >
               Email *
             </label>
             <input
@@ -127,7 +155,10 @@ const [staticData] = await getCollection('staticData');
           </div>
 
           <div>
-            <label for="subject" class="block text-sm font-medium text-blacktext dark:text-white mb-2">
+            <label
+              for="subject"
+              class="block text-sm font-medium text-blacktext dark:text-white mb-2"
+            >
               Asunto *
             </label>
             <input
@@ -141,7 +172,10 @@ const [staticData] = await getCollection('staticData');
           </div>
 
           <div>
-            <label for="message" class="block text-sm font-medium text-blacktext dark:text-white mb-2">
+            <label
+              for="message"
+              class="block text-sm font-medium text-blacktext dark:text-white mb-2"
+            >
               Mensaje *
             </label>
             <textarea
@@ -150,8 +184,7 @@ const [staticData] = await getCollection('staticData');
               required
               rows="5"
               class="w-full px-4 py-3 border border-mint-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-800 text-blacktext dark:text-white focus:ring-2 focus:ring-mint-500 focus:border-transparent transition-colors resize-vertical"
-              placeholder="Cuéntame sobre tu proyecto o consulta..."
-            ></textarea>
+              placeholder="Cuéntame sobre tu proyecto o consulta..."></textarea>
           </div>
 
           <button
@@ -170,81 +203,54 @@ const [staticData] = await getCollection('staticData');
   </div>
 </section>
 
+
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('contact-form') as HTMLFormElement;
-    const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-    const submitText = document.getElementById('submit-text') as HTMLSpanElement;
-    const formStatus = document.getElementById('form-status') as HTMLDivElement;
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("contact-form");
+    const submitButton = form.querySelector('button[type="submit"]');
+    const submitText = document.getElementById("submit-text");
+    const formStatus = document.getElementById("form-status");
 
-    form.addEventListener('submit', function(e) {
+    // ✅ Inicializar EmailJS con tu clave pública
+    emailjs.init("lqo_OcD3fpGXsS3PB"); // Reemplaza con tu Public Key real
+
+    form.addEventListener("submit", function (e) {
       e.preventDefault();
-      
-      const formData = new FormData(form);
-      const name = formData.get('name') as string;
-      const email = formData.get('email') as string;
-      const subject = formData.get('subject') as string;
-      const message = formData.get('message') as string;
 
-      // Validación básica
-      if (!name || !email || !subject || !message) {
-        showStatus('Por favor, completa todos los campos requeridos.', 'error');
-        return;
-      }
-
-      // Validación de email
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        showStatus('Por favor, ingresa un email válido.', 'error');
-        return;
-      }
-
-      // Deshabilitar botón y mostrar loading
+      // Deshabilitar el botón
       submitButton.disabled = true;
-      submitText.textContent = 'Enviando...';
+      submitText.textContent = "Enviando...";
 
-      // Crear el enlace mailto con todos los datos
-      const mailtoLink = `mailto:david.josue.solorza@gmail.com?subject=${encodeURIComponent(`[Contacto Web] ${subject}`)}&body=${encodeURIComponent(`
-Nombre: ${name}
-Email: ${email}
-Asunto: ${subject}
-
-Mensaje:
-${message}
-
----
-Este mensaje fue enviado desde davidsolorza.dev
-      `)}`;
-
-      // Abrir cliente de email
-      window.location.href = mailtoLink;
-
-      // Mostrar mensaje de éxito
-      showStatus('¡Perfecto! Se ha abierto tu cliente de email. Si no se abrió automáticamente, puedes contactarme directamente en david.josue.solorza@gmail.com', 'success');
-
-      // Limpiar formulario
-      form.reset();
-
-      // Restaurar botón después de un momento
-      setTimeout(() => {
-        submitButton.disabled = false;
-        submitText.textContent = 'Enviar mensaje';
-      }, 3000);
+      // Enviar con EmailJS
+      emailjs.sendForm("service_0uqj7ws", "template_3j9xfp8", form)
+        .then(function () {
+          showStatus("✅ ¡Mensaje enviado con éxito!", "success");
+          form.reset();
+        })
+        .catch(function (error) {
+          console.error("EmailJS Error:", error);
+          showStatus("❌ Ocurrió un error al enviar el mensaje. Intenta de nuevo más tarde.", "error");
+        })
+        .finally(() => {
+          submitButton.disabled = false;
+          submitText.textContent = "Enviar mensaje";
+        });
     });
 
-    function showStatus(message: string, type: 'success' | 'error') {
+    function showStatus(message, type) {
       formStatus.textContent = message;
       formStatus.className = `p-4 rounded-lg text-center ${
-        type === 'success' 
-          ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border border-green-200 dark:border-green-800' 
-          : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300 border border-red-200 dark:border-red-800'
+        type === "success"
+          ? "bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border border-green-200 dark:border-green-800"
+          : "bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300 border border-red-200 dark:border-red-800"
       }`;
-      formStatus.classList.remove('hidden');
+      formStatus.classList.remove("hidden");
 
-      // Ocultar mensaje después de 5 segundos
       setTimeout(() => {
-        formStatus.classList.add('hidden');
+        formStatus.classList.add("hidden");
       }, 5000);
     }
   });
 </script>
+
+

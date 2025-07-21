@@ -11,10 +11,12 @@
   "dependencies": {
     "@astrojs/preact": "^4.0.8",
     "@astrojs/sitemap": "^3.3.0",
+    "@emailjs/browser": "^4.4.1",
     "@tailwindcss/vite": "^4.1.8",
     "alpinejs": "^3.14.9",
     "astro": "^5.6.1",
     "astro-icon": "^1.1.5",
+    "emailjs-com": "^3.2.0",
     "preact": "^10.26.2",
     "prismjs": "^1.30.0",
     "tailwindcss": "^4.1.8"
