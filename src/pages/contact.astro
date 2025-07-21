@@ -1,0 +1,17 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ContactForm from "../components/portfolio/ContactForm.astro";
+
+const pageTitle = "Contacto | David Solorza - Frontend Developer";
+const description = "¿Tienes un proyecto en mente? Contáctame y trabajemos juntos para convertir tu idea en realidad. Disponible para proyectos freelance y colaboraciones.";
+const ogimage = {
+  url: "/images/imagedefault.webp",
+  alt: "Página de contacto de David Solorza, Frontend Developer",
+};
+---
+
+<Layout pageTitle={pageTitle} description={description} ogimage={ogimage}>
+  <div class="min-h-screen pt-20">
+    <ContactForm />
+  </div>
+</Layout>

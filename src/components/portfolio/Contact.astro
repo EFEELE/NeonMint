@@ -1,16 +1,17 @@
 ---
 import Heading from "../ui/Heading.astro";
 import Button from "../ui/Button.astro";
+import ContactForm from "./ContactForm.astro";
 import { getCollection} from "astro:content";
 
 const [staticData] = await getCollection('staticData');
 ---
 
-<section>
+<section id="contact">
   <div
-    class="w-full border-b bg-linear-to-b from-mint-100 to-transparent dark:from-mint-800 dark:border-mint-950 border-mint-100"
+    class="w-full bg-linear-to-b from-mint-100 to-transparent dark:from-mint-800"
   >
-    <div class="mx-auto max-w-5xl px-8 py-24 max-sm:py-12">
+    <div class="mx-auto max-w-5xl px-8 py-16 max-sm:py-12">
       <div class="flex items-center justify-between max-sm:flex-col max-sm:gap-8 max-sm:text-center">
         <div class="max-w-lg">
           <Heading
@@ -32,4 +33,7 @@ const [staticData] = await getCollection('staticData');
       </div>
     </div>
   </div>
+  
+  <!-- Formulario de contacto completo -->
+  <ContactForm />
 </section>
