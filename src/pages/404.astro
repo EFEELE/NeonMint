@@ -1,0 +1,41 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<Layout
+    pageTitle="Page Not Found - 404"
+    description="The page you requested could not be found."
+>
+    <main
+        class="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] text-blacktext dark:text-gray-200 py-8 md:py-16 px-4 text-center font-montserrat"
+    >
+        <h1
+            class="text-9xl font-bold mb-8 tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-mint-500 to-riptide-500 max-sm:text-7xl"
+        >
+            404
+        </h1>
+
+        <h2
+            class="text-4xl max-md:text-3xl font-roboto font-bold mb-6 text-blacktext dark:text-white"
+        >
+            Page Not Found
+        </h2>
+
+        <p
+            class="max-w-xl text-xl leading-relaxed mb-10 text-pretty text-blacktext dark:text-gray-200"
+        >
+            Oops! It seems the page you are looking for has taken a detour or
+            doesn't exist.
+        </p>
+
+        <a
+            href="/"
+            class="inline-flex items-center gap-3 px-8 py-4 text-white rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl
+             bg-mint-500 hover:bg-mint-600 focus:outline-none focus:ring-4 focus:ring-mint-500/50 dark:bg-riptide-500 dark:hover:bg-riptide-600 dark:focus:ring-riptide-500/50"
+        >
+            <Icon name="arrow-left" class="size-6" aria-hidden="true" />
+            Go Back Home
+        </a>
+    </main>
+</Layout>
