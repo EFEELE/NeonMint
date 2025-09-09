@@ -219,6 +219,15 @@ The site is configured for deployment on Vercel, but can be deployed to any stat
 4. Push to the branch
 5. Create a Pull Request
 
+## 👥 Contributors  
+
+A huge thanks to all the amazing people who have contributed to this project!  
+Your time, effort, and ideas make this repository better every day. 💚  
+
+<a href="https://github.com/EFEELE/NeonMint/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=EFEELE/NeonMint" />
+</a>
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
