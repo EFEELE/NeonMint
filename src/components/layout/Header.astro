@@ -1,6 +1,7 @@
 ---
 import Navigation from "./Navigation.astro";
 import ThemeIcon from "../ui/ThemeIcon.astro";
+import LanguageSwitcher from "../ui/LanguageSwitcher.astro";
 import Social from "../ui/Social.astro";
 import { Icon } from "astro-icon/components";
 import { getCollection} from "astro:content";
@@ -13,7 +14,7 @@ const navItems = ["home", "experience", "projects", "contact", "about"];
 <header
   role="banner"
   aria-label="Main navigation"
-  class="sticky top-0 z-50 w-full p-4 font-medium text-blacktext dark:text-zinc-300 dark:bg-[#0E0E11]/80 dark:border-b dark:border-zinc-800 bg-white/90 backdrop-blur-xs dark:backdrop-blur-xs max-md:z-50 max-md:px-0 transition-all"
+  class="sticky top-0 z-50 w-full p-4 font-medium text-blacktext dark:text-gray-300 dark:bg-gray-950/95 dark:border-b dark:border-gray-800 bg-white/95 backdrop-blur-md dark:backdrop-blur-md max-md:z-50 max-md:px-0 transition-all shadow-sm dark:shadow-gray-900/50"
 >
   <div
     class="relative mx-auto flex max-w-7xl flex-row items-center justify-between max-xl:px-6"
@@ -26,7 +27,8 @@ const navItems = ["home", "experience", "projects", "contact", "about"];
         <Social link={staticData.data.linkedin} iconName={staticData.data.linkedinIconName} />
       </div>
     </div>
-    <div class="flex items-center gap-5 text-xl md:pl-5">
+    <div class="flex items-center gap-3 text-xl md:pl-5">
+      <LanguageSwitcher />
       <ThemeIcon />
       <button 
         class="hamburger"

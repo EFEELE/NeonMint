@@ -2,9 +2,10 @@
 import { Icon } from "astro-icon/components";
 import Heading from "../ui/Heading.astro";
 import { getCollection } from "astro:content";
-
+import { t } from "../../utils/i18n";
 
 const [staticData] = await getCollection("staticData");
+const lang = "es"; // Default, updated client-side
 ---
 
 <section class="py-16 px-8 max-md:py-8" id="contact">
@@ -12,41 +13,40 @@ const [staticData] = await getCollection("staticData");
     <!-- Header de la sección -->
     <div class="flex gap-4 items-center justify-center mb-12">
       <Icon class="text-3xl dark:text-white text-blacktext" name="envelope" />
-      <Heading text="Contáctame" textGradient="Ahora" level={2} />
+      <Heading text={t("contact.title", lang)} textGradient={t("contact.titleGradient", lang)} level={2} />
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
       <!-- Información de contacto -->
       <div class="space-y-8">
         <div>
-          <h3 class="text-2xl font-bold text-blacktext dark:text-white mb-4">
-            ¡Trabajemos juntos!
+          <h3 class="text-2xl font-bold text-blacktext dark:text-white mb-4" data-i18n="contact.workTogether">
+            {t("contact.workTogether", lang)}
           </h3>
           <p
-            class="text-lg text-blacktext/80 dark:text-zinc-300 leading-relaxed"
+            class="text-lg text-blacktext/80 dark:text-gray-300 leading-relaxed"
+            data-i18n="contact.description"
           >
-            ¿Tienes un proyecto en mente? Me encantaría escuchar sobre tu idea y
-            ayudarte a convertirla en realidad. Estoy disponible para proyectos
-            freelance y colaboraciones.
+            {t("contact.description", lang)}
           </p>
         </div>
 
         <!-- Métodos de contacto -->
         <div class="space-y-6">
           <div class="flex items-center gap-4">
-            <div class="p-3 bg-mint-100 dark:bg-mint-900 rounded-full">
+            <div class="p-3 bg-accent-100 dark:bg-accent-900 rounded-full">
               <Icon
                 name="envelope"
-                class="size-6 text-mint-600 dark:text-mint-400"
+                class="size-6 text-accent-700 dark:text-accent-400"
               />
             </div>
             <div>
-              <h4 class="font-semibold text-blacktext dark:text-white">
-                Email
+              <h4 class="font-semibold text-blacktext dark:text-white" data-i18n="contact.email">
+                {t("contact.email", lang)}
               </h4>
               <a
                 href={`mailto:${staticData.data.email}`}
-                class="text-mint-600 dark:text-mint-400 hover:text-mint-700 dark:hover:text-mint-300 transition-colors"
+                class="text-accent-700 dark:text-accent-400 hover:text-accent-800 dark:hover:text-accent-300 transition-colors"
               >
                 {staticData.data.email}
               </a>
@@ -54,45 +54,47 @@ const [staticData] = await getCollection("staticData");
           </div>
 
           <div class="flex items-center gap-4">
-            <div class="p-3 bg-mint-100 dark:bg-mint-900 rounded-full">
+            <div class="p-3 bg-accent-100 dark:bg-accent-900 rounded-full">
               <Icon
                 name="linkedin"
-                class="size-6 text-mint-600 dark:text-mint-400"
+                class="size-6 text-accent-700 dark:text-accent-400"
               />
             </div>
             <div>
-              <h4 class="font-semibold text-blacktext dark:text-white">
-                LinkedIn
+              <h4 class="font-semibold text-blacktext dark:text-white" data-i18n="contact.linkedin">
+                {t("contact.linkedin", lang)}
               </h4>
               <a
                 href={staticData.data.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-mint-600 dark:text-mint-400 hover:text-mint-700 dark:hover:text-mint-300 transition-colors"
+                class="text-accent-700 dark:text-accent-400 hover:text-accent-800 dark:hover:text-accent-300 transition-colors"
+                data-i18n="contact.connectLinkedIn"
               >
-                Conectar en LinkedIn
+                {t("contact.connectLinkedIn", lang)}
               </a>
             </div>
           </div>
 
           <div class="flex items-center gap-4">
-            <div class="p-3 bg-mint-100 dark:bg-mint-900 rounded-full">
+            <div class="p-3 bg-accent-100 dark:bg-accent-900 rounded-full">
               <Icon
                 name="github"
-                class="size-6 text-mint-600 dark:text-mint-400"
+                class="size-6 text-accent-700 dark:text-accent-400"
               />
             </div>
             <div>
-              <h4 class="font-semibold text-blacktext dark:text-white">
-                GitHub
+              <h4 class="font-semibold text-blacktext dark:text-white" data-i18n="contact.github">
+                {t("contact.github", lang)}
               </h4>
               <a
                 href={staticData.data.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-mint-600 dark:text-mint-400 hover:text-mint-700 dark:hover:text-mint-300 transition-colors"
+                class="text-accent-700 dark:text-accent-400 hover:text-accent-800 dark:hover:text-accent-300 transition-colors"
+                data-i18n="contact.viewProjects"
               >
-                Ver mis proyectos
+                {t("contact.viewProjects", lang)}
               </a>
             </div>
           </div>
@@ -100,40 +102,41 @@ const [staticData] = await getCollection("staticData");
 
         <!-- Disponibilidad -->
         <div
-          class="p-6 bg-mint-50 dark:bg-mint-950/30 rounded-xl border border-mint-200 dark:border-mint-800"
+          class="p-6 bg-accent-50 dark:bg-accent-950/30 rounded-xl border border-accent-200 dark:border-accent-800"
         >
           <div class="flex items-center gap-3 mb-3">
             <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-            <span class="font-semibold text-blacktext dark:text-white">
-              Disponible para proyectos
+            <span class="font-semibold text-blacktext dark:text-white" data-i18n="contact.available">
+              {t("contact.available", lang)}
             </span>
           </div>
-          <p class="text-sm text-blacktext/70 dark:text-zinc-400">
-            Actualmente acepto proyectos freelance y colaboraciones. Tiempo de
-            respuesta: 24-48 horas.
+          <p class="text-sm text-blacktext/70 dark:text-gray-400" data-i18n="contact.responseTime">
+            {t("contact.responseTime", lang)}
           </p>
         </div>
       </div>
 
       <!-- Formulario de contacto -->
       <div
-        class="bg-white dark:bg-zinc-900/50 rounded-2xl p-8 border border-mint-100 dark:border-zinc-800"
+        class="bg-white dark:bg-gray-900/50 rounded-2xl p-8 border border-gray-200 dark:border-gray-800 shadow-lg"
       >
         <form id="contact-form" class="space-y-6">
           <div>
             <label
               for="name"
               class="block text-sm font-medium text-blacktext dark:text-white mb-2"
+              data-i18n="contact.form.name"
             >
-              Nombre *
+              {t("contact.form.name", lang)} *
             </label>
             <input
               type="text"
               id="name"
               name="name"
               required
-              class="w-full px-4 py-3 border border-mint-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-800 text-blacktext dark:text-white focus:ring-2 focus:ring-mint-500 focus:border-transparent transition-colors"
-              placeholder="Tu nombre completo"
+              class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-blacktext dark:text-white focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-colors"
+              placeholder={t("contact.form.namePlaceholder", lang)}
+              data-i18n-placeholder="contact.form.namePlaceholder"
             />
           </div>
 
@@ -141,16 +144,18 @@ const [staticData] = await getCollection("staticData");
             <label
               for="email"
               class="block text-sm font-medium text-blacktext dark:text-white mb-2"
+              data-i18n="contact.form.email"
             >
-              Email *
+              {t("contact.form.email", lang)} *
             </label>
             <input
               type="email"
               id="email"
               name="email"
               required
-              class="w-full px-4 py-3 border border-mint-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-800 text-blacktext dark:text-white focus:ring-2 focus:ring-mint-500 focus:border-transparent transition-colors"
-              placeholder="tu@email.com"
+              class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-blacktext dark:text-white focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-colors"
+              placeholder={t("contact.form.emailPlaceholder", lang)}
+              data-i18n-placeholder="contact.form.emailPlaceholder"
             />
           </div>
 
@@ -158,16 +163,18 @@ const [staticData] = await getCollection("staticData");
             <label
               for="subject"
               class="block text-sm font-medium text-blacktext dark:text-white mb-2"
+              data-i18n="contact.form.subject"
             >
-              Asunto *
+              {t("contact.form.subject", lang)} *
             </label>
             <input
               type="text"
               id="subject"
               name="subject"
               required
-              class="w-full px-4 py-3 border border-mint-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-800 text-blacktext dark:text-white focus:ring-2 focus:ring-mint-500 focus:border-transparent transition-colors"
-              placeholder="¿En qué puedo ayudarte?"
+              class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-blacktext dark:text-white focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-colors"
+              placeholder={t("contact.form.subjectPlaceholder", lang)}
+              data-i18n-placeholder="contact.form.subjectPlaceholder"
             />
           </div>
 
@@ -175,24 +182,26 @@ const [staticData] = await getCollection("staticData");
             <label
               for="message"
               class="block text-sm font-medium text-blacktext dark:text-white mb-2"
+              data-i18n="contact.form.message"
             >
-              Mensaje *
+              {t("contact.form.message", lang)} *
             </label>
             <textarea
               id="message"
               name="message"
               required
               rows="5"
-              class="w-full px-4 py-3 border border-mint-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-800 text-blacktext dark:text-white focus:ring-2 focus:ring-mint-500 focus:border-transparent transition-colors resize-vertical"
-              placeholder="Cuéntame sobre tu proyecto o consulta..."></textarea>
+              class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-blacktext dark:text-white focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-colors resize-vertical"
+              placeholder={t("contact.form.messagePlaceholder", lang)}
+              data-i18n-placeholder="contact.form.messagePlaceholder"></textarea>
           </div>
 
           <button
             type="submit"
-            class="w-full bg-mint-500 hover:bg-mint-600 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            class="w-full bg-accent-600 hover:bg-accent-700 dark:bg-accent-700 dark:hover:bg-accent-800 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg"
           >
             <Icon name="paperplane" class="size-5" />
-            <span id="submit-text">Enviar mensaje</span>
+            <span id="submit-text" data-i18n="contact.form.send">{t("contact.form.send", lang)}</span>
           </button>
 
           <!-- Mensaje de estado -->
@@ -219,7 +228,8 @@ const [staticData] = await getCollection("staticData");
 
       // Deshabilitar el botón
       submitButton.disabled = true;
-      submitText.textContent = "Enviando...";
+      const lang = localStorage.getItem("language") || "es";
+      submitText.textContent = lang === "es" ? "Enviando..." : "Sending...";
 
       // Enviar con EmailJS
       emailjs.sendForm("service_0uqj7ws", "template_3j9xfp8", form)
@@ -233,7 +243,8 @@ const [staticData] = await getCollection("staticData");
         })
         .finally(() => {
           submitButton.disabled = false;
-          submitText.textContent = "Enviar mensaje";
+          const lang = localStorage.getItem("language") || "es";
+          submitText.textContent = lang === "es" ? "Enviar mensaje" : "Send message";
         });
     });
 

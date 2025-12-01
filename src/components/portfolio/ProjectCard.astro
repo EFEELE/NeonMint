@@ -26,13 +26,13 @@ const {
 ---
 
 <article 
-  class={`group relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-2xl ${
+  class={`group relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl ${
     featured 
-      ? 'bg-linear-to-r from-mint-300 dark:from-mint-600 to-mint-50 dark:to-mint-200/5 p-[2px] hover:shadow-mint-500/30' 
-      : 'bg-white dark:bg-zinc-900 border border-mint-100 dark:border-zinc-800 hover:border-mint-300 dark:hover:border-mint-500'
+      ? 'border-2 border-accent-400 dark:border-accent-600 bg-white dark:bg-gray-900 p-[2px] hover:shadow-accent-500/20' 
+      : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-accent-400 dark:hover:border-accent-600'
   }`}
 >
-  <div class={`h-full ${featured ? 'bg-white dark:bg-zinc-900 rounded-2xl' : ''}`}>
+  <div class={`h-full ${featured ? 'bg-white dark:bg-gray-900 rounded-2xl' : ''}`}>
     <!-- Imagen del proyecto -->
     <div class="relative overflow-hidden">
       <img 
@@ -51,7 +51,7 @@ const {
               href={liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="p-2 bg-white/90 dark:bg-zinc-800/90 rounded-full hover:bg-mint-400 hover:text-white transition-colors"
+              class="p-2 bg-white/95 dark:bg-gray-800/95 rounded-full hover:bg-accent-600 hover:text-white transition-colors shadow-md"
               aria-label={`Ver ${title} en vivo`}
             >
               <Icon name="rocket" class="size-4" />
@@ -62,7 +62,7 @@ const {
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="p-2 bg-white/90 dark:bg-zinc-800/90 rounded-full hover:bg-mint-400 hover:text-white transition-colors"
+              class="p-2 bg-white/95 dark:bg-gray-800/95 rounded-full hover:bg-accent-600 hover:text-white transition-colors shadow-md"
               aria-label={`Ver código de ${title} en GitHub`}
             >
               <Icon name="github" class="size-4" />
@@ -75,17 +75,15 @@ const {
     <!-- Contenido -->
     <div class="p-6">
       <div class="flex items-start justify-between mb-3">
-        <h3 class="text-xl font-bold text-blacktext dark:text-white group-hover:text-mint-500 dark:group-hover:text-mint-400 transition-colors">
+        <h3 class="text-xl font-bold text-blacktext dark:text-gray-200 group-hover:text-accent-700 dark:group-hover:text-accent-400 transition-colors">
           {title}
         </h3>
         {featured && (
-          <span class="px-2 py-1 text-xs font-semibold bg-mint-100 dark:bg-mint-900 text-mint-700 dark:text-mint-300 rounded-full">
-            Destacado
-          </span>
+          <span class="px-2 py-1 text-xs font-semibold bg-accent-100 dark:bg-accent-900 text-accent-700 dark:text-accent-300 rounded-full border border-accent-200 dark:border-accent-800" data-i18n="projects.featured">Destacado</span>
         )}
       </div>
 
-      <p class="text-blacktext/80 dark:text-zinc-300 text-sm leading-relaxed mb-4">
+      <p class="text-blacktext/80 dark:text-gray-400 text-sm leading-relaxed mb-4">
         {description}
       </p>
 
@@ -98,16 +96,16 @@ const {
 
       <!-- Enlaces en el footer -->
       {(liveUrl || githubUrl) && (
-        <div class="flex gap-3 pt-4 border-t border-mint-100 dark:border-zinc-700">
+        <div class="flex gap-3 pt-4 border-t border-gray-200 dark:border-gray-800">
           {liveUrl && (
             <a 
               href={liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center gap-2 text-sm font-medium text-mint-600 dark:text-mint-400 hover:text-mint-700 dark:hover:text-mint-300 transition-colors"
+              class="flex items-center gap-2 text-sm font-medium text-accent-700 dark:text-accent-400 hover:text-accent-800 dark:hover:text-accent-300 transition-colors"
             >
               <Icon name="rocket" class="size-4" />
-              Ver proyecto
+              <span data-i18n="projects.viewProject">Ver proyecto</span>
             </a>
           )}
           {githubUrl && (
@@ -115,10 +113,10 @@ const {
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center gap-2 text-sm font-medium text-blacktext/70 dark:text-zinc-400 hover:text-blacktext dark:hover:text-white transition-colors"
+              class="flex items-center gap-2 text-sm font-medium text-blacktext/70 dark:text-gray-400 hover:text-blacktext dark:hover:text-gray-200 transition-colors"
             >
               <Icon name="github" class="size-4" />
-              Código
+              <span data-i18n="projects.code">Código</span>
             </a>
           )}
         </div>

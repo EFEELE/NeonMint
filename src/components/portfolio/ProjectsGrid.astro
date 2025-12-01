@@ -2,6 +2,10 @@
 import ProjectCard from "./ProjectCard.astro";
 import Heading from "../ui/Heading.astro";
 import { Icon } from "astro-icon/components";
+import { t } from "../../utils/i18n";
+
+// Default to Spanish, will be updated client-side
+const lang = "es";
 
 // Aquí defines tus proyectos
 const projects = [
@@ -46,14 +50,14 @@ const projects = [
     <!-- Header de la sección -->
     <div class="flex gap-4 items-center justify-center mb-12">
       <Icon class="text-3xl dark:text-white text-blacktext" name="code" />
-      <Heading text="Mis" textGradient="Proyectos" level={2} />
+      <Heading text={t("projects.title", lang)} textGradient={t("projects.titleGradient", lang)} level={2} />
     </div>
 
     <p
-      class="text-center text-lg text-blacktext/80 dark:text-zinc-300 mb-12 max-w-2xl mx-auto"
+      class="text-center text-lg text-blacktext/80 dark:text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed"
+      data-i18n="projects.description"
     >
-      Aquí puedes ver algunos de los proyectos en los que he trabajado,
-      aplicando las últimas tecnologías y mejores prácticas de desarrollo.
+      {t("projects.description", lang)}
     </p>
 
     <!-- Grid de proyectos -->

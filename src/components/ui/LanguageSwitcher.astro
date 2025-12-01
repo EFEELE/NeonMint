@@ -1,0 +1,57 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<button
+  id="language-switcher"
+  class="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:bg-accent-50 dark:hover:bg-gray-700 transition-colors text-sm font-medium text-blacktext dark:text-gray-300"
+  aria-label="Change language"
+  title="Change language"
+>
+  <Icon name="code" class="size-4" aria-hidden="true" />
+  <span id="current-lang" class="uppercase">ES</span>
+</button>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const switcher = document.getElementById("language-switcher");
+    const currentLangSpan = document.getElementById("current-lang");
+    
+    if (!switcher || !currentLangSpan) return;
+
+    // Get current language
+    const getLang = () => {
+      const saved = localStorage.getItem("language");
+      return (saved === "es" || saved === "en") ? saved : "es";
+    };
+
+    // Update button text
+    const updateButton = () => {
+      const lang = getLang();
+      currentLangSpan.textContent = lang.toUpperCase();
+      document.documentElement.lang = lang;
+    };
+
+    // Toggle language
+    switcher.addEventListener("click", () => {
+      const currentLang = getLang();
+      const newLang = currentLang === "es" ? "en" : "es";
+      localStorage.setItem("language", newLang);
+      updateButton();
+      
+      // Dispatch custom event to update all translations
+      window.dispatchEvent(new CustomEvent("languageChanged", { detail: { lang: newLang } }));
+      
+      // Try to update without reload first, then reload if needed
+      // The i18n.js script should handle the update
+      setTimeout(() => {
+        // Small delay to ensure event is processed, then reload for server-rendered content
+        window.location.reload();
+      }, 100);
+    });
+
+    // Initialize
+    updateButton();
+  });
+</script>
+

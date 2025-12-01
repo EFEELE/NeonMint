@@ -4,32 +4,39 @@ interface Props {
     textGradient?: string;
     level?: 1 | 2 | 3;
     className?: string;
+    "data-i18n-text"?: string;
+    "data-i18n-gradient"?: string;
 }
 
-const { text = "", textGradient = "", level = 1, className = "" } = Astro.props;
+const { text = "", textGradient = "", level = 1, className = "", "data-i18n-text": dataI18nText, "data-i18n-gradient": dataI18nGradient } = Astro.props;
 
 const Tag = `h${level}`;
 ---
 
-<Tag class:list={[
-    "font-extrabold text-4xl max-xl:text-3xl",
-    level === 2 && "max-md:text-3xl ",
-    level === 3 && "max-md:text-xl ",
-    "dark:text-white text-blacktext",
-    className
-]}>
+<Tag 
+    class:list={[
+        "font-extrabold text-4xl max-xl:text-3xl",
+        level === 2 && "max-md:text-3xl ",
+        level === 3 && "max-md:text-xl ",
+        "dark:text-white text-blacktext",
+        className
+    ]}
+    data-i18n-text={dataI18nText}
+    data-i18n-gradient={dataI18nGradient}
+>
     {text && (
-        <>
+        <span data-i18n={dataI18nText}>
             {text}
             {textGradient && " "}
-        </> 
+        </span> 
     )}
     {textGradient && (
         <b
             class:list={[
-                "bg-linear-to-r from-riptide-500 to-mint-400 dark:from-riptide-500 dark:to-mint-500 text-transparent bg-clip-text",
+                "bg-linear-to-r from-accent-600 to-accent-500 dark:from-accent-400 dark:to-accent-500 text-transparent bg-clip-text",
                 level === 1 
             ]}
+            data-i18n={dataI18nGradient}
         >{textGradient}</b>
     )}
 </Tag> 

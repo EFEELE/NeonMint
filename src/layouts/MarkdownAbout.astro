@@ -4,7 +4,10 @@ import { Icon } from "astro-icon/components";
 import Heading from "../components/ui/Heading.astro";
 import Contact from "../components/portfolio/Contact.astro";
 import Tools from "../components/portfolio/Tools.astro";
+import { t } from "../utils/i18n";
+
 const { frontmatter } = Astro.props;
+const lang = "es"; // Default, updated client-side
 ---
 
 <Layout
@@ -20,19 +23,19 @@ const { frontmatter } = Astro.props;
     >
       <div class="w-full h-auto mb-4 mx-auto" id="#">
         <div
-          class="transition-all justify-center w-full gap-8 max-md:gap-3 max-lg:gap-2 flex flex-col items-center z-0 relative dark:from-mint-950 dark:to-zinc-950"
+          class="transition-all justify-center w-full gap-8 max-md:gap-3 max-lg:gap-2 flex flex-col items-center z-0 relative"
         >
           <div class="aspect-square h-60 max-md:size-32">
             <div
               class="group-hover:scale-105 relative z-10 flex w-full cursor-pointer items-center overflow-hidden rounded-full dark:p-[1.5px] p-[2px] transition-all duration-500"
             >
               <div
-                class="absolute inset-0 h-full w-full rounded-fullfrom-transparent to-riptide-500 dark:from-transparent f dark:to-mint-300 animate-rotate-border bg-conic/[from_var(--border-angle)]"
+                class="absolute inset-0 h-full w-full rounded-full from-transparent to-accent-500 dark:from-transparent dark:to-accent-400 animate-rotate-border bg-conic/[from_var(--border-angle)]"
               >
               </div>
-              <div class="relative z-20 flex w-full rounded-full bg-mint-900">
+              <div class="relative z-20 flex w-full rounded-full bg-gray-100 dark:bg-gray-800">
                 <div
-                  class="w-full aspect-square rounded-full bg-[url(/images/perfil.png)] bg-center bg-cover"
+                  class="w-full aspect-square rounded-full bg-[url(/images/portada.jpg)] bg-center bg-cover"
                   aria-label="Photo of David Solorza for the portfolio"
                 >
                   <a
@@ -53,22 +56,19 @@ const { frontmatter } = Astro.props;
               class="text-lg max-xl:text-base text-blacktext dark:text-gray-200 mb-0 leading-8 font-semibold text-center"
             >
               <b
-                class="bg-linear-to-r from-riptide-400 to-mint-500 dark:to-mint-200 dark:from-riptide-300 text-transparent bg-clip-text"
+                class="text-accent-700 dark:text-accent-400 font-bold"
                 >Frontend Developer</b
-              > with <b
-                class="bg-linear-to-r from-riptide-400 to-mint-500 dark:to-mint-200 dark:from-riptide-300 text-transparent bg-clip-text"
-                >6 months of experience</b
-              >, passionate about development, technology. I love bringing digital projects to life. 🚀☕
+              > <span data-i18n="hero.experience">{t("hero.experience", lang)}</span>, <span data-i18n="hero.description">{t("hero.description", lang)}</span> 🚀☕
             </p>
           </div>
         </div>
       </div>
       
       <div class="flex gap-4 items-center">
-        <Heading text="About" textGradient="me" />
+        <Heading text={t("contact.title", lang)} textGradient={t("contact.titleGradient", lang)} data-i18n-text="contact.title" data-i18n-gradient="contact.titleGradient" />
       </div>
 
-      <div class="markdown text-white" id="content">
+      <div class="markdown" id="content">
         <slot />
       </div>
     </article>
@@ -77,8 +77,8 @@ const { frontmatter } = Astro.props;
   <section class="py-8 px-8 max-md:py-4 mt-10 mb-20 scroll-m-16" id="stack">
     <div class="flex flex-col gap-8 max-w-3xl justify-center mx-auto">
       <div class="flex gap-4 items-center justify-center">
-        <Icon class="text-3xl text-white" name="dashboard" />
-        <Heading text="Tech" textGradient="Stack" level={2} />
+        <Icon class="text-3xl dark:text-white text-blacktext" name="dashboard" />
+        <Heading text="Tech" textGradient={t("tech.stack", lang)} level={2} />
       </div>
       <Tools variant="center" />
     </div>

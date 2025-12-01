@@ -8,30 +8,58 @@
   --font-montserrat: 'Montserrat', sans-serif;
   --font-roboto: 'Roboto', sans-serif;
   --font-opensans: 'Open Sans', sans-serif;
-  --color-blacktext: #171717;
-  --color-mint-50: #f7e6fb;
-  --color-mint-100: #ecd1f7;
-  --color-mint-200: #d9aaf0;
-  --color-mint-300: #c47be7;
-  --color-mint-400: #b34edb;
-  --color-mint-500: #A411CC;      /* azul menta principal */
-  --color-mint-600: #8e0fae;
-  --color-mint-700: #740d8e;
-  --color-mint-800: #5c0a6e;
-  --color-mint-900: #470857;
-  --color-mint-950: #2d0336;
+  --color-blacktext: #0a0a0a;
+  
+  /* Professional Gray Scale */
+  --color-gray-50: #fafafa;
+  --color-gray-100: #f5f5f5;
+  --color-gray-200: #e5e5e5;
+  --color-gray-300: #d4d4d4;
+  --color-gray-400: #a3a3a3;
+  --color-gray-500: #737373;
+  --color-gray-600: #525252;
+  --color-gray-700: #404040;
+  --color-gray-800: #262626;
+  --color-gray-900: #171717;
+  --color-gray-950: #0a0a0a;
 
-  --color-riptide-50: #f0fdfa;
-  --color-riptide-100: #cbfcf1;
-  --color-riptide-200: #96f7e4;
-  --color-riptide-300: #5cecd5;
-  --color-riptide-400: #2bd6c1;
-  --color-riptide-500: #12baa8;
-  --color-riptide-600: #0b9689;
-  --color-riptide-700: #0e776f;
-  --color-riptide-800: #105f5a;
-  --color-riptide-900: #124f4b;
-  --color-riptide-950: #03302f;
+  /* Professional Accent - Subtle Blue-Gray */
+  --color-accent-50: #f8fafc;
+  --color-accent-100: #f1f5f9;
+  --color-accent-200: #e2e8f0;
+  --color-accent-300: #cbd5e1;
+  --color-accent-400: #94a3b8;
+  --color-accent-500: #64748b;
+  --color-accent-600: #475569;
+  --color-accent-700: #334155;
+  --color-accent-800: #1e293b;
+  --color-accent-900: #0f172a;
+  --color-accent-950: #020617;
+
+  /* Legacy color names for compatibility - mapped to gray scale */
+  --color-mint-50: #fafafa;
+  --color-mint-100: #f5f5f5;
+  --color-mint-200: #e5e5e5;
+  --color-mint-300: #d4d4d4;
+  --color-mint-400: #a3a3a3;
+  --color-mint-500: #64748b;      /* Professional accent */
+  --color-mint-600: #475569;
+  --color-mint-700: #334155;
+  --color-mint-800: #1e293b;
+  --color-mint-900: #0f172a;
+  --color-mint-950: #020617;
+
+  --color-riptide-50: #f8fafc;
+  --color-riptide-100: #f1f5f9;
+  --color-riptide-200: #e2e8f0;
+  --color-riptide-300: #cbd5e1;
+  --color-riptide-400: #94a3b8;
+  --color-riptide-500: #64748b;
+  --color-riptide-600: #475569;
+  --color-riptide-700: #334155;
+  --color-riptide-800: #1e293b;
+  --color-riptide-900: #0f172a;
+  --color-riptide-950: #020617;
 
   --animate-rotate: rotate 10s linear infinite;
 
@@ -50,18 +78,18 @@
 }
 
 ::selection {
-	@apply text-white bg-mint-500;
+	@apply text-white bg-accent-600;
 	
   }
 *::-webkit-scrollbar-thumb{
 	border-radius: 20px;
 }
 .dark *{
-	   scrollbar-color: #A411CC #2d0336;
+	   scrollbar-color: #475569 #1e293b;
     scrollbar-width: thin;
 }
  *{
-	scrollbar-color: #6ce9b7 #d0fbe5;
+	scrollbar-color: #94a3b8 #e2e8f0;
 	scrollbar-width: thin;
 	box-sizing: border-box;
 }
@@ -110,11 +138,11 @@ a.inline-block.leading-5.pl-12{
 }
 
 .markdown a {
-	@apply text-xl max-md:text-lg font-semibold dark:text-mint-400! text-mint-500! underline hover:text-mint-600! transition-all;
+	@apply text-xl max-md:text-lg font-semibold dark:text-accent-400! text-accent-600! underline hover:text-accent-700! transition-all;
 }
 
 .markdown a:hover {
-    color: #8e0fae !important; /* Derivado de #A411CC */
+    color: #334155 !important; /* Professional gray */
 }
 
 .markdown ol{
@@ -137,7 +165,7 @@ a.inline-block.leading-5.pl-12{
 }
 
 .markdown blockquote {
-	@apply py-4 border-l-4 border-mint-500 pl-4 italic text-blacktext dark:text-mint-200 bg-mint-50 dark:bg-mint-900/20 backdrop-blur-lg mb-8;
+	@apply py-4 border-l-4 border-accent-500 pl-4 italic text-blacktext dark:text-gray-300 bg-gray-50 dark:bg-gray-900/30 backdrop-blur-lg mb-8;
 }
 
 .markdown blockquote p {
@@ -174,11 +202,11 @@ a.inline-block.leading-5.pl-12{
   }
   
   .task-list-item input[type="checkbox"] {
-	@apply w-5 h-5 accent-mint-300;
+	@apply w-5 h-5 accent-accent-500;
   }
   
   .task-list-item input[type="checkbox"]:checked + span {
-	@apply line-through text-mint-600;
+	@apply line-through text-accent-600;
   }
   
   .task-list-item span {
@@ -186,7 +214,7 @@ a.inline-block.leading-5.pl-12{
   }
 
 .expanded {
-	@apply transition-all duration-700 w-full flex! flex-col! left-0 top-full mt-4 absolute shadow-xl  dark:text-zinc-300 bg-linear-to-t from-white to-white/90 dark:from-zinc-950 dark:to-zinc-950/80 bg-clip-padding backdrop-filter backdrop-blur backdrop-saturate-100 backdrop-contrast-100;
+	@apply transition-all duration-700 w-full flex! flex-col! left-0 top-full mt-4 absolute shadow-2xl dark:text-gray-300 bg-linear-to-t from-white to-white/95 dark:from-gray-950 dark:to-gray-950/95 bg-clip-padding backdrop-filter backdrop-blur-md backdrop-saturate-100 backdrop-contrast-100 border border-gray-200 dark:border-gray-800;
 }
 
 
@@ -239,7 +267,7 @@ a.inline-block.leading-5.pl-12{
 	display: block;
 	width: 400px;
 	height: 400px;
-	background: #A411CC40;
+	background: rgba(100, 116, 139, 0.15);
 	bottom: -400px;
 	right: -300px;
 	position: fixed;
@@ -251,7 +279,7 @@ a.inline-block.leading-5.pl-12{
 
 
 .blur-circle {
-	background-color: rgba(164, 17, 204, 0.29);
+	background-color: rgba(100, 116, 139, 0.12);
 	position: absolute;
 	width: 200px;
 	height: 200px;
@@ -268,7 +296,7 @@ a.inline-block.leading-5.pl-12{
 	display: block;
 	width: 500px;
 	height: 500px;
-	background: #A411CC25 !important;
+	background: rgba(100, 116, 139, 0.08) !important;
 	bottom: -150px;
 	right: -150px;
 	position: absolute;
@@ -276,4 +304,41 @@ a.inline-block.leading-5.pl-12{
 	border-radius: 50%;
 	filter: blur(10px);
 
+}
+
+/* Professional subtle animations */
+@keyframes fade-in-up {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Professional card hover effects */
+.card-hover {
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Professional text gradients */
+.text-gradient-professional {
+	background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.dark .text-gradient-professional {
+	background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
 }

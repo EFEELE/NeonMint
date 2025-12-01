@@ -9,29 +9,59 @@ const { items = [] }: { items: (keyof typeof menu)[] } = Astro.props as {
 };
 
 const menu = {
-  about: { name: "About Me", path: "/about-me" },
-  home: { name: "Home", path: "/#home" },
-  experience: { name: "Experience", path: "/#experience" },
-  projects: { name: "Proyectos", path: "/#projects" },
-  contact: { name: "Contacto", path: "/#contact" },
+  about: { name: "About Me", path: "/about-me", i18nKey: "about" },
+  home: { name: "Home", path: "/#home", i18nKey: "home" },
+  experience: { name: "Experience", path: "/#experience", i18nKey: "experience" },
+  projects: { name: "Proyectos", path: "/#projects", i18nKey: "projects" },
+  contact: { name: "Contacto", path: "/#contact", i18nKey: "contact" },
 };
 
 // Common base classes
 const baseClasses = {
   nav: "nav-links flex w-full justify-center gap-6 max-md:gap-3 max-md:py-6",
-  link: "px-2 py-2 transition-all hover:text-mint-300 max-md:mx-auto max-md:w-full max-md:px-6 max-md:py-2 ",
+  link: "px-2 py-2 transition-all hover:text-accent-600 dark:hover:text-accent-400 max-md:mx-auto max-md:w-full max-md:px-6 max-md:py-2 ",
   socialContainer: "flex items-center justify-center gap-5 md:hidden",
 } as const;
 ---
 
 <script>
+  // Inline translations to avoid import issues in client-side script
+  const translations = {
+    es: { nav: { home: "Inicio", experience: "Experiencia", projects: "Proyectos", contact: "Contacto", about: "Sobre Mí" } },
+    en: { nav: { home: "Home", experience: "Experience", projects: "Projects", contact: "Contact", about: "About Me" } }
+  };
+  
+  function getLang() {
+    const saved = localStorage.getItem("language");
+    return (saved === "es" || saved === "en") ? saved : "es";
+  }
+  
+  function t(key, lang) {
+    const keys = key.split(".");
+    let value = translations[lang];
+    for (const k of keys) {
+      value = value?.[k];
+      if (value === undefined) return key;
+    }
+    return typeof value === "string" ? value : key;
+  }
+  
   document.addEventListener("DOMContentLoaded", () => {
     const isHome = window.location.pathname === "/";
+    const lang = getLang();
+    
+    // Update navigation text on load
+    document.querySelectorAll('nav a[data-i18n]').forEach(link => {
+      const key = link.getAttribute('data-i18n');
+      if (key) {
+        link.textContent = t(`nav.${key}`, lang);
+      }
+    });
     
     // Classes for link states
     const linkClasses = {
-      active: ["text-mint-500","dark:text-mint-400", "font-bold", "[text-shadow:1px_1px_11px_rgba(208,251,229,0.7)]"],
-      inactive: ["dark:text-zinc-300",  "text-blacktext"]
+      active: ["text-accent-700","dark:text-accent-400", "font-bold"],
+      inactive: ["dark:text-gray-300",  "text-blacktext"]
     };
 
     function toggleLinkClasses(link: Element, isActive: boolean) {
@@ -106,6 +136,7 @@ const baseClasses = {
           href={item.path}
           class={baseClasses.link}
           data-path={item.path}
+          data-i18n={item.i18nKey}
           aria-label={item.name}
           aria-current={item.path === Astro.url.pathname ? 'page' : undefined}
         >

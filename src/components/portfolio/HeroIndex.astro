@@ -5,8 +5,11 @@ import Tools from "../portfolio/Tools.astro";
 import { Icon } from "astro-icon/components";
 import Hobbies from "../portfolio/Hobbies.astro";
 import { getCollection} from "astro:content";
+import { t } from "../../utils/i18n";
 
 const [staticData] = await getCollection('staticData');
+// Default to Spanish, will be updated client-side
+const lang = "es";
 ---
 
 <section
@@ -15,20 +18,20 @@ const [staticData] = await getCollection('staticData');
   aria-label="Professional profile and introduction"
 >
   <div
-    class="mx-auto mb-4 h-96 w-full max-w-7xl rounded-2xl bg-linear-to-r from-mint-300 dark:from-mint-600 to-mint-50 dark:to-mint-200/5 hover:to-mint-300/30 dark:hover:to-mint-600/30 p-[.2rem]  max-md:h-auto"
+    class="mx-auto mb-4 h-96 w-full max-w-7xl rounded-2xl border border-gray-200 dark:border-gray-800 bg-linear-to-r from-gray-100 dark:from-gray-900 to-white dark:to-gray-950 p-[.2rem] hover:shadow-xl hover:shadow-gray-900/10 dark:hover:shadow-gray-900/50 transition-all duration-300 max-md:h-auto"
   >
     <div
-      class="group relative z-0 flex h-full items-center justify-center gap-8 overflow-hidden rounded-2xl bg-linear-to-tr from-riptide-100 to-white p-4 transition-all hover:shadow-[0_10px_50px_rgba(13,188,130,0.2)] dark:bg-linear-to-r dark:from-mint-950 dark:to-zinc-950 dark:overflow-hidden max-md:w-full max-md:gap-3 max-lg:gap-2 max-sm:flex-col dark:before:bg-[radial-gradient(circle,rgba(13,188,130)_0,rgba(1,45,34)_100%)] before:bg-[radial-gradient(circle,rgba(95,255,202)_0,rgba(144,253,210)_100%)] before:absolute before:left-65 before:top-10 before:h-[40%] before:aspect-square before:rounded-full before:blur-3xl before:opacity-80 before:-z-10 before:transition hover:before:animate-pulse"
+      class="group relative z-0 flex h-full items-center justify-center gap-8 overflow-hidden rounded-2xl bg-linear-to-tr from-white to-gray-50 p-4 transition-all hover:shadow-lg dark:bg-linear-to-r dark:from-gray-900 dark:to-gray-950 dark:overflow-hidden max-md:w-full max-md:gap-3 max-lg:gap-2 max-sm:flex-col before:bg-[radial-gradient(circle,rgba(148,163,184,0.1)_0,rgba(148,163,184,0)_100%)] before:absolute before:left-65 before:top-10 before:h-[40%] before:aspect-square before:rounded-full before:blur-3xl before:opacity-60 before:-z-10 before:transition"
     >
       <div class="aspect-square h-4/5 max-md:size-32">
         <div
           class="group-hover:scale-105 relative z-10 flex w-full cursor-pointer items-center overflow-hidden rounded-full p-[2px] transition-all duration-500"
         >
           <div
-            class="absolute inset-0 h-full w-full rounded-fullfrom-transparent  to-riptide-500 dark:from-transparent  f dark:to-mint-300 animate-rotate-border bg-conic/[from_var(--border-angle)] "
+            class="absolute inset-0 h-full w-full rounded-full from-transparent to-accent-500 dark:from-transparent dark:to-accent-400 animate-rotate-border bg-conic/[from_var(--border-angle)] "
           >
           </div>
-          <div class="relative z-20 flex w-full rounded-full bg-mint-900">
+          <div class="relative z-20 flex w-full rounded-full bg-gray-100 dark:bg-gray-800">
             <div
               class="w-full aspect-square rounded-full bg-center bg-cover"
               style={`background-image: url(${staticData.data.profileImage})`}
@@ -52,7 +55,7 @@ const [staticData] = await getCollection('staticData');
           <span
             class="before:mr-2 before:block before:h-1.5 before:w-1.5 before:rounded-full before:bg-green-400 before:shadow-[0px_0px_0px_3px_rgba(34,197,94,0.5)] before:animate-pulse before:content-['']"
           ></span>
-          Available for work
+          <span data-i18n="hero.available">{t("hero.available", lang)}</span>
         </span>
 
         <h1
@@ -61,22 +64,19 @@ const [staticData] = await getCollection('staticData');
           {staticData.data.profileName} 👋
         </h1>
         <p
-          class="mb-0 text-lg font-semibold leading-8 text-blacktext dark:text-gray-200 max-xl:text-base"
+          class="mb-0 text-lg font-semibold leading-8 text-blacktext dark:text-gray-300 max-xl:text-base"
         >
           <span
-            class="bg-linear-to-r from-riptide-500 to-mint-500 bg-clip-text font-black text-transparent   dark:from-riptide-300 dark:to-mint-200"
+            class="text-accent-700 dark:text-accent-400 font-bold"
             >{staticData.data.profileTitle}</span
-          > with <span
-            class="bg-linear-to-r from-riptide-500 to-mint-500 bg-clip-text font-black text-transparent  dark:from-riptide-300 dark:to-mint-200"
-            >6 months of experience</span
-          >, passionate about development, technology. I love bringing digital projects to life. 🚀☕
+          > <span data-i18n="hero.experience">{t("hero.experience", lang)}</span>, <span data-i18n="hero.description">{t("hero.description", lang)}</span> 🚀☕
         </p>
 
         <div class="flex gap-4 max-sm:flex-col max-sm:items-center">
           
           <Button
             link={staticData.data.profileLink}
-            text="About Me"
+            text={t("hero.aboutMe", lang)}
             iconName="person"
             variant="dark"
           />
@@ -90,18 +90,18 @@ const [staticData] = await getCollection('staticData');
   >
     <!-- Tech Stack Card - Ocupa 2 columnas en desktop -->
     <div
-      class="md:col-span-2 flex flex-col gap-4 rounded-2xl bg-linear-to-r from-mint-300 dark:from-mint-600 to-mint-50 dark:to-mint-200/5 hover:to-mint-300/30 dark:hover:to-mint-600/30 p-[.2rem] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_20px_50px_rgba(13,188,130,0.3)]"
+      class="md:col-span-2 flex flex-col gap-4 rounded-2xl border border-gray-200 dark:border-gray-800 bg-linear-to-r from-gray-50 dark:from-gray-900 to-white dark:to-gray-950 p-[.2rem] transition-all duration-300 hover:scale-[1.01] hover:shadow-xl hover:shadow-gray-900/10 dark:hover:shadow-gray-900/50"
     >
       <article
-        class="group relative z-0 flex h-full w-full flex-col overflow-hidden rounded-2xl bg-linear-to-tr from-riptide-100 to-mint-100 p-8 max-md:p-6 gap-6 max-md:gap-4 dark:bg-linear-to-r dark:from-mint-900 dark:to-mint-950 dark:before:bg-[radial-gradient(circle,rgba(13,188,130)_0,rgba(1,45,34)_100%)] before:bg-[radial-gradient(circle,rgba(95,255,202)_0,rgba(144,253,210)_100%)] before:absolute before:right-0 before:top-0 before:h-[60%] before:aspect-square before:rounded-full before:blur-3xl dark:before:opacity-60 before:opacity-20 before:-z-10 before:transition"
+        class="group relative z-0 flex h-full w-full flex-col overflow-hidden rounded-2xl bg-white dark:bg-gray-900 p-8 max-md:p-6 gap-6 max-md:gap-4 border border-gray-100 dark:border-gray-800 before:bg-[radial-gradient(circle,rgba(148,163,184,0.08)_0,rgba(148,163,184,0)_100%)] before:absolute before:right-0 before:top-0 before:h-[60%] before:aspect-square before:rounded-full before:blur-3xl before:opacity-40 before:-z-10 before:transition"
       >
         <div class="flex items-center gap-4 max-md:gap-3">
           <Icon
-            class="text-4xl dark:text-white text-mint-500 max-md:text-3xl"
+            class="text-4xl dark:text-gray-300 text-accent-600 max-md:text-3xl"
             name="dashboard"
             aria-hidden="true"
           />
-          <Heading text="Tech" textGradient="Stack" level={2} />
+          <Heading text="Tech" textGradient={t("tech.stack", lang)} level={2} />
         </div>
         
         <div class="flex-1 overflow-y-auto">
@@ -112,15 +112,15 @@ const [staticData] = await getCollection('staticData');
 
     <!-- Hobbies Card -->
     <div
-      class="flex flex-col gap-4 rounded-2xl border border-emerald-50 bg-linear-to-r from-riptide-200 to-mint-200 p-8 max-md:p-6 dark:border-zinc-800 dark:border-2 dark:bg-zinc-800 dark:bg-gradient-radial dark:from-riptide-500 dark:to-mint-500 transition-all duration-300 hover:scale-[1.02]"
+      class="flex flex-col gap-4 rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-8 max-md:p-6 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg"
     >
       <div class="flex items-center gap-3">
         <Icon
-          class="text-2xl dark:text-white text-blacktext"
+          class="text-2xl dark:text-gray-300 text-accent-600"
           name="person"
           aria-hidden="true"
         />
-        <Heading text="Beyond the" textGradient="Code" level={3}/>
+        <Heading text={t("hobbies.title", lang)} textGradient={t("hobbies.titleGradient", lang)} level={3}/>
       </div>
 
       <div class="flex-1 overflow-y-auto">
@@ -134,11 +134,11 @@ const [staticData] = await getCollection('staticData');
   <!-- GitHub Card - Separada en su propia fila -->
   <div class="mx-auto max-w-7xl mt-4">
     <div
-      class="rounded-2xl bg-linear-to-r from-mint-300 dark:from-mint-600 to-mint-50 dark:to-mint-200/5 hover:to-mint-300/30 dark:hover:to-mint-600/30 p-[.2rem] transition-all ease-in duration-300 hover:scale-[1.01] hover:shadow-[0_20px_50px_rgba(13,188,130,0.4)]"
+      class="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-[.2rem] transition-all ease-in duration-300 hover:scale-[1.01] hover:shadow-xl hover:shadow-gray-900/10 dark:hover:shadow-gray-900/50"
     >
-      <div class="h-full w-full overflow-hidden rounded-2xl dark:bg-zinc-900">
+      <div class="h-full w-full overflow-hidden rounded-2xl">
         <div
-          class="relative h-full w-full overflow-hidden rounded-2xl bg-linear-to-tr from-riptide-100 to-white dark:from-transparent dark:bg-linear-to-bl dark:to-transparent"
+          class="relative h-full w-full overflow-hidden rounded-2xl bg-white dark:bg-gray-900"
         >
           <a
             target="_blank"
@@ -146,24 +146,24 @@ const [staticData] = await getCollection('staticData');
             aria-label="View GitHub profile"
           >
             <div
-              class="relative flex h-full flex-row items-center justify-between gap-8 p-8 max-md:p-6 dark:before:bg-[radial-gradient(circle,rgba(13,188,130)_0,rgba(1,45,34)_100%)] before:bg-[radial-gradient(circle,rgba(95,255,202)_0,rgba(144,253,210)_100%)] before:absolute before:right-10 before:top-1/2 before:-translate-y-1/2 before:h-[60%] before:aspect-square before:rounded-full before:blur-3xl before:opacity-90 before:transition before:z-0"
+              class="relative flex h-full flex-row items-center justify-between gap-8 p-8 max-md:p-6 before:bg-[radial-gradient(circle,rgba(148,163,184,0.08)_0,rgba(148,163,184,0)_100%)] before:absolute before:right-10 before:top-1/2 before:-translate-y-1/2 before:h-[60%] before:aspect-square before:rounded-full before:blur-3xl before:opacity-40 before:transition before:z-0"
             >
               <div class="z-10 flex-1">
                 <div class="flex items-center gap-4 mb-4">
                   <Icon
-                    class="text-3xl text-mint-500"
+                    class="text-3xl text-accent-600 dark:text-accent-400"
                     name="github"
                     aria-hidden="true"
                   />
-                  <Heading text={staticData.data.githubText} level={3}/>
+                  <Heading text={t("github.text", lang)} level={3}/>
                 </div>
-                <p class="text-blacktext/80 dark:text-zinc-300 text-lg max-md:text-base">
-                  Explora mi código, contribuciones y proyectos open source en GitHub.
+                <p class="text-blacktext/80 dark:text-gray-400 text-lg max-md:text-base" data-i18n="github.description">
+                  {t("github.description", lang)}
                 </p>
               </div>
 
               <Icon
-                class="group-hover:animate-pulse ease-in-out size-32 max-md:size-24 text-mint-500/30 z-10"
+                class="ease-in-out size-32 max-md:size-24 text-accent-200 dark:text-accent-900/30 z-10"
                 name="github"
                 aria-hidden="true"
               />
@@ -184,40 +184,40 @@ const [staticData] = await getCollection('staticData');
   <div class="mx-auto max-w-4xl">
     <div class="flex gap-4 items-center justify-center mb-12">
       <Icon class="text-3xl dark:text-white text-blacktext" name="briefcase" />
-      <Heading text="Work" textGradient="Experience" level={2} />
+      <Heading text={t("experience.title", lang)} textGradient={t("experience.titleGradient", lang)} level={2} />
     </div>
 
-    <div class="relative">
-      <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-mint-400/30"></div>
+      <div class="relative">
+      <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-accent-300 dark:bg-accent-700"></div>
       
       <div class="space-y-12">
         <!-- Experiencia Laboral -->
         <div class="relative flex items-start gap-6">
-          <div class="flex-shrink-0 w-8 h-8 bg-mint-400 rounded-full flex items-center justify-center relative z-10">
-            <div class="w-3 h-3 bg-white rounded-full"></div>
+          <div class="flex-shrink-0 w-8 h-8 bg-accent-500 dark:bg-accent-600 rounded-full flex items-center justify-center relative z-10 border-2 border-white dark:border-gray-900">
+            <div class="w-3 h-3 bg-white dark:bg-gray-900 rounded-full"></div>
           </div>
           
           <div class="flex-grow">
-            <div class="bg-white dark:bg-zinc-900/50 rounded-xl p-6 shadow-lg border border-mint-100 dark:border-zinc-800">
-              <h3 class="text-xl font-bold text-mint-500 mb-2">Desarrollador Web</h3>
-              <h4 class="text-lg font-semibold text-blacktext dark:text-white mb-2">Fundación FreeAgents</h4>
-              <time class="text-sm text-zinc-600 dark:text-zinc-400 mb-4 block">2024 – Actualidad</time>
-              <ul class="text-blacktext dark:text-zinc-300 leading-relaxed space-y-2">
+            <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-800">
+              <h3 class="text-xl font-bold text-accent-700 dark:text-accent-400 mb-2" data-i18n="experience.developer">{t("experience.developer", lang)}</h3>
+              <h4 class="text-lg font-semibold text-blacktext dark:text-gray-200 mb-2">Fundación FreeAgents</h4>
+              <time class="text-sm text-gray-600 dark:text-gray-400 mb-4 block">2024 – <span data-i18n="experience.current">{t("experience.current", lang)}</span></time>
+              <ul class="text-blacktext dark:text-gray-300 leading-relaxed space-y-2">
                 <li class="flex items-start gap-2">
-                  <span class="w-1.5 h-1.5 bg-mint-400 rounded-full mt-2 flex-shrink-0"></span>
-                  Creación de sistemas Web personalizados
+                  <span class="w-1.5 h-1.5 bg-accent-500 rounded-full mt-2 flex-shrink-0"></span>
+                  <span data-i18n="experience.tasks.webSystems">{t("experience.tasks.webSystems", lang)}</span>
                 </li>
                 <li class="flex items-start gap-2">
-                  <span class="w-1.5 h-1.5 bg-mint-400 rounded-full mt-2 flex-shrink-0"></span>
-                  Desarrollo de APIs y Microservicios
+                  <span class="w-1.5 h-1.5 bg-accent-500 rounded-full mt-2 flex-shrink-0"></span>
+                  <span data-i18n="experience.tasks.apis">{t("experience.tasks.apis", lang)}</span>
                 </li>
                 <li class="flex items-start gap-2">
-                  <span class="w-1.5 h-1.5 bg-mint-400 rounded-full mt-2 flex-shrink-0"></span>
-                  Elaboración de integración de sistemas
+                  <span class="w-1.5 h-1.5 bg-accent-500 rounded-full mt-2 flex-shrink-0"></span>
+                  <span data-i18n="experience.tasks.integration">{t("experience.tasks.integration", lang)}</span>
                 </li>
                 <li class="flex items-start gap-2">
-                  <span class="w-1.5 h-1.5 bg-mint-400 rounded-full mt-2 flex-shrink-0"></span>
-                  Divulgación E-commerce
+                  <span class="w-1.5 h-1.5 bg-accent-500 rounded-full mt-2 flex-shrink-0"></span>
+                  <span data-i18n="experience.tasks.ecommerce">{t("experience.tasks.ecommerce", lang)}</span>
                 </li>
               </ul>
             </div>
@@ -226,22 +226,22 @@ const [staticData] = await getCollection('staticData');
         
         <!-- Educación -->
         <div class="mb-8">
-          <h3 class="text-2xl font-bold text-blacktext dark:text-white mb-6 text-center">Educación</h3>
+          <h3 class="text-2xl font-bold text-blacktext dark:text-gray-200 mb-6 text-center" data-i18n="experience.education">{t("experience.education", lang)}</h3>
         </div>
         
         <!-- Ingeniería en Sistemas -->
         <div class="relative flex items-start gap-6">
-          <div class="flex-shrink-0 w-8 h-8 bg-riptide-400 rounded-full flex items-center justify-center relative z-10">
-            <div class="w-3 h-3 bg-white rounded-full"></div>
+          <div class="flex-shrink-0 w-8 h-8 bg-accent-500 dark:bg-accent-600 rounded-full flex items-center justify-center relative z-10 border-2 border-white dark:border-gray-900">
+            <div class="w-3 h-3 bg-white dark:bg-gray-900 rounded-full"></div>
           </div>
           
           <div class="flex-grow">
-            <div class="bg-white dark:bg-zinc-900/50 rounded-xl p-6 shadow-lg border border-riptide-100 dark:border-zinc-800">
-              <h3 class="text-xl font-bold text-riptide-500 mb-2">Ingeniero en Sistemas y Computación</h3>
-              <h4 class="text-lg font-semibold text-blacktext dark:text-white mb-2">Universidad de Caldas</h4>
-              <time class="text-sm text-zinc-600 dark:text-zinc-400 mb-4 block">2024 – Actualidad</time>
-              <p class="text-blacktext dark:text-zinc-300 leading-relaxed">
-                Estudiante de Ingeniería en Sistemas y Computación, enfocado en desarrollo de software y tecnologías modernas.
+            <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-800">
+              <h3 class="text-xl font-bold text-accent-700 dark:text-accent-400 mb-2" data-i18n="experience.systemsEngineer">{t("experience.systemsEngineer", lang)}</h3>
+              <h4 class="text-lg font-semibold text-blacktext dark:text-gray-200 mb-2">Universidad de Caldas</h4>
+              <time class="text-sm text-gray-600 dark:text-gray-400 mb-4 block">2024 – <span data-i18n="experience.current">{t("experience.current", lang)}</span></time>
+              <p class="text-blacktext dark:text-gray-300 leading-relaxed" data-i18n="experience.descriptions.systems">
+                {t("experience.descriptions.systems", lang)}
               </p>
             </div>
           </div>
@@ -249,17 +249,17 @@ const [staticData] = await getCollection('staticData');
         
         <!-- Python PUC Chile -->
         <div class="relative flex items-start gap-6">
-          <div class="flex-shrink-0 w-8 h-8 bg-riptide-400 rounded-full flex items-center justify-center relative z-10">
-            <div class="w-3 h-3 bg-white rounded-full"></div>
+          <div class="flex-shrink-0 w-8 h-8 bg-accent-500 dark:bg-accent-600 rounded-full flex items-center justify-center relative z-10 border-2 border-white dark:border-gray-900">
+            <div class="w-3 h-3 bg-white dark:bg-gray-900 rounded-full"></div>
           </div>
           
           <div class="flex-grow">
-            <div class="bg-white dark:bg-zinc-900/50 rounded-xl p-6 shadow-lg border border-riptide-100 dark:border-zinc-800">
-              <h3 class="text-xl font-bold text-riptide-500 mb-2">Introducción a la Programación en Python I</h3>
-              <h4 class="text-lg font-semibold text-blacktext dark:text-white mb-2">Pontificia Universidad Católica de Chile</h4>
-              <time class="text-sm text-zinc-600 dark:text-zinc-400 mb-4 block">2022</time>
-              <p class="text-blacktext dark:text-zinc-300 leading-relaxed">
-                Aprendiendo a programar con Python - Fundamentos de programación y desarrollo de software.
+            <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-800">
+              <h3 class="text-xl font-bold text-accent-700 dark:text-accent-400 mb-2" data-i18n="experience.python">{t("experience.python", lang)}</h3>
+              <h4 class="text-lg font-semibold text-blacktext dark:text-gray-200 mb-2">Pontificia Universidad Católica de Chile</h4>
+              <time class="text-sm text-gray-600 dark:text-gray-400 mb-4 block">2022</time>
+              <p class="text-blacktext dark:text-gray-300 leading-relaxed" data-i18n="experience.descriptions.python">
+                {t("experience.descriptions.python", lang)}
               </p>
             </div>
           </div>
@@ -267,27 +267,27 @@ const [staticData] = await getCollection('staticData');
         
         <!-- SENA Cursos -->
         <div class="relative flex items-start gap-6">
-          <div class="flex-shrink-0 w-8 h-8 bg-riptide-400 rounded-full flex items-center justify-center relative z-10">
-            <div class="w-3 h-3 bg-white rounded-full"></div>
+          <div class="flex-shrink-0 w-8 h-8 bg-accent-500 dark:bg-accent-600 rounded-full flex items-center justify-center relative z-10 border-2 border-white dark:border-gray-900">
+            <div class="w-3 h-3 bg-white dark:bg-gray-900 rounded-full"></div>
           </div>
           
           <div class="flex-grow">
-            <div class="bg-white dark:bg-zinc-900/50 rounded-xl p-6 shadow-lg border border-riptide-100 dark:border-zinc-800">
-              <h3 class="text-xl font-bold text-riptide-500 mb-2">Múltiples Certificaciones</h3>
-              <h4 class="text-lg font-semibold text-blacktext dark:text-white mb-2">SENA</h4>
-              <time class="text-sm text-zinc-600 dark:text-zinc-400 mb-4 block">2020</time>
-              <ul class="text-blacktext dark:text-zinc-300 leading-relaxed space-y-2">
+            <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-800">
+              <h3 class="text-xl font-bold text-accent-700 dark:text-accent-400 mb-2" data-i18n="experience.certifications">{t("experience.certifications", lang)}</h3>
+              <h4 class="text-lg font-semibold text-blacktext dark:text-gray-200 mb-2">SENA</h4>
+              <time class="text-sm text-gray-600 dark:text-gray-400 mb-4 block">2020</time>
+              <ul class="text-blacktext dark:text-gray-300 leading-relaxed space-y-2">
                 <li class="flex items-start gap-2">
-                  <span class="w-1.5 h-1.5 bg-riptide-400 rounded-full mt-2 flex-shrink-0"></span>
-                  Aplicación de las etapas del desarrollo de software en la implementación de soluciones de TIC
+                  <span class="w-1.5 h-1.5 bg-accent-500 rounded-full mt-2 flex-shrink-0"></span>
+                  <span data-i18n="experience.tasks.softwareStages">{t("experience.tasks.softwareStages", lang)}</span>
                 </li>
                 <li class="flex items-start gap-2">
-                  <span class="w-1.5 h-1.5 bg-riptide-400 rounded-full mt-2 flex-shrink-0"></span>
-                  Estructura de lenguaje de programación C++ (NIVEL I)
+                  <span class="w-1.5 h-1.5 bg-accent-500 rounded-full mt-2 flex-shrink-0"></span>
+                  <span data-i18n="experience.tasks.cpp">{t("experience.tasks.cpp", lang)}</span>
                 </li>
                 <li class="flex items-start gap-2">
-                  <span class="w-1.5 h-1.5 bg-riptide-400 rounded-full mt-2 flex-shrink-0"></span>
-                  Elaboración de circuitos electrónicos
+                  <span class="w-1.5 h-1.5 bg-accent-500 rounded-full mt-2 flex-shrink-0"></span>
+                  <span data-i18n="experience.tasks.electronics">{t("experience.tasks.electronics", lang)}</span>
                 </li>
               </ul>
             </div>

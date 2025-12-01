@@ -60,7 +60,7 @@ const baseClasses = `
 const variantClasses = {
     default: `
         text-blacktext/90 
-        dark:text-mint-50 
+        dark:text-gray-200 
         dark:hover:text-white 
         px-6 
         py-4 
@@ -72,17 +72,18 @@ const variantClasses = {
         max-sm:text-sm 
         hover:bg-linear-to-l 
         bg-linear-to-r 
-        from-riptide-300 
-        to-mint-300 
-        dark:from-riptide-500 
-        dark:to-mint-500
+        from-accent-400 
+        to-accent-500 
+        dark:from-accent-600 
+        dark:to-accent-700
+        hover:shadow-lg
     `,
     big: `
         font-normal 
         gap-3 
         max-md:gap-1 
         text-blacktext 
-        dark:text-mint-50 
+        dark:text-gray-200 
         dark:hover:text-white 
         px-8 
         max-sm:py-3 
@@ -94,14 +95,15 @@ const variantClasses = {
         max-sm:text-lg 
         hover:bg-linear-to-l 
         bg-linear-to-r 
-        from-riptide-200 
-        to-mint-200 
-        dark:from-riptide-500 
-        dark:to-mint-500
+        from-accent-400 
+        to-accent-500 
+        dark:from-accent-600 
+        dark:to-accent-700
+        hover:shadow-lg
     `,
     dark: `
         group 
-        dark:text-mint-50 
+        dark:text-gray-200 
         text-blacktext
         dark:hover:text-white 
         px-6 
@@ -112,9 +114,12 @@ const variantClasses = {
         text-lg 
         max-xl:text-base 
         max-sm:text-sm 
-        dark:bg-zinc-800 
+        dark:bg-gray-800 
         bg-white
-        dark:hover:bg-mint-500
+        border border-gray-200 dark:border-gray-700
+        dark:hover:bg-accent-700
+        hover:bg-accent-50
+        hover:shadow-md
     `,
 };
 
@@ -122,7 +127,7 @@ const variantClasses = {
 const iconClasses = {
     default: "size-5",
     big: "size-5",
-    dark: "size-5 dark:text-mint-300 text-blacktext group-hover:text-blacktext dark:group-hover:text-white transition-colors",
+    dark: "size-5 dark:text-gray-300 text-blacktext group-hover:text-blacktext dark:group-hover:text-white transition-colors",
 };
 
 // Combine base classes with variant-specific classes
@@ -146,8 +151,8 @@ const loadingAriaLabel = isLoading ? `${buttonAriaLabel} - Loading` : buttonAria
 ---
 
 <div
-    class="w-fit h-fit from-transparent via-riptide-300 to-transparent dark:from-transparent dark:via-mint-500 dark:to-transparent  from-40% to-60% animate-rotate-border bg-conic/[from_var(--border-angle)] p-px hover:shadow-lg
-    hover:shadow-mint-500/30 rounded-full"
+    class="w-fit h-fit from-transparent via-accent-400 to-transparent dark:from-transparent dark:via-accent-600 dark:to-transparent  from-40% to-60% animate-rotate-border bg-conic/[from_var(--border-angle)] p-px hover:shadow-lg
+    hover:shadow-accent-500/20 rounded-full"
 >
     <a 
         class:list={[buttonClasses, className]} 
