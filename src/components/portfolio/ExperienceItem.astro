@@ -34,5 +34,17 @@ const { title, company, description, link, date } = Astro.props;
     class="flex flex-col gap-2 pb-4 text-zinc-00 dark:text-zinc-300 md:col-span-3"
   >
     {description}
+    {
+      link && (
+        <a
+          href={link}
+          rel="noopener noreferrer"
+          target="_blank"
+          class="text-purple-500 hover:text-purple-400 underline"
+        >
+          Repository
+        </a>
+      )
+    }
   </div>
 </div>

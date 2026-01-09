@@ -114,6 +114,31 @@ export const languages: Record<string, Language> = {
     name: "Yaml",
     iconName: "yaml",
   },
+  linux: {
+    name: "Linux",
+    iconName: "linux",
+  },
+  bash: {
+    name: "Bash",
+    iconName: "bash",
+  },
+  docker: {
+    name: "Docker",
+    iconName: "docker",
+  },
+  kubernetes: {
+    name: "Kubernetes",
+    iconName: "kubernetes",
+  },
+  terraform: {
+    name: "Terraform",
+    iconName: "terraform",
+  },
+  postgresql: {
+    name: "PostgreSQL",
+    iconName: "postgresql",
+  },
+  
 };
 
 export const getLanguage = (lang: string): Language => {

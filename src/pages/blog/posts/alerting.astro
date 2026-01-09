@@ -1,0 +1,284 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+import DatePub from "../../../components/blog/DatePub.astro";
+import Tag from "../../../components/ui/Tag.astro";
+import Capsule from "../../../components/ui/Capsule.astro";
+import NavArticle from "../../../components/layout/NavArticle.astro";
+import ListPosts from "../../../components/blog/ListPosts.astro";
+import NavigationArticles from "../../../components/layout/NavigationArticles.astro";
+import Share from "../../../components/ui/Share.astro";
+import Heading from "../../../components/ui/Heading.astro";
+
+// Post frontmatter
+const frontmatter = {
+  title:
+    "Complete Documentation on Syslog, Rsyslog, Journald, and Alerting on Debian 12",
+  author: "Sarah THEOULLE",
+  image: {
+    url: "/images/posts/grafana.png",
+    alt: "",
+  },
+  pubDate: new Date("2025-12-25"),
+  tags: ["documentation", "tutorial", "alerting"],
+  languages: ["bash", "markdown", "yaml"],
+};
+
+const currentUrl = `${Astro.site}${Astro.url.pathname}`;
+const tweetText = encodeURIComponent(
+  `"${frontmatter.title}" - by ${frontmatter.author} | Light`
+);
+---
+
+<Layout
+  pageTitle={frontmatter.title}
+  description={`Complete guide on syslog, rsyslog, journald, and alerting on Debian 12 by ${frontmatter.author}`}
+  ogimage={frontmatter.image}
+>
+  <article
+    class="relative px-8 max-md:px-4 py-8 max-w-4xl mx-auto prose dark:prose-invert"
+    role="main"
+    aria-label={frontmatter.title}
+  >
+    <!-- Header Section -->
+    <div class="mb-12 flex flex-col gap-6">
+      <div class="flex gap-4 items-center">
+        <img
+          src={frontmatter.image.url}
+          alt={frontmatter.image.alt || frontmatter.title}
+          class="w-20 h-20 rounded object-cover"
+        />
+        <div>
+          <h1
+            class="text-3xl md:text-4xl font-bold dark:text-white text-blacktext m-0"
+          >
+            {frontmatter.title}
+          </h1>
+          <DatePub date={frontmatter.pubDate} />
+        </div>
+      </div>
+
+      <!-- Meta Info -->
+      <div class="flex flex-col gap-4">
+        <div class="flex items-center gap-2 text-sm dark:text-zinc-400">
+          <span class="font-semibold">By</span>
+          <span>{frontmatter.author}</span>
+        </div>
+
+        <!-- Tags -->
+        {
+          frontmatter.tags && frontmatter.tags.length > 0 && (
+            <div class="flex flex-wrap gap-2">
+              {frontmatter.tags.map((tag) => (
+                <a href={`/blog/tags/${tag}`}>
+                  <Tag text={tag} />
+                </a>
+              ))}
+            </div>
+          )
+        }
+
+        <!-- Languages -->
+        {
+          frontmatter.languages && frontmatter.languages.length > 0 && (
+            <div class="flex flex-wrap gap-2">
+              {frontmatter.languages.map((lang) => (
+                <a href={`/blog/techs/${lang}`}>
+                  <Capsule lang={lang}/>
+                </a>
+              ))}
+            </div>
+          )
+        }
+      </div>
+
+      <!-- Share Buttons -->
+      <div
+        class="flex gap-4 items-center border-t border-b dark:border-zinc-700 py-4"
+      >
+        <span class="text-sm font-semibold dark:text-zinc-300">Share:</span>
+        <Share
+          url={currentUrl}
+          title={frontmatter.title}
+          tweetText={tweetText}
+        />
+      </div>
+    </div>
+
+    <!-- LaTeX Content Notice -->
+    <div
+      class="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-lg p-6 mb-8"
+    >
+      <div class="flex gap-3 items-start">
+        <Icon
+          name="info"
+          class="w-5 h-5 mt-0.5 text-blue-600 dark:text-blue-400 flex-shrink-0"
+        />
+        <div>
+          <h3 class="font-semibold text-blue-900 dark:text-blue-100 mb-2">
+            About this Post
+          </h3>
+          <p class="text-sm text-blue-800 dark:text-blue-200 mb-3">
+            This comprehensive guide on syslog, rsyslog, journald, and alerting
+            on Debian 12 was originally written in LaTeX for precise technical
+            documentation. Below is a structured summary. For the complete
+            document with all diagrams and detailed formatting, please refer to
+            the <a href="https://github.com" class="underline font-medium"
+              >full source</a
+            >.
+          </p>
+          <p class="text-sm text-blue-800 dark:text-blue-200">
+            The original LaTeX document includes detailed technical diagrams,
+            code examples, and implementation guides for:
+          </p>
+          <ul
+            class="text-sm text-blue-800 dark:text-blue-200 mt-2 ml-4 list-disc"
+          >
+            <li>Linux logging system overview</li>
+            <li>Rsyslog configuration and internals</li>
+            <li>Kernel logs and log file structure</li>
+            <li>Remote log server setup</li>
+            <li>Docker logging integration</li>
+            <li>Alerting and observability pipelines</li>
+            <li>Security, retention, and monitoring best practices</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Summary -->
+    <section class="mt-12">
+      <h2 class="text-2xl font-bold dark:text-white text-blacktext mb-6">
+        Key Topics
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div
+          class="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/30 dark:to-purple-900/10 p-6 rounded-lg"
+        >
+          <h3 class="font-semibold text-purple-900 dark:text-purple-100 mb-3">
+            📋 Core Logging
+          </h3>
+          <ul class="text-sm text-purple-800 dark:text-purple-200 space-y-2">
+            <li>• Syslog protocol (RFC3164 vs RFC5424)</li>
+            <li>• Facilities and severity levels</li>
+            <li>• Rsyslog configuration and rules</li>
+            <li>• Kernel logs (dmesg, /var/log/kern.log)</li>
+          </ul>
+        </div>
+
+        <div
+          class="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-900/10 p-6 rounded-lg"
+        >
+          <h3 class="font-semibold text-blue-900 dark:text-blue-100 mb-3">
+            🌐 Remote Logging
+          </h3>
+          <ul class="text-sm text-blue-800 dark:text-blue-200 space-y-2">
+            <li>• Remote log server setup</li>
+            <li>• UDP/TCP forwarding (port 514)</li>
+            <li>• Client configuration and testing</li>
+            <li>• Firewall and security rules</li>
+          </ul>
+        </div>
+
+        <div
+          class="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-900/10 p-6 rounded-lg"
+        >
+          <h3 class="font-semibold text-green-900 dark:text-green-100 mb-3">
+            ⚙️ Systemd & Docker
+          </h3>
+          <ul class="text-sm text-green-800 dark:text-green-200 space-y-2">
+            <li>• Systemd-journald integration</li>
+            <li>• Journalctl commands and usage</li>
+            <li>• Docker logging drivers</li>
+            <li>• Log rotation and persistence</li>
+          </ul>
+        </div>
+
+        <div
+          class="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/30 dark:to-orange-900/10 p-6 rounded-lg"
+        >
+          <h3 class="font-semibold text-orange-900 dark:text-orange-100 mb-3">
+            🚨 Alerting & Monitoring
+          </h3>
+          <ul class="text-sm text-orange-800 dark:text-orange-200 space-y-2">
+            <li>• Promtail to Loki setup</li>
+            <li>• Alert rules and routing</li>
+            <li>• Alertmanager configuration</li>
+            <li>• Structured logging (CEE/JSON)</li>
+          </ul>
+        </div>
+
+        <div
+          class="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/30 dark:to-red-900/10 p-6 rounded-lg"
+        >
+          <h3 class="font-semibold text-red-900 dark:text-red-100 mb-3">
+            🔐 Security & Hardening
+          </h3>
+          <ul class="text-sm text-red-800 dark:text-red-200 space-y-2">
+            <li>• TLS encryption for log forwarding</li>
+            <li>• Authentication and certificates</li>
+            <li>• Queue and backpressure handling</li>
+            <li>• Retention and compliance</li>
+          </ul>
+        </div>
+
+        <div
+          class="bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-indigo-900/30 dark:to-indigo-900/10 p-6 rounded-lg"
+        >
+          <h3 class="font-semibold text-indigo-900 dark:text-indigo-100 mb-3">
+            📊 Operations
+          </h3>
+          <ul class="text-sm text-indigo-800 dark:text-indigo-200 space-y-2">
+            <li>• Logrotate configuration</li>
+            <li>• Monitoring dashboards</li>
+            <li>• Synthetic testing</li>
+            <li>• Failure recovery and drills</li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        class="bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800 rounded-lg p-8 mt-8"
+      >
+        <h3 class="font-semibold text-lg dark:text-white text-blacktext mb-4">
+          Complete Technical Content
+        </h3>
+        <p class="text-sm text-gray-700 dark:text-gray-300 mb-4">
+          This post contains a complete technical guide with:
+        </p>
+        <ul class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+          <li>
+            ✓ Detailed configuration examples for rsyslog, journald, and
+            logrotate
+          </li>
+          <li>✓ Step-by-step setup for remote log servers on Debian 12</li>
+          <li>
+            ✓ Docker logging driver configuration and integration patterns
+          </li>
+          <li>
+            ✓ Promtail-to-Loki pipeline with alert rules and Alertmanager
+            routing
+          </li>
+          <li>✓ Structured logging with RFC5424 and JSON parsing (CEE)</li>
+          <li>
+            ✓ Security hardening with TLS, authentication, and access control
+          </li>
+          <li>✓ Monitoring, testing, and operational best practices</li>
+          <li>
+            ✓ Technical diagrams for Docker logging flow and syslog message flow
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Footer Navigation -->
+    <div class="mt-12 pt-8 border-t dark:border-zinc-700">
+      <NavigationArticles />
+    </div>
+  </article>
+
+  <aside class="max-w-4xl mx-auto px-8 max-md:px-4 py-8">
+    <ListPosts />
+  </aside>
+</Layout>

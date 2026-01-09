@@ -1,0 +1,9 @@
+{
+  "title": "Beep",
+  "organization": "beep-industries",
+  "description": "The ultimate platform to connect and communicate effortlessly. Beep is an open-source project that provides a seamless messaging experience written in Rust microservices and React.",
+  "date": "2024 - Present",
+  "repoUrl": "https://github.com/beep-industries",
+  "techs": ["Rust", "React", "Kubernetes"],
+  "tags": ["rust", "beep", "ci"]
+}

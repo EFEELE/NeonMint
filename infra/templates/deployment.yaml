@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.front.name }}
+spec:
+  replicas: {{ .Values.front.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.front.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.front.name }}
+    spec:
+      containers:
+        - name: {{ .Values.front.name }}
+          image: {{ .Values.front.image }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: {{ .Values.front.containerPort }}
+          readinessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.front.containerPort }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.front.containerPort }}
+            initialDelaySeconds: 10
+            periodSeconds: 20
+  revisionHistoryLimit: 1

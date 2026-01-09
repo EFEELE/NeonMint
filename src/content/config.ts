@@ -33,4 +33,16 @@ const jsonDataCollection = defineCollection({
 
 export const collections = {
   staticData: jsonDataCollection,
+  openSource: defineCollection({
+    type: 'data',
+    schema: z.object({
+      title: z.string(),
+      organization: z.string(),
+      description: z.string(),
+      date: z.string(),
+      repoUrl: z.string().url(),
+      techs: z.array(z.string()).optional(),
+      tags: z.array(z.string()).optional(),
+    }),
+  }),
 };

@@ -1,0 +1,9 @@
+{
+  "title": "tldr",
+  "organization": "tldr-pages",
+  "description": " Collaborative cheatsheets for console commands.",
+  "date": "2025 - Present",
+  "repoUrl": "https://github.com/tldr-pages/tldr",
+  "techs": ["Markdown"],
+  "tags": ["markdown", "tldr", "cli"]
+}

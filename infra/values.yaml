@@ -1,0 +1,19 @@
+namespace: portfolio
+
+front:
+  name: portfolio-front
+  image: docker.io/sarahth/neon-portfolio:latest
+  replicaCount: 1
+  containerPort: 8080
+  servicePort: 8080
+  
+  ingress:
+    enabled: true
+    className: traefik
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      traefik.ingress.kubernetes.io/router.middlewares: default-redirect-https@kubernetescrd
+    hosts:
+      - stheoulle.com
+    tls: true
+    tlsSecret: portfolio-tls

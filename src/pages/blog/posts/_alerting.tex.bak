@@ -1,0 +1,707 @@
+---
+layout: /src/layouts/MarkdownPostLayout.astro
+title: Complete Documentation on Syslog, Rsyslog, Journald, and Alerting on Debian 12
+author: Sarah THEOULLE
+image:
+  url: "/images/posts/grafana.png"
+  alt: ""
+pubDate: 2025-25-12
+tags:
+  [
+    "documentation",
+    "tutorial",
+    "alerting",
+  ]
+languages: ["bash", "markdown", "yaml"]
+---
+\UseRawInputEncoding
+\documentclass[a4paper,12pt]{article}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows, positioning, shapes.geometric}
+
+\geometry{margin=2.5cm}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\lstset{
+    backgroundcolor=\color{gray!10},
+    basicstyle=\ttfamily\small,
+    frame=single,
+    breaklines=true
+}
+
+\title{Complete Documentation on Syslog, Rsyslog, Journald, and Alerting on Debian 12}
+\author{Sarah THEOULLE - DO5}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+Logging is a fundamental component of any Linux system. It records events from the kernel, services, and applications.  
+The \textbf{rsyslog} daemon is one of the most widely used tools for managing, storing, and centralizing logs.  
+This document explains:
+\begin{itemize}
+    \item How Linux logging works,
+    \item Rsyslog internals and configuration,
+    \item Kernel logs and log file structure,
+    \item Systemd and journald integration,
+    \item Docker logging and log rotation,
+    \item Remote logging setup on Debian 12.
+\end{itemize}
+
+\section{Linux Logging System Overview}
+
+\subsection{General Principles}
+Linux logging is historically based on the \textbf{syslog} protocol.  
+Rsyslog, syslog-ng, and journald have replaced older daemons like \texttt{sysklogd}.  
+Logging responsibilities include:
+\begin{itemize}
+    \item Receiving messages from applications, services, and the kernel.
+    \item Categorizing messages by \textbf{facility} (origin) and \textbf{severity} (importance).
+    \item Routing logs to files, consoles, or remote servers.
+\end{itemize}
+
+\subsection{Facilities and Severity Levels}
+Logs are classified according to:
+\begin{itemize}
+    \item \textbf{Facilities (origin)}: kernel, auth, mail, daemon, user, local0–local7, etc.
+    \item \textbf{Severity levels}: emerg, alert, crit, err, warning, notice, info, debug.
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Facility} & \textbf{Description} \\
+\hline
+kern & Kernel messages \\
+auth, authpriv & Authentication/security \\
+daemon & System daemons \\
+mail & Mail servers \\
+user & User programs \\
+syslog & Internal syslog messages \\
+local0–local7 & Custom/local use \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Severity} & \textbf{Meaning} \\
+\hline
+emerg & System is unusable \\
+alert & Immediate action required \\
+crit & Critical condition \\
+err & Error \\
+warning & Warning \\
+notice & Significant but normal \\
+info & Informational \\
+debug & Debugging \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Combining Facility and Severity}
+Rules use the syntax:
+\begin{lstlisting}
+FACILITY.SEVERITY    ACTION
+\end{lstlisting}
+Example:
+\begin{lstlisting}
+authpriv.err    /var/log/auth.log
+kern.warning    /var/log/kern.log
+*.info          /var/log/syslog
+\end{lstlisting}
+
+\section{Rsyslog: Configuration and Internals}
+
+\subsection{Introduction to Rsyslog}
+\textbf{Rsyslog} is an enhanced syslog daemon that supports:
+\begin{itemize}
+    \item Local and remote logging via TCP/UDP.
+    \item Advanced filtering and custom log formats.
+    \item Forwarding logs to files, databases, or external systems.
+\end{itemize}
+
+\subsection{Configuration Files}
+\begin{itemize}
+    \item Main configuration: \texttt{/etc/rsyslog.conf}
+    \item Additional rules: \texttt{/etc/rsyslog.d/*.conf}
+\end{itemize}
+
+\subsection{Rule Format}
+\begin{lstlisting}
+FACILITY.SEVERITY  ACTION
+\end{lstlisting}
+Examples:
+\begin{lstlisting}
+authpriv.*      /var/log/auth.log
+kern.*          /var/log/kern.log
+mail.*          -/var/log/mail.log
+*.info;mail.none;authpriv.none;cron.none  /var/log/messages
+\end{lstlisting}
+
+\subsection{Actions}
+Logs can be sent to:
+\begin{itemize}
+    \item Local files (\texttt{/var/log/syslog})
+    \item Console (\texttt{/dev/console})
+    \item Remote server (\texttt{@server\_ip} UDP or \texttt{@@server\_ip} TCP)
+    \item External programs
+\end{itemize}
+
+\subsection{Internal Flow}
+Rsyslog follows an \textbf{input → filter → output} model:
+\begin{itemize}
+    \item \textbf{Input modules:} \texttt{imuxsock}, \texttt{imklog}, \texttt{imudp}, \texttt{imtcp}.
+    \item \textbf{Filter engine:} evaluates rules by facility, severity, or properties.
+    \item \textbf{Output modules:} \texttt{omfile}, \texttt{omfwd}, \texttt{ommail}, etc.
+\end{itemize}
+
+\section{Kernel Logs}
+\subsection{Accessing Kernel Logs}
+\begin{lstlisting}
+dmesg
+sudo cat /var/log/kern.log
+sudo tail -f /var/log/kern.log
+\end{lstlisting}
+
+\subsection{Filtering Examples}
+\begin{lstlisting}
+grep "error" /var/log/kern.log
+\end{lstlisting}
+
+\section{Log Files and Structure}
+\subsection{Typical Log Line}
+\begin{lstlisting}
+Oct 23 09:45:12 debian12 kernel: [1234.5678] usb 1-2: new high-speed USB device number 4
+\end{lstlisting}
+Components:
+\begin{itemize}
+    \item Date and time
+    \item Hostname
+    \item Facility/source
+    \item Log message
+\end{itemize}
+
+\subsection{Common Log Files on Debian}
+\begin{itemize}
+    \item \texttt{/var/log/syslog} — general system messages
+    \item \texttt{/var/log/auth.log} — authentication
+    \item \texttt{/var/log/kern.log} — kernel
+    \item \texttt{/var/log/dmesg} — boot messages
+    \item \texttt{/var/log/daemon.log} — service daemons
+\end{itemize}
+
+\section{Setting Up a Remote Log Server (Debian 12)}
+
+\subsection{Server Preparation}
+Install and enable rsyslog on the server:
+
+\begin{lstlisting}
+sudo apt update
+sudo apt install rsyslog
+sudo systemctl enable rsyslog
+sudo systemctl start rsyslog
+\end{lstlisting}
+
+\subsection{Rsyslog Server Configuration}
+To receive remote logs, edit the main configuration file:
+
+\begin{lstlisting}
+/etc/rsyslog.conf
+\end{lstlisting}
+
+Uncomment or add the following lines to enable UDP and TCP reception on port 514:
+
+\begin{lstlisting}
+module(load="imudp")
+input(type="imudp" port="514")
+
+module(load="imtcp")
+input(type="imtcp" port="514")
+\end{lstlisting}
+
+Next, create a dedicated configuration file for storing remote logs:
+
+\begin{lstlisting}
+/etc/rsyslog.d/remote.conf
+\end{lstlisting}
+
+Add the following content to organize logs by host and program:
+
+\begin{lstlisting}
+$template RemoteLogs,"/var/log/remote/%HOSTNAME%/%PROGRAMNAME%.log"
+. ?RemoteLogs
+\end{lstlisting}
+
+Finally, restart rsyslog to apply changes:
+
+\begin{lstlisting}
+sudo systemctl restart rsyslog
+\end{lstlisting}
+
+\subsection{Configuring a Remote Client}
+On each client machine that will send logs to the server:
+
+Install rsyslog:
+
+\begin{lstlisting}
+sudo apt update
+sudo apt install rsyslog
+\end{lstlisting}
+
+Create a configuration file for remote logging:
+
+\begin{lstlisting}
+/etc/rsyslog.d/remote.conf
+\end{lstlisting}
+
+Add the following line (replace \texttt{<SERVER_IP>} with the server’s IP):
+
+\begin{lstlisting}
+. @<SERVER_IP>:514 # Use UDP (@) or TCP (@@)
+\end{lstlisting}
+
+Restart rsyslog to activate remote logging:
+
+\begin{lstlisting}
+sudo systemctl restart rsyslog
+\end{lstlisting}
+
+\subsection{Opening UDP/TCP Port 514 on the Server}
+Make sure the server firewall allows incoming connections:
+
+\begin{lstlisting}
+sudo ufw allow 514/udp
+sudo ufw allow 514/tcp
+sudo ufw reload
+\end{lstlisting}
+
+\subsection{Testing Remote Logging}
+
+\subsubsection{Sending a Test Message from Client}
+\begin{lstlisting}
+logger -n <SERVER_IP> -P 514 "Test message from client"
+\end{lstlisting}
+
+\subsubsection{Checking on the Server}
+\begin{lstlisting}
+sudo tail -f /var/log/remote/<client_hostname>/<program_name>.log
+\end{lstlisting}
+
+\subsubsection{Inspecting Network Traffic (Optional)}
+\begin{lstlisting}
+sudo tcpdump -i any port 514 -n
+\end{lstlisting}
+
+\section{Systemd, Journald, and Compatibility with Rsyslog}
+
+\subsection{Systemd and Journald}
+\textbf{systemd-journald} collects logs from:
+\begin{itemize}
+    \item Kernel via \texttt{/dev/kmsg}
+    \item Systemd units (stdout/stderr)
+    \item Syslog socket \texttt{/run/systemd/journal/syslog}
+\end{itemize}
+Logs are stored in binary format under \texttt{/var/log/journal} and queried with \texttt{journalctl}.
+
+\subsection{Journalctl Usage}
+\begin{lstlisting}
+sudo journalctl          # all logs
+sudo journalctl -f       # follow in real-time
+sudo journalctl -u rsyslog.service
+sudo journalctl -b       # since last boot
+\end{lstlisting}
+
+\subsection{Forwarding Journald to Rsyslog}
+\begin{lstlisting}
+# /etc/systemd/journald.conf
+ForwardToSyslog=yes
+\end{lstlisting}
+
+\subsection{Log Persistence and Rotation}
+\begin{lstlisting}
+sudo mkdir -p /var/log/journal
+sudo systemctl restart systemd-journald
+sudo journalctl --disk-usage
+sudo journalctl --vacuum-time=7d
+\end{lstlisting}
+
+\section{Log Management with Logrotate}
+
+\subsection{Logrotate Configuration}
+Directory: \texttt{/etc/logrotate.d/}  
+Example for syslog:
+\begin{lstlisting}
+/var/log/syslog {
+    weekly
+    rotate 4
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 640 syslog adm
+    postrotate
+        systemctl reload rsyslog > /dev/null
+    endscript
+}
+\end{lstlisting}
+
+\subsection{Replacing Rsyslog with Journald}
+\begin{lstlisting}
+sudo systemctl stop rsyslog
+sudo systemctl disable rsyslog
+sudo systemctl enable systemd-journald
+sudo systemctl start systemd-journald
+\end{lstlisting}
+
+\section{Docker Logging}
+
+\subsection{Docker Logging Overview}
+Docker captures container stdout/stderr via logging drivers.  
+Default driver: \textbf{json-file}.
+
+\subsection{Default Behavior}
+Logs stored at:
+\begin{lstlisting}
+/var/lib/docker/containers/<container_id>/<container_id>-json.log
+\end{lstlisting}
+Example entry:
+\begin{lstlisting}
+{"log":"Starting nginx...\n","stream":"stdout","time":"2025-10-27T10:31:12.345678901Z"}
+\end{lstlisting}
+
+\subsection{Viewing Logs}
+\begin{lstlisting}
+docker logs <container_name>
+docker logs -f <container_name>
+\end{lstlisting}
+
+\subsection{Changing Logging Drivers}
+\begin{lstlisting}
+/etc/docker/daemon.json
+{
+  "log-driver": "journald"
+}
+# Or with rotation for json-file
+{
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m",
+    "max-file": "5"
+  }
+}
+sudo systemctl restart docker
+\end{lstlisting}
+
+\subsection{Integrating Docker Logs with Logrotate}
+\begin{lstlisting}
+/etc/logrotate.d/docker-containers
+/var/lib/docker/containers/*/*.log {
+    rotate 7
+    daily
+    compress
+    delaycompress
+    missingok
+    copytruncate
+    notifempty
+}
+\end{lstlisting}
+\texttt{copytruncate} ensures Docker continues writing to the same file.
+
+\subsection{Forwarding Docker Logs to Rsyslog or Journald}
+\begin{lstlisting}
+docker run --log-driver=syslog --log-opt syslog-address=udp://192.168.1.10:514 nginx
+docker run --log-driver=journald nginx
+sudo journalctl -u docker.service
+\end{lstlisting}
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[
+    node distance=1.5cm and 2cm,
+    process/.style={rectangle, rounded corners, draw=blue!70, fill=blue!10, thick, text centered, minimum height=1cm, text width=3cm},
+    storage/.style={cylinder, cylinder uses custom shape, draw=orange!70, fill=orange!10, thick, text centered, minimum height=1cm, text width=2.5cm},
+    io/.style={ellipse, draw=gray!70, fill=gray!10, thick, text centered, minimum height=0.8cm, text width=2.3cm},
+    arrow/.style={thick, ->, >=stealth}
+]
+\node[io] (app) {Container Application};
+\node[process, below=of app] (docker) {Docker Daemon};
+\node[storage, below left=of docker] (json) {json-file};
+\node[storage, below=of docker] (journald) {systemd-journald};
+\node[storage, below right=of docker] (syslog) {rsyslog / Remote Syslog};
+\node[process, below=of journald] (logrotate) {Logrotate / Rotation Policy};
+
+\draw[arrow] (app) -- node[right]{stdout / stderr} (docker);
+\draw[arrow] (docker) -- node[left]{Default} (json);
+\draw[arrow] (docker) -- node[right]{Driver: journald} (journald);
+\draw[arrow] (docker) -- node[right]{Driver: syslog} (syslog);
+\draw[arrow, dashed] (json) -- (logrotate);
+\draw[arrow, dashed] (journald) -- (logrotate);
+\draw[arrow, dashed] (syslog) -- (logrotate);
+
+\node[above of=app, node distance=1cm, font=\bfseries] {Docker Logging Flow};
+\end{tikzpicture}
+\caption{Overview of Docker log flow and integration with journald, rsyslog, and logrotate.}
+\end{figure}
+
+\section{Alerting and Observability Pipeline}
+
+\subsection{Reference Flow}
+\begin{itemize}
+        \item Apps and hosts emit syslog (local sockets) or container stdout/stderr.
+        \item Rsyslog forwards to \textbf{Promtail} (or directly to Loki) over TCP/TLS.
+        \item \textbf{Loki} stores logs; \textbf{Grafana/Alertmanager} evaluates alert rules and sends email/Slack/webhook.
+        \item Optional: keep a local file copy for forensics and buffering during outages.
+\end{itemize}
+
+\subsection{Promtail to Loki }
+\begin{lstlisting}
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /var/lib/promtail/positions.yaml
+
+clients:
+  - url: https://loki.example.com/loki/api/v1/push
+    external_labels:
+      env: prod
+      site: dc1
+
+scrape_configs:
+  - job_name: syslog
+    syslog:
+      listen_address: 0.0.0.0:1514
+      idle_timeout: 60s
+      labels:
+        job: syslog
+    relabel_configs:
+      - source_labels: ['__syslog_message_hostname']
+        target_label: host
+      - source_labels: ['__syslog_message_app_name']
+        target_label: app
+\end{lstlisting}
+
+\subsection{Alerting Rule }
+\begin{lstlisting}
+groups:
+- name: syslog-alerts
+  rules:
+  - alert: SyslogHighErrorRate
+    expr: sum(rate({job="syslog",severity="err"}[5m])) by (host) > 10
+    for: 5m
+    labels:
+      severity: page
+    annotations:
+      summary: "High syslog error rate on {{ $labels.host }}"
+      description: "More than 10 err logs/sec for 5m"
+\end{lstlisting}
+
+\subsection{Alertmanager Routing (excerpt)}
+\begin{lstlisting}
+route:
+  receiver: default
+  routes:
+    - matchers: [severity="page"]
+      receiver: oncall
+
+receivers:
+  - name: default
+    email_configs: [{to: ops@example.com}]
+  - name: oncall
+    slack_configs:
+      - channel: '#oncall'
+        api_url: https://hooks.slack.com/services/.../...
+\end{lstlisting}
+
+\subsection{Operational Notes}
+\begin{itemize}
+        \item Normalize fields (host, app, env, severity) to make alert queries simple.
+        \item Add rate limits and aggregation to avoid noisy flapping alerts.
+        \item Silence windows and grouping in Alertmanager reduce duplicate pages.
+        \item Keep message size reasonable; large blobs slow ingestion and alert eval.
+\end{itemize}
+
+\section{Structured Logging and Field Preservation}
+
+\subsection{RFC3164 vs RFC5424}
+\begin{itemize}
+        \item \textbf{RFC3164 (BSD)}: looser format, hostname + tag, no structured data, ambiguous year/time zone.
+        \item \textbf{RFC5424}: precise timestamp with timezone, AppName/ProcID/MsgID fields, supports \textbf{Structured Data (SD)} blocks for key=value pairs.
+        \item Prefer RFC5424 on new systems so downstream (Promtail/Loki/Alertmanager) keeps host/app/labels without brittle parsing.
+\end{itemize}
+
+Force RFC5424 output in rsyslog with a template:
+\begin{lstlisting}
+# /etc/rsyslog.d/10-rfc5424.conf
+$ActionFileDefaultTemplate RSYSLOG_SyslogProtocol23Format
+*.info;mail.none;authpriv.none;cron.none    /var/log/syslog
+\end{lstlisting}
+
+\subsection{Appending Structured Data}
+Use SD to keep extra fields (env, site, trace_id) alongside the message:
+\begin{lstlisting}
+template(name="with-sd" type="string"
+  string="<%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% %procid% - "
+         "[meta env=\"prod\" site=\"dc1\" trace_id=\"%$.traceid%\"] %msg%\n")
+
+action(type="omfwd" target="logs.example.com" port="6514" protocol="tcp"
+       StreamDriver="gtls" StreamDriverMode="1" template="with-sd")
+\end{lstlisting}
+Populate custom properties (e.g., \texttt{$.traceid}) earlier in the pipeline if available.
+
+\subsection{Parsing JSON Logs (CEE/mmjsonparse)}
+For applications that log JSON, use the CEE cookie so rsyslog parses fields:
+\begin{lstlisting}
+# App log line prefix: @cee: {"msg":"hello","user":"alice","severity":"err"}
+
+module(load="mmjsonparse")
+
+if $msg startswith "@cee:" then {
+  set $!all = mmjsonparse();   # parse into structured data tree
+  set $!user = $!all!user;
+  set $!severity = $!all!severity;
+}
+
+template(name="json-to-loki" type="list") {
+  constant(value="{\"user\":\"")   property(name="$!user")
+  constant(value="\",\"severity\":\"") property(name="$!severity")
+  constant(value="\",\"msg\":\"") property(name="$msg") constant(value="\"}\n")
+}
+
+action(type="omfwd" target="loki.example.com" port="3100" protocol="tcp"
+       template="json-to-loki")
+\end{lstlisting}
+This keeps fields intact so Promtail/Loki labels can be mapped reliably without regexes.
+
+\section{Hardening, Retention, and Reliability}
+
+\subsection{Secure Transport and Auth}
+Enable TLS on rsyslog when forwarding:
+\begin{lstlisting}
+module(load="imtcp")
+module(load="imptcp")
+module(load="gtls")
+
+$DefaultNetstreamDriverCAFile /etc/ssl/certs/ca-certificates.crt
+$DefaultNetstreamDriverCertFile /etc/rsyslog.d/cert.pem
+$DefaultNetstreamDriverKeyFile  /etc/rsyslog.d/key.pem
+
+action(type="omfwd" target="logs.example.com" port="6514" protocol="tcp" StreamDriver="gtls" StreamDriverMode="1")
+\end{lstlisting}
+Keep port 514 closed externally; use 6514/tcp with TLS and firewall rules.
+
+\subsection{Queueing and Backpressure}
+Avoid loss during bursts by enabling disk queues:
+\begin{lstlisting}
+action(type="omfwd" target="logs.example.com" port="6514" protocol="tcp"
+             StreamDriver="gtls" StreamDriverMode="1"
+             queue.type="LinkedList" queue.filename="fwd-queue"
+             queue.size="50000" action.resumeRetryCount="-1")
+\end{lstlisting}
+Monitor queue depth; ensure disk has headroom.
+
+\subsection{Retention and Rotation}
+\begin{itemize}
+        \item journald: set \texttt{SystemMaxUse} and \texttt{RuntimeMaxUse} to cap size.
+        \item logrotate: tune \texttt{max-size}, \texttt{rotate} count, and compression; avoid \texttt{copytruncate} when possible for high-volume apps.
+        \item Docker: prefer driver-level rotation over external \texttt{copytruncate} for reliability.
+\end{itemize}
+
+\subsection{Time and Integrity}
+\begin{itemize}
+        \item Keep NTP/chrony in sync for accurate timestamps and alert correlation.
+        \item For compliance, consider append-only/WORM targets for critical logs.
+        \item Preserve original host/app labels when re-shipping between tiers.
+\end{itemize}
+
+\section{Monitoring and Testing}
+\begin{itemize}
+        \item \textbf{Synthetic tests:} periodically send a marker log via \texttt{logger} and assert its arrival in Loki with a scheduled query.
+        \item \textbf{Dashboards:} track rsyslog queue depth, Promtail scrape errors, Loki ingestion rate, and Alertmanager firing/silenced alerts.
+        \item \textbf{Failure drills:} stop the network link to Loki and confirm disk queues buffer and drain cleanly after recovery.
+        \item \textbf{Noise control:} sample or drop low-value debug logs before shipping; keep alert rules scoped and time-bounded.
+\end{itemize}
+
+\section{Local Syslog Collection and Logger Utility}
+
+\subsection{Local Log Collection}
+Rsyslog uses:
+\begin{itemize}
+    \item Unix socket: \texttt{/dev/log}
+    \item Network port: UDP/TCP 514
+\end{itemize}
+
+\begin{lstlisting}
+module(load="imuxsock")   # Local UNIX socket /dev/log
+module(load="imudp")      # Remote UDP 514
+input(type="imudp" port="514")
+\end{lstlisting}
+
+\subsection{Logger Command}
+\begin{lstlisting}
+logger "Hello from syslog"
+logger -n <server_ip> -P 514 "Message from client"
+\end{lstlisting}
+Flow:
+\begin{enumerate}
+    \item Message sent to \texttt{/dev/log}.
+    \item Rsyslog receives and applies filters.
+    \item Message written to appropriate file or forwarded.
+\end{enumerate}
+
+\subsection{Sockets vs File-Based Logging}
+\begin{itemize}
+    \item \textbf{Unix socket:} system-wide, structured, immediate.
+    \item \textbf{File logging:} application-specific, bypasses syslog.
+\end{itemize}
+
+\subsection{Syslog Message Flow Diagram}
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[
+    node distance=1.3cm and 2.3cm,
+    process/.style={rectangle, rounded corners, draw=blue!70, fill=blue!10, thick, text centered, minimum height=1cm, text width=3cm},
+    io/.style={ellipse, draw=gray!70, fill=gray!10, thick, text centered, minimum height=0.8cm, text width=2.5cm},
+    storage/.style={cylinder, cylinder uses custom shape, draw=orange!70, fill=orange!10, thick, text centered, minimum height=1cm, text width=3cm},
+    arrow/.style={thick, ->, >=stealth}
+]
+
+\node[io] (app) {Application / Daemon};
+\node[process, below=of app] (socket) {/dev/log (Unix Socket)};
+\node[process, below=of socket] (rsyslog) {rsyslogd};
+\node[storage, below left=of rsyslog] (files) {/var/log/*.log};
+\node[process, below right=of rsyslog] (remote) {@@remote\_server:514};
+
+\draw[arrow] (app) -- node[right]{syslog()} (socket);
+\draw[arrow] (socket) -- (rsyslog);
+\draw[arrow] (rsyslog) -- node[left]{write} (files);
+\draw[arrow] (rsyslog) -- node[right]{forward (UDP/TCP)} (remote);
+
+\node[above of=app, node distance=1cm, font=\bfseries] {Syslog Local Message Flow};
+\end{tikzpicture}
+\caption{Flow of log messages through syslog and rsyslog on a local system.}
+\end{figure}
+
+\end{document}

@@ -1,0 +1,49 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Heading from "../components/ui/Heading.astro";
+import ExperienceItem from "../components/portfolio/ExperienceItem.astro";
+import { Icon } from "astro-icon/components";
+import { getCollection } from "astro:content";
+
+const entries = await getCollection("openSource");
+const OSS = entries.map((e) => ({
+  title: e.data.title,
+  company: e.data.organization,
+  description: e.data.description,
+  date: e.data.date,
+  link: e.data.repoUrl,
+}));
+---
+
+<Layout
+  pageTitle="Open Source Contributions"
+  description="Open source work and community contributions."
+>
+  <section class="py-8 px-8 max-md:py-4 mb-4">
+    <div class="flex flex-col pt-8 max-w-4xl mx-auto">
+      <div class="flex gap-4 items-center justify-center">
+        <Icon class="text-3xl dark:text-white text-blacktext" name="code" />
+        <Heading text="Open Source" textGradient="Contributions" level={2} />
+      </div>
+
+      <div
+        class="relative max-md:mt-0 mt-8"
+        aria-label="Open source experience"
+      >
+        <ol class="relative mt-10">
+          {
+            OSS.map((entry, index) => (
+              <li>
+                <article role="article" aria-labelledby={`oss-title-${index}`}>
+                  <div class="flex flex-col gap-2 text-zinc-00 dark:text-zinc-300 md:col-span-3">
+                    <ExperienceItem {...entry} />
+                  </div>
+                </article>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+  </section>
+</Layout>
